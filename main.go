@@ -15,6 +15,7 @@ type userData struct{
 	password string
 }
 
+var MUserName string
 var MPassword []byte
 
 func main(){
@@ -32,12 +33,15 @@ func main(){
 	loginHandler := func(w http.ResponseWriter, req *http.Request){
 		username := req.PostFormValue("username")
 		password := req.PostFormValue("password")
-		fmt.Println(username)
+		if username != MUserName {
+			log.Fatalf("This name didn't match: %s", username)
+  
+		}
 		err := bcrypt.CompareHashAndPassword([]byte(MPassword) , []byte(password))
-		fmt.Println(err == nil)
-		// if err != nil{
-		// 	log.Fatalf("didn't match: %s", err)
-		// }
+	    if err != nil{
+			log.Fatalf("didn't match: %s", err)
+		}
+		fmt.Println("Yo")
 		
 		
 
@@ -49,7 +53,7 @@ func main(){
 		if err != nil{
 			log.Fatalf("failed to hash: %s", err)
 		}
-		fmt.Println(username)
+		MUserName= username
 		MPassword=bcrypt
 
 	}
