@@ -55,6 +55,7 @@ func main(){
 		}
 		MUserName= username
 		MPassword=bcrypt
+		//once registered there should switch to the login page.
 
 	}
 
