@@ -5,10 +5,13 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"os"
 
 	"io"
 	"log"
+
 	// "github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -37,6 +40,13 @@ var MUserName string
 var MPassword []byte
 
 func main(){
+	err := godotenv.Load()
+	if err != nil {
+	  log.Fatal("Error loading .env file")
+	}
+  
+	ApiKey := os.Getenv("API_KEY")
+  
 	MainPageHandler := func(w http.ResponseWriter, req *http.Request){
 		t := template.Must(template.ParseFiles("index.html"))
 		res, err := http.Get(ApiKey)
