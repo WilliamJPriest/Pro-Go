@@ -1,20 +1,29 @@
 package main
 
-import(
-	"net/http"
-	"html/template"
+import (
+	"encoding/json"
 	"fmt"
-	// "io"
+	"html/template"
+	"net/http"
+
+	"io"
 	"log"
 	// "github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 )
-var ApiKey string = "https://newsapi.org/v2/top-headlines?country=us&category=tech&apiKey=2f4376c9e22f40c7aa18a7e783a566d3"
+
+
+
 
 type userData struct{
 	Username string
 	Password string
 }
+
+type ArticlesData struct{
+	Articles []ArticleData `json:"articles"`
+}
+
 
 type ArticleData struct{
 	Author string `json:"author"`
@@ -30,11 +39,20 @@ var MPassword []byte
 func main(){
 	MainPageHandler := func(w http.ResponseWriter, req *http.Request){
 		t := template.Must(template.ParseFiles("index.html"))
-		// response, err := http.Get(ApiKey)
-		// if err != nil{
-		// 	log.Fatalf("response issue: %s", err)
-		// }
-		// fmt.Println(response)
+		res, err := http.Get(ApiKey)
+		if err != nil{
+			log.Fatalf("response issue: %s", err)
+		}
+		responseData, err := io.ReadAll(res.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		var responseObject ArticlesData
+
+		json.Unmarshal(responseData, &responseObject)
+
+		fmt.Println(responseObject.Articles[0].Author)
 		t.Execute(w, nil)
 	}	
 	loginPageHandler := func(w http.ResponseWriter, req *http.Request){
