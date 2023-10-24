@@ -15,13 +15,21 @@ type userData struct{
 	password string
 }
 
+type ArticleData struct{
+	author string
+	title string
+	description string
+	url string
+	urlToImage string
+}
+
 var MUserName string
 var MPassword []byte
 
 func main(){
 	MainPageHandler := func(w http.ResponseWriter, req *http.Request){
 		t := template.Must(template.ParseFiles("index.html"))
-		response, err := http.Get("")
+		response, err := http.Get(ApiKey)
 		if err != nil{
 			log.Fatalf("response issue: %s", err)
 		}
