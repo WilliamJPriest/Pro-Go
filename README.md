@@ -4,7 +4,7 @@
 
 # **Pro-GO**
 
-For All Your Programming Needs
+For All Your Programming News
 
 ## **About US**
 ---
