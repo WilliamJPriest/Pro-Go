@@ -9,18 +9,19 @@ import(
 	// "github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 )
+var ApiKey string = "https://newsapi.org/v2/top-headlines?country=us&category=tech&apiKey=2f4376c9e22f40c7aa18a7e783a566d3"
 
 type userData struct{
-	username string
-	password string
+	Username string
+	Password string
 }
 
 type ArticleData struct{
-	author string
-	title string
-	description string
-	url string
-	urlToImage string
+	Author string `json:"author"`
+	Title string  `json:"title"`
+	Description string `json:"description"`
+	Url string `json:"url"`
+	UrlToImage string `json:"urlToImage"`
 }
 
 var MUserName string
@@ -29,11 +30,11 @@ var MPassword []byte
 func main(){
 	MainPageHandler := func(w http.ResponseWriter, req *http.Request){
 		t := template.Must(template.ParseFiles("index.html"))
-		response, err := http.Get(ApiKey)
-		if err != nil{
-			log.Fatalf("response issue: %s", err)
-		}
-		fmt.Println(response)
+		// response, err := http.Get(ApiKey)
+		// if err != nil{
+		// 	log.Fatalf("response issue: %s", err)
+		// }
+		// fmt.Println(response)
 		t.Execute(w, nil)
 	}	
 	loginPageHandler := func(w http.ResponseWriter, req *http.Request){
@@ -48,13 +49,13 @@ func main(){
 	}
 
 	loginHandler := func(w http.ResponseWriter, req *http.Request){
-		username := req.PostFormValue("username")
-		password := req.PostFormValue("password")
-		if username != MUserName {
-			log.Fatalf("This name didn't match: %s", username)
+		Username := req.PostFormValue("username")
+		Password := req.PostFormValue("password")
+		if Username != MUserName {
+			log.Fatalf("This name didn't match: %s", Username)
   
 		}
-		err := bcrypt.CompareHashAndPassword([]byte(MPassword) , []byte(password))
+		err := bcrypt.CompareHashAndPassword([]byte(MPassword) , []byte(Password))
 	    if err != nil{
 			log.Fatalf("didn't match: %s", err)
 		}
@@ -64,13 +65,13 @@ func main(){
 
 	}
 	registerHandler := func(w http.ResponseWriter, req *http.Request){
-		username := req.PostFormValue("username")
-		password := req.PostFormValue("password")
-		bcrypt,err := bcrypt.GenerateFromPassword([]byte(password), 5  )
+		Username := req.PostFormValue("username")
+		Password := req.PostFormValue("password")
+		bcrypt,err := bcrypt.GenerateFromPassword([]byte(Password), 5  )
 		if err != nil{
 			log.Fatalf("failed to hash: %s", err)
 		}
-		MUserName= username
+		MUserName= Username
 		MPassword=bcrypt
 		//once registered there should switch to the login page.
 
