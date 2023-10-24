@@ -19,8 +19,17 @@ var MUserName string
 var MPassword []byte
 
 func main(){
-	loginPageHandler := func(w http.ResponseWriter, req *http.Request){
+	MainPageHandler := func(w http.ResponseWriter, req *http.Request){
 		t := template.Must(template.ParseFiles("index.html"))
+		response, err := http.Get("")
+		if err != nil{
+			log.Fatalf("response issue: %s", err)
+		}
+		fmt.Println(response)
+		t.Execute(w, nil)
+	}	
+	loginPageHandler := func(w http.ResponseWriter, req *http.Request){
+		t := template.Must(template.ParseFiles("login.html"))
 		t.Execute(w, nil)
 	}	
 
@@ -60,11 +69,11 @@ func main(){
 	}
 
 
-	
+	http.HandleFunc("/",MainPageHandler)
 	http.HandleFunc("/loginPage",loginPageHandler)
 	http.HandleFunc("/registerPage", registerPageHandler )	
 	http.HandleFunc("/login", loginHandler )
-	http.HandleFunc("/register", registerHandler )	
+	http.HandleFunc("/register", registerHandler )
 
 	log.Fatal(http.ListenAndServe(":8000",nil))
 }
