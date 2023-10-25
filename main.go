@@ -46,8 +46,6 @@ var MUserName string
 var MPassword []byte
 
 var SecretKey = []byte("SecretYouShouldHide")
-
-
 func main(){
 	err := godotenv.Load()
 	if err != nil {
@@ -55,6 +53,7 @@ func main(){
 	}
   
 	ApiKey := os.Getenv("API_KEY")
+	
   
 	MainPageHandler := func(w http.ResponseWriter, req *http.Request){
 		t := template.Must(template.ParseFiles("index.html"))
@@ -88,15 +87,15 @@ func main(){
 
 	loginHandler := func(w http.ResponseWriter, req *http.Request){
 		Username := req.PostFormValue("username")
-		Password := req.PostFormValue("password")
-		if Username != MUserName {
-			log.Fatalf("This name didn't match: %s", Username)
+		// Password := req.PostFormValue("password")
+		// if Username != MUserName {
+		// 	log.Fatalf("This name didn't match: %s", Username)
   
-		}
-		err := bcrypt.CompareHashAndPassword([]byte(MPassword) , []byte(Password))
-	    if err != nil{
-			log.Fatalf("didn't match: %s", err)
-		}
+		// }
+		// err := bcrypt.CompareHashAndPassword([]byte(MPassword) , []byte(Password))
+	    // if err != nil{
+		// 	log.Fatalf("didn't match: %s", err)
+		// }
 
 		generateJWT(Username)
 
