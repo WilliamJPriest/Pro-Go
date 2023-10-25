@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"html/template"
@@ -34,6 +35,11 @@ type ArticleData struct{
 	Description string `json:"description"`
 	Url string `json:"url"`
 	UrlToImage string `json:"urlToImage"`
+}
+
+type CustomClaims struct {
+	Username string `json:"User"`
+	jwt.StandardClaims
 }
 
 var MUserName string
@@ -113,8 +119,11 @@ func main(){
 	}
 
 	secretHandler := func(w http.ResponseWriter, req *http.Request){
+		claims, _ := req.Context().Value("claims").(*CustomClaims)
+	
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprintf(w, "Welcome to the protected endpoint, %s!", claims.Username)
 
-		println("hello there")
 
 	}
 
@@ -151,12 +160,30 @@ func generateJWT(Username string) (string, error) {
 
 func verifyJWT(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 	return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		// Extract the JWT token from the request header
 		tokenString := request.Header.Get("Authorization")
 		if tokenString == "" {
 			writer.WriteHeader(http.StatusUnauthorized)
 			fmt.Fprint(writer, "No token provided")
 			return
 		}
-		endpointHandler(writer,request)
-})}
+		token, err := jwt.ParseWithClaims(tokenString, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
+			return SecretKey, nil
+		})
+
+		if err != nil {
+			writer.WriteHeader(http.StatusUnauthorized)
+			fmt.Fprint(writer, "Failed to parse token")
+			return
+		}
+
+		if claims, ok := token.Claims.(*CustomClaims); ok && token.Valid {
+
+			ctx := context.WithValue(request.Context(), "claims", claims)
+			request = request.WithContext(ctx)
+			endpointHandler(writer, request)
+		} else {
+			writer.WriteHeader(http.StatusUnauthorized)
+			fmt.Fprint(writer, "Invalid token")
+		}
+	})
+}
