@@ -152,6 +152,7 @@ func generateJWT(Username string) (string, error) {
 	}
 	
 	fmt.Println(tokenString)
+	tokenString = "Bearer " + tokenString
 
 
  return tokenString, nil
@@ -166,6 +167,9 @@ func verifyJWT(endpointHandler func(http.ResponseWriter, *http.Request)) http.Ha
 			fmt.Fprint(writer, "No token provided")
 			return
 		}
+		// Remove "Bearer " prefix
+		tokenString = tokenString[7:]
+
 		token, err := jwt.ParseWithClaims(tokenString, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
 			return SecretKey, nil
 		})
