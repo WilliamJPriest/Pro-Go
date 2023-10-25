@@ -160,11 +160,11 @@ func generateJWT(Username string) (string, error) {
 }
 
 func verifyJWT(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
-	return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		tokenString := request.Header.Get("Authorization")
+	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+		tokenString := req.Header.Get("Authorization")
 		if tokenString == "" {
-			writer.WriteHeader(http.StatusUnauthorized)
-			fmt.Fprint(writer, "No token provided")
+			w.WriteHeader(http.StatusUnauthorized)
+			fmt.Fprint(w, "No token provided")
 			return
 		}
 		// Remove "Bearer " prefix
@@ -175,19 +175,19 @@ func verifyJWT(endpointHandler func(http.ResponseWriter, *http.Request)) http.Ha
 		})
 
 		if err != nil {
-			writer.WriteHeader(http.StatusUnauthorized)
-			fmt.Fprint(writer, "Failed to parse token")
+			w.WriteHeader(http.StatusUnauthorized)
+			fmt.Fprint(w, "Failed to parse token")
 			return
 		}
 
 		if claims, ok := token.Claims.(*CustomClaims); ok && token.Valid {
 
-			ctx := context.WithValue(request.Context(), "claims", claims)
-			request = request.WithContext(ctx)
-			endpointHandler(writer, request)
+			ctx := context.WithValue(req.Context(), "claims", claims)
+			req = req.WithContext(ctx)
+			endpointHandler(w, req)
 		} else {
-			writer.WriteHeader(http.StatusUnauthorized)
-			fmt.Fprint(writer, "Invalid token")
+			w.WriteHeader(http.StatusUnauthorized)
+			fmt.Fprint(w, "Invalid token")
 		}
 	})
 }
