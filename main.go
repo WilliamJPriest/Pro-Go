@@ -4,10 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
-	"net/http"
-	"os"
 	"io"
 	"log"
+	"net/http"
+	"os"
+	"time"
 
 	"github.com/golang-jwt/jwt"
 	"github.com/joho/godotenv"
@@ -38,6 +39,9 @@ type ArticleData struct{
 var MUserName string
 var MPassword []byte
 
+var SecretKey = []byte("SecretYouShouldHide")
+
+
 func main(){
 	err := godotenv.Load()
 	if err != nil {
@@ -45,7 +49,6 @@ func main(){
 	}
   
 	ApiKey := os.Getenv("API_KEY")
-	SecretKey := os.Getenv("SECRET_KEY")
   
 	MainPageHandler := func(w http.ResponseWriter, req *http.Request){
 		t := template.Must(template.ParseFiles("index.html"))
@@ -78,16 +81,18 @@ func main(){
 
 	loginHandler := func(w http.ResponseWriter, req *http.Request){
 		Username := req.PostFormValue("username")
-		Password := req.PostFormValue("password")
-		if Username != MUserName {
-			log.Fatalf("This name didn't match: %s", Username)
+		// Password := req.PostFormValue("password")
+		// if Username != MUserName {
+		// 	log.Fatalf("This name didn't match: %s", Username)
   
-		}
-		err := bcrypt.CompareHashAndPassword([]byte(MPassword) , []byte(Password))
-	    if err != nil{
-			log.Fatalf("didn't match: %s", err)
-		}
-		fmt.Println("Yo")
+		// }
+		// err := bcrypt.CompareHashAndPassword([]byte(MPassword) , []byte(Password))
+	    // if err != nil{
+		// 	log.Fatalf("didn't match: %s", err)
+		// }
+
+		generateJWT(Username)
+
 		
 		
 
@@ -113,4 +118,23 @@ func main(){
 	http.HandleFunc("/register", registerHandler )
 
 	log.Fatal(http.ListenAndServe(":8000",nil))
+}
+
+func generateJWT(Username string) (string, error) {
+	token := jwt.New(jwt.SigningMethodHS256)
+	claims := token.Claims.(jwt.MapClaims)
+	claims["exp"] = time.Now().Add(10 * time.Minute).Unix()
+	claims["authorized"] = true
+	claims["user"] = Username
+
+	tokenString, err := token.SignedString(SecretKey)
+	if err != nil {
+		return "", err
+	}
+	
+	fmt.Println(tokenString)
+
+
+ return tokenString, nil
+
 }
