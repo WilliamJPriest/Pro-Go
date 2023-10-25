@@ -6,11 +6,10 @@ import (
 	"html/template"
 	"net/http"
 	"os"
-
 	"io"
 	"log"
 
-	// "github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt"
 	"github.com/joho/godotenv"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -46,6 +45,7 @@ func main(){
 	}
   
 	ApiKey := os.Getenv("API_KEY")
+	SecretKey := os.Getenv("SECRET_KEY")
   
 	MainPageHandler := func(w http.ResponseWriter, req *http.Request){
 		t := template.Must(template.ParseFiles("index.html"))
