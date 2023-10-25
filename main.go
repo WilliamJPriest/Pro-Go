@@ -68,6 +68,7 @@ func main(){
 		fmt.Println(responseObject.Articles[0].Author)
 		t.Execute(w, nil)
 	}	
+
 	loginPageHandler := func(w http.ResponseWriter, req *http.Request){
 		t := template.Must(template.ParseFiles("login.html"))
 		t.Execute(w, nil)
@@ -97,6 +98,7 @@ func main(){
 		
 
 	}
+
 	registerHandler := func(w http.ResponseWriter, req *http.Request){
 		Username := req.PostFormValue("username")
 		Password := req.PostFormValue("password")
@@ -110,12 +112,20 @@ func main(){
 
 	}
 
+	secretHandler := func(w http.ResponseWriter, req *http.Request){
+
+		println("hello there")
+
+	}
+
+
 
 	http.HandleFunc("/",MainPageHandler)
 	http.HandleFunc("/loginPage",loginPageHandler)
 	http.HandleFunc("/registerPage", registerPageHandler )	
 	http.HandleFunc("/login", loginHandler )
 	http.HandleFunc("/register", registerHandler )
+	http.HandleFunc("/secretData", verifyJWT(secretHandler))
 
 	log.Fatal(http.ListenAndServe(":8000",nil))
 }
@@ -138,3 +148,15 @@ func generateJWT(Username string) (string, error) {
  return tokenString, nil
 
 }
+
+func verifyJWT(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
+	return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
+		// Extract the JWT token from the request header
+		tokenString := request.Header.Get("Authorization")
+		if tokenString == "" {
+			writer.WriteHeader(http.StatusUnauthorized)
+			fmt.Fprint(writer, "No token provided")
+			return
+		}
+		endpointHandler(writer,request)
+})}
