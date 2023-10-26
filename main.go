@@ -115,6 +115,8 @@ func main(){
 			Name:    "token",
 			Value:   tokenString,
 			Expires: expiration,
+			HttpOnly: true,
+			Secure:   true,
 		})
 
 	}
@@ -155,16 +157,16 @@ func main(){
 
 func verifyJWT(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
-		tokenString := req.Header.Get("Authorization")
-		if tokenString == "" {
+		cookie, err := req.Cookie("token")
+		if err != nil {
 			w.WriteHeader(http.StatusUnauthorized)
 			fmt.Fprint(w, "No token provided")
 			return
 		}
 		// Remove "Bearer " prefix
-		tokenString = tokenString[7:]
+		JWTstr := cookie.Value
 
-		token, err := jwt.ParseWithClaims(tokenString, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
+		token, err := jwt.ParseWithClaims(JWTstr, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
 			return SecretKey, nil
 		})
 
