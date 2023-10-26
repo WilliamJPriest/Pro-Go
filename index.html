@@ -6,15 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pro-GO</title>
     <script src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
 </head>
-<body class="bg-slate-900"> 
-    <section>
-        <nav>
+<body class="bg-slate-900 h-full text-center"> 
+    <section class="">
+        <nav class=" gap-2">
             <header>
-                <h1>Pro-Go</h1>
+                <h1 class="text-blue-500 text-4xl" uncloak>Pro-Go</h1>
             </header>
-            <a href="/loginPage"> Login</a>
+
+                <a class="flex-end" href="/loginPage"> Login</a>
+
         </nav>
         <article>
             <h2>For All Your Programming & Tech News</h2>
@@ -30,7 +32,7 @@
                 <article >
                     {{range .Articles}}
                     <div>
-                        
+
                     </div>
                         <h2>{{ .Author}}</h2>
                     {{end}}

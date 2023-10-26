@@ -154,7 +154,7 @@ func main(){
 
 	log.Fatal(http.ListenAndServe(":8000",nil))
 }
-
+// try this with the generateJWT token 
 func verifyJWT(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		cookie, err := req.Cookie("token")
