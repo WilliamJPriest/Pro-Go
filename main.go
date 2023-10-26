@@ -70,8 +70,10 @@ func main(){
 
 		json.Unmarshal(responseData, &responseObject)
 
-		fmt.Println(responseObject.Articles[0].Author)
-		t.Execute(w, nil)
+		// fmt.Println(responseObject.Articles[0].Author)
+		// fmt.Println(responseObject.Articles[3].UrlToImage)
+		// articlesD := map[string][]responseObject.Articles[]
+		t.Execute(w, responseObject)
 	}	
 
 	loginPageHandler := func(w http.ResponseWriter, req *http.Request){

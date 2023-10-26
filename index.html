@@ -27,8 +27,13 @@
     <section> 
         <h2>Here's your Articles</h2>
             <article>
-                <article>
-
+                <article >
+                    {{range .Articles}}
+                    <div>
+                        
+                    </div>
+                        <h2>{{ .Author}}</h2>
+                    {{end}}
                 </article>
             </article>
             <article>
