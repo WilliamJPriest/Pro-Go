@@ -70,8 +70,6 @@ func main(){
 
 		json.Unmarshal(responseData, &responseObject)
 
-		// fmt.Println(responseObject.Articles[0].Author)
-		// fmt.Println(responseObject.Articles[3].UrlToImage)
 		// articlesD := map[string][]responseObject.Articles[]
 		t.Execute(w, responseObject)
 	}	
@@ -99,10 +97,25 @@ func main(){
 		// 	log.Fatalf("didn't match: %s", err)
 		// }
 
-		generateJWT(Username)
-
+		token := jwt.New(jwt.SigningMethodHS256)
+		expiration := time.Now().Add(10 * time.Minute)
+		claims := token.Claims.(jwt.MapClaims)
+		claims["exp"] = expiration.Unix()
+		claims["authorized"] = true
+		claims["user"] = Username
+	
+		tokenString, err := token.SignedString(SecretKey)
+		if err != nil {
+			return 
+		}
 		
-		
+		fmt.Println(tokenString)
+	
+		http.SetCookie(w, &http.Cookie{
+			Name:    "token",
+			Value:   tokenString,
+			Expires: expiration,
+		})
 
 	}
 
@@ -138,26 +151,6 @@ func main(){
 	http.HandleFunc("/secretData", verifyJWT(secretHandler))
 
 	log.Fatal(http.ListenAndServe(":8000",nil))
-}
-
-func generateJWT(Username string) (string, error) {
-	token := jwt.New(jwt.SigningMethodHS256)
-	claims := token.Claims.(jwt.MapClaims)
-	claims["exp"] = time.Now().Add(10 * time.Minute).Unix()
-	claims["authorized"] = true
-	claims["user"] = Username
-
-	tokenString, err := token.SignedString(SecretKey)
-	if err != nil {
-		return "", err
-	}
-	
-	fmt.Println(tokenString)
-	tokenString = "Bearer " + tokenString
-
-
- return tokenString, nil
-
 }
 
 func verifyJWT(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
