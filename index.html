@@ -43,12 +43,16 @@
         <h2>Here's your Articles</h2>
             <article>
                 <article >
-                    {{range .Articles}}
-                    <div>
-
-                    </div>
-                        <h2>{{ .Author}}</h2>
+                    {{ if .Articles }}
+                        {{range .Articles}}
+                        <div>
+                            <h2>{{ .Author}} </h2>
+                        </div>
+                        {{end}}
+                    {{else}}
+                        <p> No Data</p>
                     {{end}}
+                    
                 </article>
             </article>
             <article>

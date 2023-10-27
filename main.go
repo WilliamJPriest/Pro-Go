@@ -59,16 +59,17 @@ func main(){
 		t := template.Must(template.ParseFiles("index.html"))
 		res, err := http.Get(ApiKey)
 		if err != nil{
-			log.Fatalf("response issue: %s", err)
+			fmt.Println(err)
 		}
 		responseData, err := io.ReadAll(res.Body)
 		if err != nil {
-			log.Fatal(err)
+			fmt.Println(err)
 		}
 
 		var responseObject ArticlesData
 
 		json.Unmarshal(responseData, &responseObject)
+
 
 		// articlesD := map[string][]responseObject.Articles[]
 		t.Execute(w, responseObject)
