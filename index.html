@@ -7,6 +7,16 @@
     <title>Pro-GO</title>
     <script src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/tailwind.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/normalize.min.css">
+    <style>
+            button{
+                -webkit-appearance: button; /* 1 */
+                background-color: transparent;
+                background-image: none; /* 2 */
+                border: 2px solid
+                }
+    </style>
 </head>
 <body class="bg-slate-900 h-full p-0 m-0 "> 
     <section class="">
@@ -21,11 +31,11 @@
                 
 
         </nav>
-        <article>
-            <h2>For All Your Programming & Tech News</h2>
-            <div>
-                <button>Submit an Article</button>
-                <button>Contact Us</button>
+        <article class="flex flex-col text-center justify-center text-white h-[80vh]">
+            <h2 class="text-5xl m-2">For All Your Programming & Tech News</h2>
+            <div class="pt-10">
+                <button class="border-1 border-white rounded-lg text-[16px] w-48  bg-white text-slate-900 hover:text-white hover:bg-blue-500">Submit an Article</button>
+                <button class="border-1 border-white rounded-lg text-[16px] w-48  bg-white text-slate-900 hover:text-white hover:bg-blue-500">Contact Us</button>
             </div>
         </article>
     </section>
