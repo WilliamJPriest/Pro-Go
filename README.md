@@ -22,4 +22,4 @@ Potentially: Postgres or SQLite
 ## **Watch This Project Live**
 ---
 
-<a href="https://www.youtube.com/@ThatWeirdKiidOnYT/streams?sub_confirmation=1">![Youtube](https://img.shields.io/badge/youtube-%230077B5.svg?style=for-the-badge&logo=youtube&logoColor=red)</a>
+<a href="https://www.youtube.com/@ThatWeirdKiidOnYT/streams?sub_confirmation=1">![Youtube](https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white)</a>
