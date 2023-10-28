@@ -46,7 +46,7 @@ type CustomClaims struct {
 
 var SecretKey = []byte("SecretYouShouldHide")
 func main(){
-	database.Create()
+	// database.Create()
 	err := godotenv.Load()
 	if err != nil {
 	  log.Fatal("Error loading .env file")
@@ -69,6 +69,7 @@ func main(){
 		var responseObject ArticlesData
 
 		json.Unmarshal(responseData, &responseObject)
+		fmt.Println(responseObject.Articles[0].Author)
 
 
 		t.Execute(w, responseObject)

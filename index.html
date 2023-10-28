@@ -26,7 +26,7 @@
                
         <div class="flex p-5 gap-2">
             <a class="text-white no-underline hover:text-blue-500" href="/loginPage"> Login</a>
-            <a class="text-white no-underline hover:text-blue-500"" href="/loginPage"> Contact US</a>
+            <a class="text-white no-underline hover:text-blue-500" href="/loginPage"> Contact US</a>
         </div>
                 
 
@@ -45,8 +45,9 @@
                 <article >
                     {{ if .Articles }}
                         {{range .Articles}}
-                        <div>
-                            <h2>{{ .Author}} </h2>
+                        <div class="border-1 border-white rounded-lg text-[16px] text-white">
+                            <h2>{{ .Title}} </h2>
+                            <p>{{ .Author}} </p>
                         </div>
                         {{end}}
                     {{else}}
@@ -55,10 +56,6 @@
                     
                 </article>
             </article>
-            <article>
-
-            </article>
-        </article>
     </section>
     <footer>
 
