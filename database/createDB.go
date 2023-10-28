@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"time"
 
 	"github.com/joho/godotenv"
 
@@ -24,11 +23,27 @@ func Create(){
 		log.Fatal("failed to connect database", err)
 	}
 
-	var now time.Time
-	err = db.QueryRow("SELECT NOW()").Scan(&now)
+	// _, err = db.Exec("CREATE TABLE Users (UserID SERIAL PRIMARY KEY, username char(100),password char(100));")
+	// if err != nil {
+	// 	log.Fatal("failed to execute query", err)
+	// }
+	// res, err := db.Exec("insert into Users (username,password) VALUES (username,password)", "yo","yololo")
+	// if err != nil {
+	// 	log.Fatal("failed to execute query", err)
+	// }
+	res, err := db.Exec("SELECT * FROM Users ")
 	if err != nil {
 		log.Fatal("failed to execute query", err)
 	}
 
-	fmt.Println(now)
+
+	// id, err := res.LastInsertId()
+    // if err != nil {
+    //     panic(err)
+    // }
+
+
+
+	fmt.Println(res)
+	// fmt.Println(id)
 }
