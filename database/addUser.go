@@ -10,7 +10,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-func Create(){
+func AddUser(username string, password string){
 	err := godotenv.Load()
 	if err != nil {
 	  log.Fatal("Error loading .env file")
@@ -22,9 +22,8 @@ func Create(){
 		log.Fatal("failed to connect database", err)
 	}
 
-	_, err = db.Exec("CREATE TABLE if not exists Users (UserID SERIAL PRIMARY KEY, username char(100),password char(100));")
+	_, err = db.Exec("INSERT INTO Users (username, password) VALUES ($1, $2)", username, password)
 	if err != nil {
 		log.Fatal("failed to execute query", err)
 	}
-
 }
