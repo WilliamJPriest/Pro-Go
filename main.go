@@ -82,6 +82,7 @@ func main(){
 	registerPageHandler := func(w http.ResponseWriter, req *http.Request){
 		t := template.Must(template.ParseFiles("register.html"))
 		t.Execute(w, nil)
+		
 
 	}
 
@@ -110,6 +111,7 @@ func main(){
 			HttpOnly: true,
 			Secure:   true,
 		})
+
 
 	}
 
@@ -145,6 +147,7 @@ func main(){
 	http.HandleFunc("/login", loginHandler )
 	http.HandleFunc("/register", registerHandler )
 	http.HandleFunc("/secretData", verifyJWT(secretHandler))
+	//convert to SPA possibily - articles
 
 	log.Fatal(http.ListenAndServe(":8000",nil))
 }
