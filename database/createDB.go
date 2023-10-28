@@ -23,27 +23,12 @@ func Create(){
 		log.Fatal("failed to connect database", err)
 	}
 
-	// _, err = db.Exec("CREATE TABLE Users (UserID SERIAL PRIMARY KEY, username char(100),password char(100));")
-	// if err != nil {
-	// 	log.Fatal("failed to execute query", err)
-	// }
-	// res, err := db.Exec("insert into Users (username,password) VALUES (username,password)", "yo","yololo")
-	// if err != nil {
-	// 	log.Fatal("failed to execute query", err)
-	// }
-	res, err := db.Exec("SELECT * FROM Users ")
+	_, err = db.Exec("CREATE TABLE if not exists Users (UserID SERIAL PRIMARY KEY, username char(100),password char(100));")
 	if err != nil {
 		log.Fatal("failed to execute query", err)
 	}
-
-
-	// id, err := res.LastInsertId()
-    // if err != nil {
-    //     panic(err)
-    // }
-
-
-
-	fmt.Println(res)
-	// fmt.Println(id)
+	_, err = db.Exec("INSERT INTO Users (username, password) VALUES ($1, $2)", "yo", "yololo")
+	if err != nil {
+		log.Fatal("failed to execute query", err)
+	}
 }

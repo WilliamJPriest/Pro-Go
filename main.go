@@ -14,7 +14,7 @@ import (
 	"github.com/golang-jwt/jwt"
 	"github.com/joho/godotenv"
 	"golang.org/x/crypto/bcrypt"
-	// "github.com/williamjPriest/HTMXGO/database"
+	"github.com/williamjPriest/HTMXGO/database"
 )
 
 
@@ -46,7 +46,7 @@ type CustomClaims struct {
 
 var SecretKey = []byte("SecretYouShouldHide")
 func main(){
-	// database.Create()
+	database.Create()
 	err := godotenv.Load()
 	if err != nil {
 	  log.Fatal("Error loading .env file")
