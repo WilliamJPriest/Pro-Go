@@ -14,7 +14,7 @@ import (
 	"github.com/golang-jwt/jwt"
 	"github.com/joho/godotenv"
 	"golang.org/x/crypto/bcrypt"
-	"github.com/williamjPriest/HTMXGO/database"
+	// "github.com/williamjPriest/HTMXGO/database"
 )
 
 
@@ -43,12 +43,10 @@ type CustomClaims struct {
 	jwt.StandardClaims
 }
 
-var MUserName string
-var MPassword []byte
 
 var SecretKey = []byte("SecretYouShouldHide")
 func main(){
-	database.Create()
+	// database.Create()
 	err := godotenv.Load()
 	if err != nil {
 	  log.Fatal("Error loading .env file")
@@ -73,7 +71,6 @@ func main(){
 		json.Unmarshal(responseData, &responseObject)
 
 
-		// articlesD := map[string][]responseObject.Articles[]
 		t.Execute(w, responseObject)
 	}	
 
@@ -89,23 +86,15 @@ func main(){
 	}
 
 	loginHandler := func(w http.ResponseWriter, req *http.Request){
-		Username := req.PostFormValue("username")
-		// Password := req.PostFormValue("password")
-		// if Username != MUserName {
-		// 	log.Fatalf("This name didn't match: %s", Username)
-  
-		// }
-		// err := bcrypt.CompareHashAndPassword([]byte(MPassword) , []byte(Password))
-	    // if err != nil{
-		// 	log.Fatalf("didn't match: %s", err)
-		// }
+		username := req.PostFormValue("username")
+
 
 		token := jwt.New(jwt.SigningMethodHS256)
 		expiration := time.Now().Add(10 * time.Minute)
 		claims := token.Claims.(jwt.MapClaims)
 		claims["exp"] = expiration.Unix()
 		claims["authorized"] = true
-		claims["user"] = Username
+		claims["user"] = username
 	
 		tokenString, err := token.SignedString(SecretKey)
 		if err != nil {
@@ -125,14 +114,14 @@ func main(){
 	}
 
 	registerHandler := func(w http.ResponseWriter, req *http.Request){
-		Username := req.PostFormValue("username")
-		Password := req.PostFormValue("password")
-		bcrypt,err := bcrypt.GenerateFromPassword([]byte(Password), 5  )
+		username := req.PostFormValue("username")
+		password := req.PostFormValue("password")
+		bcrypt,err := bcrypt.GenerateFromPassword([]byte(password), 5  )
 		if err != nil{
 			log.Fatalf("failed to hash: %s", err)
 		}
-		MUserName= Username
-		MPassword=bcrypt
+		fmt.Println(username)
+		fmt.Println(bcrypt)
 		//once registered there should switch to the login page.
 
 	}
