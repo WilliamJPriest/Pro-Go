@@ -120,9 +120,11 @@ func main(){
 		if err != nil{
 			log.Fatalf("failed to hash: %s", err)
 		}
-		fmt.Println(username)
-		fmt.Println(bcrypt)
-		//once registered there should switch to the login page.
+		res, err := database.AddUser(username,bcrypt) 
+		if err != nil{
+			log.Fatalf("User couldn't be added to the database: %s", err)
+		}
+		fmt.Println(res)
 
 	}
 
@@ -155,7 +157,7 @@ func verifyJWT(endpointHandler func(http.ResponseWriter, *http.Request)) http.Ha
 			fmt.Fprint(w, "No token provided")
 			return
 		}
-		// Remove "Bearer " prefix
+
 		JWTstr := cookie.Value
 
 		token, err := jwt.ParseWithClaims(JWTstr, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
