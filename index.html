@@ -16,6 +16,11 @@
                 background-image: none; /* 2 */
                 border: 2px solid
                 }
+
+            .addBorder{
+                border: 2px solid white;
+
+            }
     </style>
 </head>
 <body class="bg-slate-900 h-full p-0 m-0 "> 
@@ -45,9 +50,10 @@
                 <article class="">
                     {{ if .Articles }}
                         {{range .Articles}}
-                        <div class="border-2 border-white rounded-lg  w-64 flex flex-col justify-center align-items mx-auto text-center pb-2">
-                            <a class="w-64 text-[16px] text-white no-underline" href="{{ .Url }}" target="_blank">
-                                <img class="w-64" src={{.UrlToImage}} alt="img failed to failed">
+                        <div class="addBorder rounded-lg  w-64 h-[400px] flex flex-col  mx-auto text-center mb-10">
+                            
+                            <a class="w-64 text-[16px] text-white no-underline flex flex-col flex-start" href="{{ .Url }}" target="_blank">
+                                <img class="w-64 rounded-lg" src={{.UrlToImage}} alt="img failed to failed">
                                 <h2>{{ .Title}} </h2>
                                 <p>{{ .Author}} </p>
                             </a>
