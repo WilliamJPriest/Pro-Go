@@ -40,12 +40,12 @@
         </article>
     </section>
     <section> 
-        <h2>Here's your Articles</h2>
+        <h2 class="text-white">Here's your Articles</h2>
             <article>
                 <article >
                     {{ if .Articles }}
                         {{range .Articles}}
-                        <div class="border-1 border-white rounded-lg text-[16px] text-white">
+                        <div class="border-2 border-white rounded-lg text-[16px] text-white">
                             <h2>{{ .Title}} </h2>
                             <p>{{ .Author}} </p>
                         </div>
