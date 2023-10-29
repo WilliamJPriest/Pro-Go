@@ -46,7 +46,7 @@
                     {{ if .Articles }}
                         {{range .Articles}}
                         <div class="border-2 border-white rounded-lg  w-64 flex flex-col justify-center align-items mx-auto text-center pb-2">
-                            <a class="w-64 text-[16px] text-white no-underline" href="{{ .Url }}">
+                            <a class="w-64 text-[16px] text-white no-underline" href="{{ .Url }}" target="_blank">
                                 <img class="w-64" src={{.UrlToImage}} alt="img failed to failed">
                                 <h2>{{ .Title}} </h2>
                                 <p>{{ .Author}} </p>
