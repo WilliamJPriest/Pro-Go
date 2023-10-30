@@ -129,6 +129,9 @@ func main(){
 		}
 		fmt.Println(res)
 
+		t := template.Must(template.ParseFiles("login.html"))
+		t.Execute(w, nil)
+
 	}
 
 	secretHandler := func(w http.ResponseWriter, req *http.Request){
