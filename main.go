@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"html/template"
@@ -15,36 +14,14 @@ import (
 	"github.com/joho/godotenv"
 	"golang.org/x/crypto/bcrypt"
 	"github.com/williamjPriest/HTMXGO/database"
+	"github.com/williamjPriest/HTMXGO/models"
+	"github.com/williamjPriest/HTMXGO/middlewares"
 )
 
 
 
 
-type userData struct{
-	Username string
-	Password string
-}
 
-type ArticlesData struct{
-	Articles []ArticleData `json:"articles"`
-}
-
-
-type ArticleData struct{
-	Author string `json:"author"`
-	Title string  `json:"title"`
-	Description string `json:"description"`
-	Url string `json:"url"`
-	UrlToImage string `json:"urlToImage"`
-}
-
-type CustomClaims struct {
-	Username string `json:"User"`
-	jwt.StandardClaims
-}
-
-
-var SecretKey = []byte("SecretYouShouldHide")
 func main(){
 	// database.Create()
 	err := godotenv.Load()
@@ -66,7 +43,7 @@ func main(){
 			fmt.Println(err)
 		}
 
-		var responseObject ArticlesData
+		var responseObject models.ArticlesData
 
 		json.Unmarshal(responseData, &responseObject)
 		fmt.Println(responseObject.Articles[0].Author)
@@ -98,7 +75,7 @@ func main(){
 		claims["authorized"] = true
 		claims["user"] = username
 	
-		tokenString, err := token.SignedString(SecretKey)
+		tokenString, err := token.SignedString(models.SecretKey)
 		if err != nil {
 			return 
 		}
@@ -137,7 +114,7 @@ func main(){
 	}
 
 	secretHandler := func(w http.ResponseWriter, req *http.Request){
-		claims, _ := req.Context().Value("claims").(*CustomClaims)
+		claims, _ := req.Context().Value("claims").(*models.CustomClaims)
 	
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprintf(w, "Welcome to the protected endpoint, %s!", claims.Username)
@@ -152,41 +129,8 @@ func main(){
 	http.HandleFunc("/registerForm", registerPageHandler )	
 	http.HandleFunc("/login", loginHandler )
 	http.HandleFunc("/register", registerHandler )
-	http.HandleFunc("/secretData", verifyJWT(secretHandler))
+	http.HandleFunc("/secretData", middlewares.VerifyJWT(secretHandler))
 	//convert to SPA possibily - articles
 
 	log.Fatal(http.ListenAndServe(":8000",nil))
-}
-// try this with the generateJWT token 
-func verifyJWT(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
-	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
-		cookie, err := req.Cookie("token")
-		if err != nil {
-			w.WriteHeader(http.StatusUnauthorized)
-			fmt.Fprint(w, "No token provided")
-			return
-		}
-
-		JWTstr := cookie.Value
-
-		token, err := jwt.ParseWithClaims(JWTstr, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
-			return SecretKey, nil
-		})
-
-		if err != nil {
-			w.WriteHeader(http.StatusUnauthorized)
-			fmt.Fprint(w, "Failed to parse token")
-			return
-		}
-
-		if claims, ok := token.Claims.(*CustomClaims); ok && token.Valid {
-
-			ctx := context.WithValue(req.Context(), "claims", claims)
-			req = req.WithContext(ctx)
-			endpointHandler(w, req)
-		} else {
-			w.WriteHeader(http.StatusUnauthorized)
-			fmt.Fprint(w, "Invalid token")
-		}
-	})
 }
