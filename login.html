@@ -1,5 +1,26 @@
 
-<body class="bg-slate-900">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hey There</title>
+    <script src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .my-indicator{
+            display:none;
+        }
+        .htmx-request .my-indicator{
+            display:inline;
+        }
+        .htmx-request.my-indicator{
+            display:inline;
+        }
+    </style>
+</head>
+<body id="SwapPanel" class="bg-slate-900">
     <section class="w-full text-white flex flex-col justify-center text-center items-center h-[100vh]">  
         <article class="border-white border-2 rounded-lg w-72 h-80 flex flex-col justify-center items-center pt-8">
             <h2 class="flex flex-start">
@@ -10,9 +31,12 @@
                 <input class="text-slate-900" type="text" name="username" placeholder=" username">
                 <label for="password"></label>
                 <input class="text-slate-900" type="password" name="password" placeholder=" password">
-                <button hx-post="/login" hx-trigger="click" class="border-white border-2 rounded-lg mt-8 hover:bg-white hover:text-slate-900">Submit</button>
+                <button hx-post="/login" hx-trigger="click" hx-indicator="#loader" hx-target="#SwapPanel" hx-swap="innerHTML" class="border-white border-2 rounded-lg mt-8 hover:bg-white hover:text-slate-900" 
+                > Submit</button>
+                <p  id= "loader" class="my-indicator" un-cloak> ...Loading</p>
             </form>
-            <a href="/registerPage" class="m-6">Register your account</a>
+            <a hx-get="/registerForm" hx-trigger="click" hx-target="#SwapPanel" hx-swap="innerHTML" class="m-6 pointer">register into account</a>
         </article>
     </section>
 </body>
+</html>

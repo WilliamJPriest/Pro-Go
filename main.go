@@ -148,8 +148,8 @@ func main(){
 
 
 	http.HandleFunc("/",MainPageHandler)
-	http.HandleFunc("/loginPage",loginPageHandler)
-	http.HandleFunc("/registerPage", registerPageHandler )	
+	http.HandleFunc("/entry",loginPageHandler)
+	http.HandleFunc("/registerForm", registerPageHandler )	
 	http.HandleFunc("/login", loginHandler )
 	http.HandleFunc("/register", registerHandler )
 	http.HandleFunc("/secretData", verifyJWT(secretHandler))

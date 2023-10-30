@@ -27,17 +27,26 @@
             body{
                 background: #0f172a;
             }
+            .my-indicator{
+            display:none;
+            }
+            .htmx-request .my-indicator{
+                display:inline;
+            }
+            .htmx-request.my-indicator{
+                display:inline;
+            }
     </style>
 </head>
-<body class="bg-slate-900 h-full p-0 m-0 "> 
+<body id="SwapPanel" class="bg-slate-900 h-full p-0 m-0 "> 
     <section class=""> 
         <nav class=" flex text-center justify-between h-[10vh] align-bottom"> 
     
         <h1 class="text-blue-500 text-4xl p-0 m-2" >Pro-Go</h1>
                
         <div class="flex p-5 gap-2">
-            <a class="text-white no-underline hover:text-blue-500" href="/loginPage"> Login</a>
-            <a class="text-white no-underline hover:text-blue-500" href="/RegisterPage"> Register</a>
+            <a class="text-white no-underline hover:text-blue-500" href="/entry"> Login</a>
+            <!-- <a class="text-white no-underline hover:text-blue-500" href="/RegisterPage"> Register</a> -->
         </div>
                 
 
@@ -75,7 +84,7 @@
     <footer>
         <p> Created by WilliamJ</p>
         <div>
-            
+
         </div>
 
     </footer>
