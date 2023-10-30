@@ -117,6 +117,8 @@ func main(){
 	}
 
 	registerHandler := func(w http.ResponseWriter, req *http.Request){
+		
+
 		username := req.PostFormValue("username")
 		password := req.PostFormValue("password")
 		bcrypt,err := bcrypt.GenerateFromPassword([]byte(password), 5  )
