@@ -94,19 +94,16 @@ func main(){
 	}
 
 	registerHandler := func(w http.ResponseWriter, req *http.Request){
-		
-
 		username := req.PostFormValue("username")
 		password := req.PostFormValue("password")
 		bcrypt,err := bcrypt.GenerateFromPassword([]byte(password), 5  )
 		if err != nil{
 			log.Fatalf("failed to hash: %s", err)
 		}
-		res, err := database.AddUser(username,bcrypt) 
+		err = database.AddUser(username,bcrypt) 
 		if err != nil{
 			log.Fatalf("User couldn't be added to the database: %s", err)
 		}
-		fmt.Println(res)
 
 		t := template.Must(template.ParseFiles("login.html"))
 		t.Execute(w, nil)
@@ -132,7 +129,6 @@ func main(){
 	http.HandleFunc("/login", loginHandler )
 	http.HandleFunc("/register", middlewares.VerifyUser(registerHandler) )
 	http.HandleFunc("/secretData", middlewares.VerifyJWT(secretHandler))
-	//convert to SPA possibily - articles
 
 	log.Fatal(http.ListenAndServe(":8000",nil))
 }
