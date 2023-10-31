@@ -3,7 +3,6 @@ package database
 import (
 	"database/sql"
 	"fmt"
-	"log"
 
 	// "log"
 	"os"
@@ -26,18 +25,6 @@ func AddUser(username string, password []byte) (bool,error){
 	db, err := sql.Open("postgres", dsn)
 	if err != nil {
 		return false,  fmt.Errorf("Failed to execute query: %w" ,err)
-	}
-
-	rows, err := db.Query("SELECT * FROM Users WHERE username = $1", username)
-	if err != nil {
-		log.Printf("Error executing SQL query: %v", err)
-	}
-	defer rows.Close()
-
-	if rows.Next() {
-		log.Println("Username already exists.")
-	} else {
-		log.Println("Username is not in the database.")
 	}
 
 	_, err = db.Exec("INSERT INTO Users (username, password) VALUES ($1, $2)", username, password)

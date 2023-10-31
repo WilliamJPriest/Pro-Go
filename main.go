@@ -130,7 +130,7 @@ func main(){
 	http.HandleFunc("/entry",loginPageHandler)
 	http.HandleFunc("/registerForm", registerPageHandler )	
 	http.HandleFunc("/login", loginHandler )
-	http.HandleFunc("/register", registerHandler )
+	http.HandleFunc("/register", middlewares.VerifyUser(registerHandler) )
 	http.HandleFunc("/secretData", middlewares.VerifyJWT(secretHandler))
 	//convert to SPA possibily - articles
 
