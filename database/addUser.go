@@ -28,21 +28,17 @@ func AddUser(username string, password []byte) (bool,error){
 		return false,  fmt.Errorf("Failed to execute query: %w" ,err)
 	}
 
-	rows, err := db.Query("select from Users (username) VALUES ($1)", username)
-		if err != nil {
-			log.Fatal(err)
-		}
-		defer rows.Close()
-		for rows.Next() {
-			var username string
-			if err := rows.Scan(&username); err != nil {
-					log.Fatal(err)
-			}
-			fmt.Println(username)
-		}
-		if err := rows.Err(); err != nil {
-			log.Fatal(err)
-		}
+	rows, err := db.Query("SELECT * FROM Users WHERE username = $1", username)
+	if err != nil {
+		log.Printf("Error executing SQL query: %v", err)
+	}
+	defer rows.Close()
+
+	if rows.Next() {
+		log.Println("Username already exists.")
+	} else {
+		log.Println("Username is not in the database.")
+	}
 
 	_, err = db.Exec("INSERT INTO Users (username, password) VALUES ($1, $2)", username, password)
 	if err != nil {

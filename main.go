@@ -111,6 +111,8 @@ func main(){
 		t := template.Must(template.ParseFiles("login.html"))
 		t.Execute(w, nil)
 
+		database.AddUser(username, []byte(password))
+
 	}
 
 	secretHandler := func(w http.ResponseWriter, req *http.Request){
