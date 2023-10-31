@@ -4,14 +4,15 @@
             <h2 class="flex flex-start">
                 Register
             </h2>
-            <form class="flex flex-col gap-4" action="POST">
+            <form hx-ext="response-targets" class="flex flex-col gap-4" action="POST">
                 <label for="username"></label>
                 <input class="text-slate-900" type="text" name="username" placeholder=" username">
                 <label for="password"></label>
                 <input class="text-slate-900" type="password" name="password" placeholder=" password">
-                <button hx-post="/register" hx-trigger="click" hx-indicator="#loader" hx-target="#SwapPanel" hx-swap="innerHTML" class="border-white border-2 rounded-lg mt-8 hover:bg-white hover:text-slate-900" 
+                <button hx-post="/register" hx-trigger="click" hx-indicator="#loader" hx-target="#SwapPanel" hx-swap="innerHTML" hx-target-409="#serious-errors" class="border-white border-2 rounded-lg mt-8 hover:bg-white hover:text-slate-900" 
                 > Submit</button>
                 <p  id= "loader" class="my-indicator"> ...Loading</p>
+                <p  id="serious-errors"></p>
                 
             </form>
             <a hx-get="/entry" hx-trigger="click" hx-target="#SwapPanel" hx-swap="innerHTML" class="m-6 pointer">Login into account</a>

@@ -32,7 +32,7 @@ func VerifyUser(endpointHandler func(http.ResponseWriter, *http.Request)) http.H
 		defer rows.Close()
 	
 		if rows.Next() {
-			log.Fatal("Username already exists.")
+			http.Error(w, "Username already exists.", http.StatusConflict)
 		} else {
 			log.Println("Username is not in the database.")
 			endpointHandler(w, req)
