@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"text/template"
 
 	"github.com/joho/godotenv"
 )
@@ -32,7 +33,8 @@ func VerifyUser(endpointHandler func(http.ResponseWriter, *http.Request)) http.H
 		defer rows.Close()
 	
 		if rows.Next() {
-			http.Error(w, "Username already exists.", http.StatusConflict)
+			t := template.Must(template.ParseFiles("register-error.html"))
+			t.Execute(w, nil)
 		} else {
 			log.Println("Username is not in the database.")
 			endpointHandler(w, req)

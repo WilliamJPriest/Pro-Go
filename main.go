@@ -100,16 +100,14 @@ func main(){
 		if err != nil{
 			log.Fatalf("failed to hash: %s", err)
 		}
-		err = database.AddUser(username,bcrypt) 
-		if err != nil{
-			log.Fatalf("User couldn't be added to the database: %s", err)
-		}
 
+		err = database.AddUser(username, bcrypt)
+		if err != nil{
+			log.Fatalf("failed to add user: %s", err)
+		}
+		
 		t := template.Must(template.ParseFiles("login.html"))
 		t.Execute(w, nil)
-
-		database.AddUser(username, []byte(password))
-
 	}
 
 	secretHandler := func(w http.ResponseWriter, req *http.Request){
