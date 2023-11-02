@@ -23,8 +23,11 @@ func VertifyLogin(endpointHandler func(http.ResponseWriter, *http.Request)) http
 		if err != nil {
 			log.Fatal("Failed to execute query: %w" ,err)
 		}
-
-		rows, err := db.Query("SELECT * FROM Users WHERE username = $1, password = $2", username, email)
+		//use username to fetch password
+		// decrypt and see if it matches user input
+		//if it does go to main page
+		//if not send error html, password didn't match
+		rows, err := db.Query("SELECT * FROM Users WHERE username = $1, password = $2", username, password)
 		if err != nil {
 			log.Fatal("Error executing SQL query: %w", err)
 		}
