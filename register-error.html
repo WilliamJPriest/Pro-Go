@@ -12,7 +12,7 @@
                 <button hx-post="/register" hx-trigger="click" hx-indicator="#loader" hx-target="#SwapPanel" hx-swap="innerHTML" class="border-white border-2 rounded-lg mt-8 hover:bg-white hover:text-slate-900" 
                 > Submit</button>
                 <p  id= "loader" class="my-indicator"> ...Loading</p>
-                <div id="errors">That username is already taken</div>
+                <p id="error-message">That username is already taken</p>
             </form>
             <a hx-get="/entry" hx-trigger="click" hx-target="#SwapPanel" hx-swap="innerHTML" class="m-6 pointer">Login into account</a>
         </article>
