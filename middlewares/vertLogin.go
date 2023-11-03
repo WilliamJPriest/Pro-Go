@@ -11,7 +11,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func VertifyLogin(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
+func VerifyLogin(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		username := req.PostFormValue("username")
 		password := req.PostFormValue("password")
@@ -38,7 +38,7 @@ func VertifyLogin(endpointHandler func(http.ResponseWriter, *http.Request)) http
 		}
 		err = bcrypt.CompareHashAndPassword([]byte(storedPasswordHash), []byte(password))
 		if err != nil {
-			t := template.Must(template.ParseFiles("register-error.html"))
+			t := template.Must(template.ParseFiles("login-error.html"))
 			t.Execute(w, nil)
 		}
 
