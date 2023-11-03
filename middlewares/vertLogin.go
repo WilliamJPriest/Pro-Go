@@ -7,14 +7,13 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func VertifyLogin(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		username := req.PostFormValue("username")
 		password := req.PostFormValue("password")
-
-		err, encypted = CompareHashAndPassword(SQLPassword, password)
 
 		err := godotenv.Load()
 		if err != nil {
@@ -31,12 +30,15 @@ func VertifyLogin(endpointHandler func(http.ResponseWriter, *http.Request)) http
 		// decrypt and see if it matches user input
 		//if it does go to main page
 		//if not send error html, password didn't match
-		rows, err := db.Query("SELECT * FROM Users WHERE username = $1, password = $2", username, password)
+		var storedPasswordHash string
+		err = db.QueryRow("SELECT password FROM Users WHERE username = $1", username).Scan(&storedPasswordHash)
 		if err != nil {
 			log.Fatal("Error executing SQL query: %w", err)
 		}
-		defer rows.Close()
-		err, encypted = CompareHashAndPassword(rows.password, password)
+		err = bcrypt.CompareHashAndPassword([]byte(storedPasswordHash), []byte(password))
+		if err != nil {
+			log.Fatal("password doesn't match: %w", err)
+		}
 
 	})
 }
