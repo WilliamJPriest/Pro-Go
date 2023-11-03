@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"text/template"
 
 	"github.com/joho/godotenv"
 	"golang.org/x/crypto/bcrypt"
@@ -37,7 +38,8 @@ func VertifyLogin(endpointHandler func(http.ResponseWriter, *http.Request)) http
 		}
 		err = bcrypt.CompareHashAndPassword([]byte(storedPasswordHash), []byte(password))
 		if err != nil {
-			log.Fatal("password doesn't match: %w", err)
+			t := template.Must(template.ParseFiles("register-error.html"))
+			t.Execute(w, nil)
 		}
 
 	})
