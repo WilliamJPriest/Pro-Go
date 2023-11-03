@@ -11,6 +11,10 @@ import (
 
 func VertifyLogin(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+		username := req.PostFormValue("username")
+		password := req.PostFormValue("password")
+
+		err, encypted = CompareHashAndPassword(SQLPassword, password)
 
 		err := godotenv.Load()
 		if err != nil {
@@ -32,6 +36,7 @@ func VertifyLogin(endpointHandler func(http.ResponseWriter, *http.Request)) http
 			log.Fatal("Error executing SQL query: %w", err)
 		}
 		defer rows.Close()
+		err, encypted = CompareHashAndPassword(rows.password, password)
 
 	})
 }
