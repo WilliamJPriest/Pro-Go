@@ -1,12 +1,20 @@
 package controllers
 
-import 
+import (
+	"log"
+	"net/http"
 
-http.HandleFunc("/",MainPageHandler)
-http.HandleFunc("/entry",loginPageHandler)
-http.HandleFunc("/registerForm", registerPageHandler )	
-http.HandleFunc("/login",  middlewares.VerifyLogin(loginHandler) )
-http.HandleFunc("/register", middlewares.VerifyUser(registerHandler) )
-http.HandleFunc("/secretData", middlewares.VerifyJWT(secretHandler))
+	"github.com/williamjPriest/HTMXGO/middlewares"
+	"github.com/williamjPriest/HTMXGO/routes"
+)
 
-log.Fatal(http.ListenAndServe(":8000",nil))
+func Controllers(){
+	http.HandleFunc("/", routes.MainPageHandler)
+	http.HandleFunc("/entry",routes.loginPageHandler)
+	http.HandleFunc("/registerForm", routes.registerPageHandler )	
+	http.HandleFunc("/login",  middlewares.VerifyLogin(routes.loginHandler) )
+	http.HandleFunc("/register", middlewares.VerifyUser(routes.registerHandler) )
+	http.HandleFunc("/secretData", middlewares.VerifyJWT(routes.secretHandler))
+
+	log.Fatal(http.ListenAndServe(":8000",nil))
+}

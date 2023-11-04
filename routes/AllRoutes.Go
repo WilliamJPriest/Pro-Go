@@ -1,8 +1,10 @@
-import routes
+package routes
+
+import
 
 
-
-MainPageHandler := func(w http.ResponseWriter, req *http.Request){
+func Router(){
+	MainPageHandler := func(w http.ResponseWriter, req *http.Request){
 	t := template.Must(template.ParseFiles("index.html"))
 	res, err := http.Get(ApiKey)
 	if err != nil{
@@ -88,3 +90,5 @@ secretHandler := func(w http.ResponseWriter, req *http.Request){
 
 
 }
+}
+

@@ -18,3 +18,7 @@ replace github.com/williamjPriest/HTMXGO/database => ./database
 replace github.com/williamjPriest/HTMXGO/middlewares => ./middlewares
 
 replace github.com/williamjPriest/HTMXGO/models => ./models
+
+replace github.com/williamjPriest/HTMXGO/routes => ./routes
+
+replace github.com/williamjPriest/HTMXGO/controllers => ./controllers
