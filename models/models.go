@@ -9,8 +9,14 @@ type userData struct{
 	Password string
 }
 
+// type Profile struct{
+// 	PageData []ArticlesData 
+	
+// }
+
 type ArticlesData struct{
 	Articles []ArticleData `json:"articles"`
+	isLoggedIn bool
 }
 
 
@@ -20,6 +26,7 @@ type ArticleData struct{
 	Description string `json:"description"`
 	Url string `json:"url"`
 	UrlToImage string `json:"urlToImage"`
+
 }
 
 type CustomClaims struct {

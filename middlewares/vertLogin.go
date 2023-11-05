@@ -27,10 +27,7 @@ func VerifyLogin(endpointHandler func(http.ResponseWriter, *http.Request)) http.
 		if err != nil {
 			log.Fatal("Failed to execute query: %w" ,err)
 		}
-		//use username to fetch password
-		// decrypt and see if it matches user input
-		//if it does go to main page
-		//if not send error html, password didn't match
+
 		var storedPasswordHash string
 		err = db.QueryRow("SELECT password FROM Users WHERE username = $1", username).Scan(&storedPasswordHash)
 		if err != nil {
@@ -41,6 +38,8 @@ func VerifyLogin(endpointHandler func(http.ResponseWriter, *http.Request)) http.
 			t := template.Must(template.ParseFiles("login-error.html"))
 			t.Execute(w, nil)
 		}
+		t := template.Must(template.ParseFiles("welcome.html"))
+		t.Execute(w, nil)
 
 	})
 }
