@@ -16,7 +16,7 @@ type userData struct{
 
 type ArticlesData struct{
 	Articles []ArticleData `json:"articles"`
-	isLoggedIn bool
+	IsLoggedIn bool
 }
 
 

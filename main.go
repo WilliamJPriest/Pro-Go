@@ -45,9 +45,23 @@ func main(){
 
 		json.Unmarshal(responseData, &responseObject)
 		fmt.Println(responseObject.Articles[0].Author)
+		fmt.Println(responseObject.IsLoggedIn)
+		_, err = req.Cookie("token")
+		if err != nil {
+			fmt.Println(err)
+			responseObject.IsLoggedIn = false
+			fmt.Println(responseObject.IsLoggedIn)
+			t.Execute(w, responseObject)
+		}else{
+			responseObject.IsLoggedIn = true
+			fmt.Println(responseObject.IsLoggedIn)
+			t.Execute(w, responseObject)
+
+		}
+		
 
 
-		t.Execute(w, responseObject)
+		
 	}	
 
 	loginPageHandler := func(w http.ResponseWriter, req *http.Request){
