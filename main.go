@@ -53,15 +53,10 @@ func main(){
 			responseObject.IsLoggedIn = false
 			fmt.Println(responseObject.IsLoggedIn)
 			t.Execute(w, responseObject)
-		}else{
-			responseObject.IsLoggedIn = true
-			fmt.Println(responseObject.IsLoggedIn)
-			t.Execute(w, responseObject)
-
 		}
-		
-
-
+		responseObject.IsLoggedIn = true
+		fmt.Println(responseObject.IsLoggedIn)
+		t.Execute(w, responseObject)
 		
 	}	
 
@@ -90,7 +85,7 @@ func main(){
 	
 		tokenString, err := token.SignedString(models.SecretKey)
 		if err != nil {
-			return 
+			log.Fatalf("failed to login %s", err)
 		}
 		
 		fmt.Println(tokenString)
@@ -102,6 +97,10 @@ func main(){
 			HttpOnly: true,
 			Secure:   true,
 		})
+
+		t := template.Must(template.ParseFiles("welcome.html"))
+		t.Execute(w, nil)
+
 
 
 	}
