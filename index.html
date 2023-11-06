@@ -47,7 +47,11 @@
         <h1 class="text-blue-500 text-4xl p-0 m-2" >Pro-Go</h1>
                
         <div class="flex p-5 gap-2">
-            <a class="text-white no-underline hover:text-blue-500" href="/entry"> Login</a>
+            {{ if .IsLoggedIn}}
+                <a class="text-white no-underline hover:text-blue-500" href="/entry"> Favorites</a>
+            {{else}}
+                <a class="text-white no-underline hover:text-blue-500" href="/entry"> Login</a>
+            {{end}}
         </div>
                 
 
