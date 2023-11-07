@@ -54,11 +54,11 @@ func main(){
 			fmt.Println(responseObject.IsLoggedIn)
 			t.Execute(w, responseObject)
 		}else{
-			
+			responseObject.IsLoggedIn = true
+			fmt.Println(responseObject.IsLoggedIn)
+			t.Execute(w, responseObject)
 		}
-		responseObject.IsLoggedIn = true
-		fmt.Println(responseObject.IsLoggedIn)
-		t.Execute(w, responseObject)
+		
 		
 	}	
 
@@ -140,7 +140,7 @@ func main(){
 	http.HandleFunc("/registerForm", registerPageHandler )	
 	http.HandleFunc("/login",  middlewares.VerifyLogin(loginHandler) )
 	http.HandleFunc("/register", middlewares.VerifyUser(registerHandler) )
-	http.HandleFunc("/secretData", middlewares.VerifyJWT(secretHandler))
+	http.HandleFunc("/bookmarks", middlewares.VerifyJWT(secretHandler))
 
 	log.Fatal(http.ListenAndServe(":8000",nil))
 }
