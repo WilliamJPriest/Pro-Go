@@ -23,28 +23,28 @@ I been telling everyone with ears:
 
 ### Alpha Release (MVP)
 
-- Bookmarks
-- Search Func
-- Guest Login
-- Articles Page
-- Google Analytics 
+- [] Bookmarks
+- [] Search Func
+- [] Guest Login
+- [] Articles Page
+- [] Google Analytics 
 
 ### Post-Alpha Release
 
-- Take user email
-- Send verify code/reset password
-- Two factor
-- Submit Articles
-- User Profiles
-- Public/Private Bookmarks
-- Custom Articles/ Web Scraped
+- [] Take user email
+- [] Send verify code/reset password
+- [] Two factor
+- [] Submit Articles
+- [] User Profiles
+- [] Public/Private Bookmarks
+- [] Custom Articles/ Web Scraped
 
 ## Unlikely but cool features
 
-- Comments
-- Messaging between users
-- Likes and Dislikes
-- Paid Pro Features
+- [] Comments
+- [] Messaging between users
+- [] Likes and Dislikes
+- [] Paid Pro Features
 
 ## **Watch This Project Live**
 ---
