@@ -16,8 +16,7 @@ I been telling everyone with ears:
 - GO
 - HTMX
 - Tailwind/UNO CSS
-
-Potentially: Postgres or SQLite
+- Postgres
 
 ## **Watch This Project Live**
 ---
