@@ -44,15 +44,14 @@ func main(){
 		var responseObject models.ArticlesData
 
 		json.Unmarshal(responseData, &responseObject)
-		fmt.Println(responseObject.Articles[0].Author)
-		fmt.Println(responseObject.IsLoggedIn)
+
 		// just testing something
 		_, err = req.Cookie("token")
 		if err != nil {
 			responseObject.IsLoggedIn = false
 			t.Execute(w, responseObject)
 		}else{
-			fmt.Println(responseObject.IsLoggedIn)
+			responseObject.IsLoggedIn = true
 			t.Execute(w, responseObject)
 		}
 		
