@@ -37,7 +37,7 @@ func VerifyLogin(endpointHandler func(http.ResponseWriter, *http.Request)) http.
 		if err != nil {
 			t := template.Must(template.ParseFiles("login-error.html"))
 			t.Execute(w, nil)
-			log.Fatal("doesn't compare: %w" ,err)
+			return
 		}
 		endpointHandler(w, req)
 	})
