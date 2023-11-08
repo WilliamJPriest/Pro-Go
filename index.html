@@ -79,7 +79,7 @@
                                 <p class="h-32 overflow-y-hidden px-2 overflow-x-hidden">{{ .Description}}</p> 
                             </a>
                             
-                            <div class="flex justify-right pr-4 pb-4" hx-post="/checkBookmarks" hx-trigger="load" hx-include="this" hx-swap="innerHTML">
+                            <div class="flex justify-right pr-4 pb-4" hx-post="/checkBookmarks" hx-target="this" hx-trigger="load" hx-include="this" hx-swap="innerHTML">
                                 <input  id={{.Author}} name="author" value={{.Author}}></input>
                                 <input  id={{.Title}} name="title" value={{.Title}}></input>
                             </div>
