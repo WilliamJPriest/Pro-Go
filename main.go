@@ -131,14 +131,14 @@ func main(){
 	bookmarkHandler := func(w http.ResponseWriter, req *http.Request){
 
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
-    	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-blue-500  hover:text-white hover:bg-transparent cursor-pointer"></i> `)
+    	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-blue-500  hover:text-white  cursor-pointer"></i> `)
 
 
 	}
 	checkBookmarkHandler := func(w http.ResponseWriter, req *http.Request){
-		// author := req.PostFormValue("author")
-		// title := req.PostFormValue("title")
-		// fmt.Println(author +" | "+ title)
+		author := req.PostFormValue("author")
+		title := req.PostFormValue("title")
+		fmt.Println(author +" | "+ title)
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
     	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-white  hover:text-blue  cursor-pointer"></i> `)
 	}
