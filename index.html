@@ -74,12 +74,12 @@
                             
                             <a class="w-72 h-[450px} text-[16px] text-white no-underline flex flex-col flex-start" href="{{ .Url }}" target="_blank" un-cloak >
                                 <img class="w-72 h-36 rounded-lg "   src={{.UrlToImage}}  onerror="this.src='https://i.ibb.co/W2LttSG/error.png';this.onerror='';" alt="img failed to failed">
-                                <h2 class="h-20 overflow-y-hidden">{{ .Title}} </h2>
+                                <h2 class="h-20 overflow-y-hidden" name="title">{{ .Title}} </h2>
                                 {{if .Author}}<p>{{.Author}} </p> {{else}} <p>Unknown</p>{{end}}
                                 <p class="h-32 overflow-y-hidden px-2 overflow-x-hidden">{{ .Description}}</p> 
                             </a>
-                            <div class="flex justify-right pr-4 pb-4">
-                                <i hx-post="/handleBookmarks" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-white hover:text-blue-500 cursor-pointer"></i>
+                            <div class="flex justify-right pr-4 pb-4" hx-get="/checkBookmarks" hx-trigger="load" hx-swap="innerHTML">
+                                <!-- <i hx-post="/handleBookmarks" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-white hover:text-blue-500 cursor-pointer"></i> -->
                             </div>
 
                             
