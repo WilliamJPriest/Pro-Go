@@ -26,6 +26,7 @@ type ArticleData struct{
 	Description string `json:"description"`
 	Url string `json:"url"`
 	UrlToImage string `json:"urlToImage"`
+	Content string `json:"content"`
 
 }
 

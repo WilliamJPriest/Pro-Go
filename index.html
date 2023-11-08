@@ -78,8 +78,10 @@
                                 {{if .Author}}<p>{{.Author}} </p> {{else}} <p>Unknown</p>{{end}}
                                 <p class="h-32 overflow-y-hidden px-2 overflow-x-hidden">{{ .Description}}</p> 
                             </a>
-                            <div class="flex justify-right pr-4 pb-4" hx-get="/checkBookmarks" hx-trigger="load" hx-swap="innerHTML">
-                                <!-- <i hx-post="/handleBookmarks" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-white hover:text-blue-500 cursor-pointer"></i> -->
+                            
+                            <div class="flex justify-right pr-4 pb-4" hx-post="/checkBookmarks" hx-trigger="load" hx-include="this" hx-swap="outerHTML">
+                                <input  id={{.Author}} name="author" value={{.Author}}></input>
+                                <input  id={{.Title}} name="title" value={{.Title}}></input>
                             </div>
 
                             
