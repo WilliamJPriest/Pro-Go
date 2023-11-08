@@ -79,7 +79,7 @@
                                 <p class="h-32 overflow-y-hidden px-2 overflow-x-hidden">{{ .Description}}</p> 
                             </a>
                             <div class="flex justify-right pr-4 pb-4">
-                                <i class="far fa-bookmark text-white hover:text-blue-500 cursor-pointer"></i>
+                                <i hx-post="/handleBookmarks" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-white hover:text-blue-500 cursor-pointer"></i>
                             </div>
 
                             

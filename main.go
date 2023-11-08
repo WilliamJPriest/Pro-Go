@@ -128,6 +128,13 @@ func main(){
 
 
 	}
+	bookmarkHandler := func(w http.ResponseWriter, req *http.Request){
+
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+    	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-trigger="click" hx-swap="innerHTML" class="far fa-bookmark text-blue-500  hover:text-white hover:bg-transparent cursor-pointer"></i> `)
+
+
+	}
 
 
 
@@ -137,6 +144,7 @@ func main(){
 	http.HandleFunc("/login",  middlewares.VerifyLogin(loginHandler) )
 	http.HandleFunc("/register", middlewares.VerifyUser(registerHandler) )
 	http.HandleFunc("/bookmarks", middlewares.VerifyJWT(secretHandler))
+	http.HandleFunc("/handleBookmarks", middlewares.VerifyBookmarks(bookmarkHandler))
 
 	log.Fatal(http.ListenAndServe(":8000",nil))
 }
