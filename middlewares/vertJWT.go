@@ -13,8 +13,8 @@ func VerifyJWT(endpointHandler func(http.ResponseWriter, *http.Request)) http.Ha
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		cookie, err := req.Cookie("token")
 		if err != nil {
-			w.WriteHeader(http.StatusUnauthorized)
-			fmt.Fprint(w, "No token provided")
+			w.Header().Set("Content-Type", "text/html; charset=utf-8")
+			fmt.Fprint(w, `<a href="/entry" class="text-white no-underline"> You need to login brah</a> `)
 			return
 		}
 
