@@ -81,8 +81,12 @@
                             
                             <div class="flex justify-right pr-4 pb-4" hx-post="/checkBookmarks" hx-target="find i" hx-trigger="load" hx-include="this" hx-swap="innerHTML">
                                 <i class=""></i>
-                                <input  id={{.Author}} name="author" value={{.Author}}></input>
-                                <input  id={{.Title}} name="title" value={{.Title}}></input>
+                                <input  class="hidden" id={{.Author}} name="Author" value={{.Author}}></input>
+                                <input  class="hidden" id={{.Title}} name="Title" value={{.Title}}></input>
+                                <input  class="hidden" id={{.UrlToImage}} name="UrlToImage" value={{.UrlToImage}}></input>
+                                <input  class="hidden" id={{.UrlToImage}} name="UrlToImage" value={{.UrlToImage}}></input>
+                                <input  class="hidden" id={{.Description}} name="Description" value={{.Description}}></input>
+                                <input  class="hidden" id={{.Content}} name="Content" value={{.Content}}></input>
                             </div>
 
                             
