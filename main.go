@@ -129,15 +129,24 @@ func main(){
 
 	}
 	bookmarkHandler := func(w http.ResponseWriter, req *http.Request){
-		// author := req.PostFormValue("Author")
-		// title := req.PostFormValue("Title")
-		// desc := req.PostFormValue("Description")
-		// urltoimage := req.PostFormValue("UrlToImage")
-		// content := req.PostFormValue("Content")
-		// claims, _ := req.Context().Value("claims").(*models.CustomClaims)
-		// fmt.Fprintf(w, "sussy, %s", claims.Username)
+		author := req.PostFormValue("Author")
+		title := req.PostFormValue("Title")
+		desc := req.PostFormValue("Description")
+		urltoimage := req.PostFormValue("UrlToImage")
+		content := req.PostFormValue("Content")
+
+
+		res := database.CheckBookMarks(title)
+		if res != nil{
+			database.AddBookMarks(author,title,desc,urltoimage,content)
+			w.Header().Set("Content-Type", "text/html; charset=utf-8")
+    		fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-blue-500  hover:text-white  cursor-pointer"></i> `)
+			return
+		}
+		fmt.Println(res)
+
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
-    	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-blue-500  hover:text-white  cursor-pointer"></i> `)
+    	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-white  hover:text-blue-500  cursor-pointer"></i> `)
 
 
 	}
@@ -148,7 +157,7 @@ func main(){
 		// urltoimage := req.PostFormValue("UrlToImage")
 		// fmt.Println(author +" | "+ title, desc, urltoimage)
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
-    	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-white  hover:text-blue  cursor-pointer"></i> `)
+    	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-blue-500  hover:text-white  cursor-pointer"></i> `)
 	}
 
 
@@ -159,7 +168,7 @@ func main(){
 	http.HandleFunc("/login",  middlewares.VerifyLogin(loginHandler) )
 	http.HandleFunc("/register", middlewares.VerifyUser(registerHandler) )
 	http.HandleFunc("/bookmarks", middlewares.VerifyJWT(secretHandler))
-	http.HandleFunc("/handleBookmarks", middlewares.VerifyBookmarks(middlewares.VerifyJWT(bookmarkHandler)))
+	http.HandleFunc("/handleBookmarks", middlewares.VerifyJWT(bookmarkHandler))
 	http.HandleFunc("/checkBookmarks", middlewares.VerifyBookmarks(checkBookmarkHandler ))
 
 	log.Fatal(http.ListenAndServe(":8000",nil))
