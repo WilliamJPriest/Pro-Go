@@ -134,7 +134,8 @@ func main(){
 		// desc := req.PostFormValue("Description")
 		// urltoimage := req.PostFormValue("UrlToImage")
 		// content := req.PostFormValue("Content")
-		fmt.Println("sussy")
+		// claims, _ := req.Context().Value("claims").(*models.CustomClaims)
+		// fmt.Fprintf(w, "sussy, %s", claims.Username)
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
     	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-blue-500  hover:text-white  cursor-pointer"></i> `)
 
@@ -158,7 +159,7 @@ func main(){
 	http.HandleFunc("/login",  middlewares.VerifyLogin(loginHandler) )
 	http.HandleFunc("/register", middlewares.VerifyUser(registerHandler) )
 	http.HandleFunc("/bookmarks", middlewares.VerifyJWT(secretHandler))
-	http.HandleFunc("/handleBookmarks", middlewares.VerifyJWT(bookmarkHandler))
+	http.HandleFunc("/handleBookmarks", middlewares.VerifyBookmarks(middlewares.VerifyJWT(bookmarkHandler)))
 	http.HandleFunc("/checkBookmarks", middlewares.VerifyBookmarks(checkBookmarkHandler ))
 
 	log.Fatal(http.ListenAndServe(":8000",nil))
