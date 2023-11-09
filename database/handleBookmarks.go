@@ -13,6 +13,7 @@ func CheckBookMarks(title string) (error) {
 		return fmt.Errorf("%w", err)
 	}
 	fmt.Println(title)
+	//also check that logged user also matches db user
 	row := db.QueryRow("SELECT title FROM Bookmarks WHERE title = $1", title)
     
     if err := row.Scan(); err != nil {
@@ -27,7 +28,7 @@ func AddBookMarks(author string, title string, desc string,urltoimage string,con
 
 }
 
-func removedBookMarks(author string, title string, desc string,urltoimage string,content string) {
+func RemovedBookMarks(author string, title string, desc string,urltoimage string,content string) {
 	fmt.Println(author +" removed")
 
 }
