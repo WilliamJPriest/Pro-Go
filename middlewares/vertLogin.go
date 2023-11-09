@@ -31,7 +31,9 @@ func VerifyLogin(endpointHandler func(http.ResponseWriter, *http.Request)) http.
 		var storedPasswordHash string
 		err = db.QueryRow("SELECT password FROM Users WHERE username = $1", username).Scan(&storedPasswordHash)
 		if err != nil {
-			log.Fatal("Error executing SQL query: %w", err)
+			t := template.Must(template.ParseFiles("login-error.html"))
+			t.Execute(w, nil)
+			return
 		}
 		err = bcrypt.CompareHashAndPassword([]byte(storedPasswordHash), []byte(password))
 		if err != nil {
