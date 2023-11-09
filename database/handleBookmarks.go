@@ -4,10 +4,7 @@ import (
 	"fmt"
 )
 
-func AddBookMarks(author string, title string, desc string,urltoimage string,content string) {
-	fmt.Println(author)
 
-}
 
 func CheckBookMarks(title string) (error) {
 
@@ -23,4 +20,14 @@ func CheckBookMarks(title string) (error) {
     }
 
 	return nil
+}
+
+func AddBookMarks(author string, title string, desc string,urltoimage string,content string) {
+	fmt.Println(author + " added")
+
+}
+
+func removedBookMarks(author string, title string, desc string,urltoimage string,content string) {
+	fmt.Println(author +" removed")
+
 }
