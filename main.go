@@ -166,14 +166,37 @@ func main(){
 
 	}
 	checkBookmarkHandler := func(w http.ResponseWriter, req *http.Request){
-		// author := req.PostFormValue("Author")
-		// title := req.PostFormValue("Title")
-		// desc := req.PostFormValue("Description")
-		// urltoimage := req.PostFormValue("UrlToImage")
-		// fmt.Println(author +" | "+ title, desc, urltoimage)
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
     	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-blue-500  hover:text-white  cursor-pointer"</i>`)
 	}
+
+	searchHandler := func(w http.ResponseWriter, req *http.Request){
+		t := template.Must(template.ParseFiles("search.html"))
+		res, err := http.Get("https://newsapi.org/v2/everything?q=tesla&apiKey=2f4376c9e22f40c7aa18a7e783a566d3")
+		if err != nil{
+			fmt.Println(err)
+		}
+		responseData, err := io.ReadAll(res.Body)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		var responseObject models.ArticlesData
+
+		json.Unmarshal(responseData, &responseObject)
+
+		_, err = req.Cookie("token")
+		if err != nil {
+			responseObject.IsLoggedIn = false
+			t.Execute(w, responseObject)
+		}else{
+			responseObject.IsLoggedIn = true
+			t.Execute(w, responseObject)
+		}
+		
+		
+	}	
+
 
 
 
@@ -185,6 +208,7 @@ func main(){
 	http.HandleFunc("/bookmarks", middlewares.VerifyJWT(secretHandler))
 	http.HandleFunc("/handleBookmarks", middlewares.VerifyJWT(bookmarkHandler))
 	http.HandleFunc("/checkBookmarks", middlewares.VerifyBookmarks(checkBookmarkHandler ))
+	http.HandleFunc("/search", searchHandler)
 
 	log.Fatal(http.ListenAndServe(":8000",nil))
 }
