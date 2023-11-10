@@ -45,6 +45,7 @@ I been telling everyone with ears:
 - [] Messaging between users
 - [] Likes and Dislikes
 - [] Paid Pro Features
+- [] Supporter icons for those who contribute to this Project
 
 ## **Watch This Project Live**
 ---
