@@ -65,9 +65,10 @@
             </div>
         </article>
     </section>
-    <section >
-        <h2 class="text-white pb-10 pl-2" >Here's your Articles</h2>
-            <article  class="grid grid-cols-1 md:grid-cols-3 "  >
+    <h2 class="text-white pb-10 pl-2" >Here's your Articles</h2>
+    <section class="flex align-center justify-around ">
+        
+            <article  class="grid grid-cols-1 md:grid-cols-3 gap-10 "  >
                     {{ if .Articles}}
                         {{range .Articles}}
                         <div class="addBorder rounded-lg  w-72 h-[500px]  mx-auto text-center mb-10" un-cloak>
@@ -96,8 +97,10 @@
                     {{else}}
                         <p> No Data</p>
                     {{end}}
-                    
-                </article>
+            </article>
+            <article class="flex flex-col align-center gap-5 mt-20">
+                <input placeholder="...search">
+                <button class="text-white w-32 mx-auto">Find Something</button>
             </article>
     </section>
     <footer class="flex flex-col text-center justify-center mx-auto h-20vh py-5 ">

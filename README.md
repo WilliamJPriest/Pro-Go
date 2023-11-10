@@ -23,11 +23,13 @@ I been telling everyone with ears:
 
 ### Alpha Release (MVP)
 
-- [] Bookmarks
+- [✔] Bookmarks
 - [] Search Func
 - [] Guest Login
 - [] Articles Page
 - [] Google Analytics 
+
+- [] make go brrrrrr (faster)
 
 ### Post-Alpha Release
 
