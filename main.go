@@ -138,19 +138,26 @@ func main(){
 		username, err := utils.CheckUsername(req)
 		if err != nil{
 			w.Header().Set("Content-Type", "text/html; charset=utf-8")
+			fmt.Println("should be pueplw")
 			fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-white  hover:text-blue-500  cursor-pointer"></i> `)
 			return
 		}
 
 		res := database.CheckBookMarks(title, username)
 		if res != nil{
-			database.AddBookMarks(author,title,desc,urltoimage,content,username)
+			err := database.AddBookMarks(author,title,desc,urltoimage,content,username)
+			if err != nil{
+				fmt.Println("should be green")
+				w.Header().Set("Content-Type", "text/html; charset=utf-8")
+    			fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-white  hover:text-blue-500  cursor-pointer"></i> `)
+				return
+			}
+			fmt.Println(res)
 			w.Header().Set("Content-Type", "text/html; charset=utf-8")
     		fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-blue-500  hover:text-white  cursor-pointer"></i> `)
 			return
 		}
-		fmt.Println(res)
-
+		fmt.Println("should be blue")
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
     	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-white  hover:text-blue-500  cursor-pointer"></i> `)
 
