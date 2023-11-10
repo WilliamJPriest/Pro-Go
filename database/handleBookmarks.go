@@ -6,13 +6,14 @@ import (
 
 
 
-func CheckBookMarks(title string) (error) {
+func CheckBookMarks(title string, username string) (error) {
 
 	db,err := ConnectToDB()
 	if err != nil{
 		return fmt.Errorf("%w", err)
 	}
 	fmt.Println(title)
+	fmt.Println(username)
 	//also check that logged user also matches db user
 	row := db.QueryRow("SELECT title FROM Bookmarks WHERE title = $1", title)
     
@@ -23,8 +24,9 @@ func CheckBookMarks(title string) (error) {
 	return nil
 }
 
-func AddBookMarks(author string, title string, desc string,urltoimage string,content string) {
-	fmt.Println(author + " added")
+func AddBookMarks(author string, title string, desc string,urltoimage string,content string, username string) {
+	fmt.Println(author + " added to this user:"+ username)
+	// utils.CheckUsername()
 
 }
 

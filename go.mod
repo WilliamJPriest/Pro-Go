@@ -19,4 +19,9 @@ require (
 	golang.org/x/crypto v0.14.0
 )
 
-require github.com/lib/pq v1.10.9 // indirect
+require (
+	github.com/lib/pq v1.10.9 // indirect
+	github.com/williamjPriest/HTMXGO/utils v0.0.0-00010101000000-000000000000 // indirect
+)
+
+replace github.com/williamjPriest/HTMXGO/utils => ./utils

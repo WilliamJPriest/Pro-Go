@@ -15,7 +15,7 @@ func VerifyJWT(endpointHandler func(http.ResponseWriter, *http.Request)) http.Ha
 		if err != nil {
 			w.Header().Set("Content-Type", "text/html; charset=utf-8")
 			fmt.Fprint(w, `<a href="/entry" class="text-white no-underline"> You need to login brah</a> `)
-			return
+			return 
 		}
 
 		JWTstr := cookie.Value
