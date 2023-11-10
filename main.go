@@ -19,7 +19,8 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-
+//Find ways to optimise Db query speed
+//Have other people test
 
 
 func main(){
@@ -46,7 +47,6 @@ func main(){
 
 		json.Unmarshal(responseData, &responseObject)
 
-		// just testing something
 		_, err = req.Cookie("token")
 		if err != nil {
 			responseObject.IsLoggedIn = false
@@ -170,7 +170,7 @@ func main(){
 		// urltoimage := req.PostFormValue("UrlToImage")
 		// fmt.Println(author +" | "+ title, desc, urltoimage)
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
-    	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-blue-500  hover:text-white  cursor-pointer"></i> `)
+    	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-blue-500  hover:text-white  cursor-pointer"</i>`)
 	}
 
 
