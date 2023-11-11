@@ -13,6 +13,7 @@ func AddUser(username string, password []byte) (error){
 	if err != nil{
 		return fmt.Errorf("%w", err)
 	}
+	defer db.Close()
 
 	_, err = db.Exec("INSERT INTO Users (username, password) VALUES ($1, $2)", username, password)
 	if err != nil {

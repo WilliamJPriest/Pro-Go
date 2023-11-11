@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"time"
 )
 
 
@@ -14,19 +15,23 @@ func CheckBookMarks(title string, username string) (error) {
 	}
 
 	row := db.QueryRow("SELECT title, username FROM Bookmarks WHERE title = $1 AND username = $2", title, username)
-
+	defer db.Close()
+	
     if err := row.Scan(&title, &username); err != nil {
         return fmt.Errorf("%w", err)
     }
-
 	return nil
 }
 
 func AddBookMarks(author string, title string, desc string,urltoimage string,content string, username string) error{
 	db,err := ConnectToDB()
+	defer db.Close()
 	if err != nil{
 		return fmt.Errorf("%w", err)
 	}
+	// defer func(start time.Time){
+	// 	fmt.Printf("time: %v \n", time.Since(start))
+	// }(time.Now())
 
 	_, err = db.Exec("INSERT INTO Bookmarks (author, title, Description, UrlToImage, Content, username) VALUES ($1, $2,$3,$4,$5,$6)", author, title, desc, urltoimage, content, username)
 	if err != nil {
@@ -38,9 +43,13 @@ func AddBookMarks(author string, title string, desc string,urltoimage string,con
 
 func RemovedBookMarks(title string,  username string) error{
 	db,err := ConnectToDB()
+	defer db.Close()
 	if err != nil{
 		return fmt.Errorf("%w", err)
 	}
+	// defer func(start time.Time){
+	// 	fmt.Printf("time: %v \n", time.Since(start))
+	// }(time.Now())
 
 	_, err = db.Exec("DELETE FROM Bookmarks WHERE title = $1 AND username = $2", title, username)
 	if err != nil {

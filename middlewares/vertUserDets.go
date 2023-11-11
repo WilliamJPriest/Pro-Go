@@ -25,7 +25,7 @@ func VerifyUser(endpointHandler func(http.ResponseWriter, *http.Request)) http.H
 		if err != nil {
 			log.Fatal("Failed to execute query: %w" ,err)
 		}
-
+		defer db.Close()
 		rows, err := db.Query("SELECT * FROM Users WHERE username = $1", username)
 		if err != nil {
 			log.Fatal("Error executing SQL query: %w", err)

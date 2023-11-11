@@ -27,7 +27,8 @@ func VerifyLogin(endpointHandler func(http.ResponseWriter, *http.Request)) http.
 		if err != nil {
 			log.Fatal("Failed to execute query: %w" ,err)
 		}
-
+		defer db.Close()
+		
 		var storedPasswordHash string
 		err = db.QueryRow("SELECT password FROM Users WHERE username = $1", username).Scan(&storedPasswordHash)
 		if err != nil {
