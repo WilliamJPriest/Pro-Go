@@ -97,9 +97,11 @@
                         <p> No Data</p>
                     {{end}}
             </article>
-            <article class="flex flex-col align-center gap-5 mt-20">
-                <input placeholder="...search">
-                <button hx-post="/search" hx-target="#articleBody" hx-swap="outerHTML" class="text-white w-32 mx-auto">Find Something</button>
+            <article >
+                <form class="flex flex-col align-center gap-5 mt-20" hx-on::after-request="this.reset()">
+                    <input id="searchBar" name="searchRes" placeholder="...search">
+                    <button hx-post="/search"  hx-target="#articleBody" hx-include="#searchBar" hx-swap="outerHTML" class="text-white w-32 mx-auto">Find Something</button>
+                </form>
             </article>
     </section>
     <footer class="flex flex-col text-center justify-center mx-auto h-20vh py-5 ">
