@@ -174,7 +174,7 @@ func main(){
 		searchRes := req.PostFormValue("searchRes")
 		fmt.Println(searchRes)
 		t := template.Must(template.ParseFiles("search.html"))
-		res, err := http.Get("https://newsapi.org/v2/everything?q="+searchRes+"&language=en&apiKey=2f4376c9e22f40c7aa18a7e783a566d3")
+		res, err := http.Get("https://newsapi.org/v2/everything?q="+searchRes+"&language=en&")
 		if err != nil{
 			fmt.Println(err)
 		}
