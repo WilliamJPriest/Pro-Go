@@ -67,8 +67,7 @@
     </section>
     <h2 class="text-white pb-10 pl-2" >Here's your Articles</h2>
     <section class="flex align-center justify-around ">
-        
-            <article  id="articleBody" class="grid grid-cols-1 md:grid-cols-3 gap-10 "  >
+            <article  id="articleBody" class="grid grid-cols-1 md:grid-cols-3 gap-10 w[70%]"  >
                     {{ if .Articles}}
                         {{range .Articles}}
                         <div class="addBorder rounded-lg  w-72 h-[500px]  mx-auto text-center mb-10" un-cloak>
@@ -96,11 +95,12 @@
                     {{else}}
                         <p> No Data</p>
                     {{end}}
+                    
             </article>
             <article >
                 <form class="flex flex-col align-center gap-5 mt-20" hx-on::after-request="this.reset()">
                     <input id="searchBar" name="searchRes" placeholder="...search">
-                    <button hx-post="/search"  hx-target="#articleBody" hx-include="#searchBar" hx-swap="outerHTML" class="text-white w-32 mx-auto">Find Something</button>
+                    <button hx-post="/search"  hx-target="#articleBody" hx-include="#searchBar" hx-swap="innerHTML" class="text-white w-32 mx-auto">Find Something</button>
                 </form>
             </article>
     </section>

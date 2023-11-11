@@ -170,12 +170,11 @@ func main(){
     	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-blue-500  hover:text-white  cursor-pointer"</i>`)
 	}
 
-	searchHandler := func(w http.ResponseWriter, req *http.Request){
+	searchHandler := func(w http.ResponseWriter, req *http.Request){		
 		searchRes := req.PostFormValue("searchRes")
 		fmt.Println(searchRes)
-		
 		t := template.Must(template.ParseFiles("search.html"))
-		res, err := http.Get("https://newsapi.org/v2/everything?q="+searchRes+"&apiKey=2f4376c9e22f40c7aa18a7e783a566d3")
+		res, err := http.Get("https://newsapi.org/v2/everything?q="+searchRes+"&language=en&apiKey=2f4376c9e22f40c7aa18a7e783a566d3")
 		if err != nil{
 			fmt.Println(err)
 		}
