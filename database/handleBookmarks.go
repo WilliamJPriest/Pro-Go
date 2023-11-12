@@ -1,7 +1,6 @@
 package database
 
 import (
-	"encoding/json"
 	"fmt"
 	// "time"
 	"github.com/williamjPriest/HTMXGO/models"
@@ -85,10 +84,7 @@ func GetBookMarks(username string) ([]models.ArticleData, error){
 		return nil, fmt.Errorf("error during row iteration: %w", err)
 	}
 
-	// jsonData, err = json.Marshal(bookmarks)
-	// if err != nil {
-	// 	return nil, fmt.Errorf("failed to convert to JSON: %w", err)
-	// }
+
 	
 	return bookmarks, nil
 }

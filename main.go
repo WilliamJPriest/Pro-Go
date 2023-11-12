@@ -128,19 +128,28 @@ func main(){
 			fmt.Println("error")
 			return 
 		}
+		jsonData, err := json.Marshal(bookmarks)
+		if err != nil {
+
+		}
 
 		// responseData, err := io.ReadAll(req.bookmarks)
 		// if err != nil {
 		// 	fmt.Println(err)
 		// }
 
-		// var responseObject models.ArticleData
+		articles := map[string]{
+			"articles":{jsonData
+		}
+			
+		
 
-		// json.Unmarshal(responseData, &responseObject)
-		// fmt.Println(bookmarks)
+		var responseObject models.ArticleData
+
+		json.Unmarshal(articles, &responseObject)
 		w.WriteHeader(http.StatusOK)
 		t := template.Must(template.ParseFiles("bookmarks.html"))
-		t.Execute(w, bookmarks)
+		t.Execute(w, responseObject)
 
 
 	}
