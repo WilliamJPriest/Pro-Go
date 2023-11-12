@@ -9,10 +9,6 @@ type userData struct{
 	Password string
 }
 
-// type Profile struct{
-// 	PageData []ArticlesData 
-	
-// }
 
 type ArticlesData struct{
 	Articles []ArticleData `json:"articles"`

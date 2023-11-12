@@ -123,7 +123,7 @@ func main(){
 
 	secretHandler := func(w http.ResponseWriter, req *http.Request){
 		claims, _ := req.Context().Value("claims").(*models.CustomClaims)
-	
+		database.GetBookMarks(claims.Username)
 		w.WriteHeader(http.StatusOK)
 		t := template.Must(template.ParseFiles("bookmarks.html"))
 		t.Execute(w, claims)

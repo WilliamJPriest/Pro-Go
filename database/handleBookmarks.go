@@ -3,6 +3,7 @@ package database
 import (
 	"fmt"
 	// "time"
+	"github.com/williamjPriest/HTMXGO/models"
 )
 
 
@@ -57,4 +58,15 @@ func RemovedBookMarks(title string,  username string) error{
 	}
 	return nil
 
+}
+
+func GetBookMarks(username string) ([]models.ArticleData, error){
+	db,err := ConnectToDB()
+	defer db.Close()
+	var bookmarks []models.ArticleData
+	_, err = db.Exec("SELECT author, title, Description, UrlToImage, Content FROM Bookmarks where username= $1", username)
+	if err != nil {
+		return nil, fmt.Errorf("failed to execute query: %w", err)
+	}
+	return bookmarks, nil
 }
