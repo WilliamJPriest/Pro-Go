@@ -125,7 +125,8 @@ func main(){
 		claims, _ := req.Context().Value("claims").(*models.CustomClaims)
 	
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprintf(w, "Welcome to the protected endpoint, %s!", claims.Username)
+		t := template.Must(template.ParseFiles("bookmarks.html"))
+		t.Execute(w, claims)
 
 
 	}
