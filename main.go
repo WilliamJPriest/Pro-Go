@@ -122,29 +122,29 @@ func main(){
 	}
 
 	secretHandler := func(w http.ResponseWriter, req *http.Request){
-		claims, _ := req.Context().Value("claims").(*models.CustomClaims)
-		bookmarks, err := database.GetBookMarks(claims.Username)
+		// claims, _ := req.Context().Value("claims").(*models.CustomClaims)
+		// bookmarks, err := database.GetBookMarks(claims.Username)
 		if err != nil{
 			fmt.Println("error")
 			return 
 		}
-		jsonData, err := json.Marshal(bookmarks)
-		if err != nil {
+		// jsonData, err := json.Marshal(bookmarks)
+		// if err != nil {
 
-		}
+		// }
 
-		articles := map[string]{
-			"articles":{jsonData
-		}
+		// // articles := map[string]{
+		// // 	"articles":{jsonData
+		// // }
 			
 		
 
-		var responseObject models.ArticleData
+		// var responseObject models.ArticleData
 
-		json.Unmarshal(articles, &responseObject)
-		w.WriteHeader(http.StatusOK)
-		t := template.Must(template.ParseFiles("bookmarks.html"))
-		t.Execute(w, responseObject)
+		// json.Unmarshal(articles, &responseObject)
+		// w.WriteHeader(http.StatusOK)
+		// t := template.Must(template.ParseFiles("bookmarks.html"))
+		// t.Execute(w, responseObject)
 
 
 	}
