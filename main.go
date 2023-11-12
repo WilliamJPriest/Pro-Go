@@ -139,7 +139,6 @@ func main(){
 		username, err := utils.CheckUsername(req)
 		if err != nil{
 			w.Header().Set("Content-Type", "text/html; charset=utf-8")
-			fmt.Println("should be pueplw")
 			fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-white  hover:text-blue-500  cursor-pointer"></i> `)
 			return
 		}
@@ -173,7 +172,6 @@ func main(){
 
 	searchHandler := func(w http.ResponseWriter, req *http.Request){		
 		searchRes := req.PostFormValue("searchRes")
-		fmt.Println(searchRes)
 		t := template.Must(template.ParseFiles("search.html"))
 		res, err := http.Get("https://newsapi.org/v2/everything?q="+searchRes+"&language=en&")
 		if err != nil{
