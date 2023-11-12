@@ -133,11 +133,6 @@ func main(){
 
 		}
 
-		// responseData, err := io.ReadAll(req.bookmarks)
-		// if err != nil {
-		// 	fmt.Println(err)
-		// }
-
 		articles := map[string]{
 			"articles":{jsonData
 		}
