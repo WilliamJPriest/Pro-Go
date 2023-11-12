@@ -1,6 +1,7 @@
 package database
 
 import (
+	"encoding/json"
 	"fmt"
 	// "time"
 	"github.com/williamjPriest/HTMXGO/models"
@@ -64,9 +65,30 @@ func GetBookMarks(username string) ([]models.ArticleData, error){
 	db,err := ConnectToDB()
 	defer db.Close()
 	var bookmarks []models.ArticleData
-	_, err = db.Exec("SELECT author, title, Description, UrlToImage, Content FROM Bookmarks where username= $1", username)
+	rows, err := db.Query("SELECT author, title, Description, UrlToImage, Content FROM Bookmarks where username= $1", username)
 	if err != nil {
 		return nil, fmt.Errorf("failed to execute query: %w", err)
 	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var bookmark models.ArticleData
+		err := rows.Scan(&bookmark.Author,&bookmark.Title,&bookmark.Description, &bookmark.UrlToImage,&bookmark.Content)
+		if err != nil {
+			return nil, fmt.Errorf("failed to scan row: %w", err)
+		}
+		bookmarks = append(bookmarks, bookmark)
+	}
+
+	// Check for errors during row iteration
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("error during row iteration: %w", err)
+	}
+
+	// jsonData, err = json.Marshal(bookmarks)
+	// if err != nil {
+	// 	return nil, fmt.Errorf("failed to convert to JSON: %w", err)
+	// }
+	
 	return bookmarks, nil
 }
