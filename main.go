@@ -206,10 +206,8 @@ func main(){
 
 		_, err = req.Cookie("token")
 		if err != nil {
-			responseObject.IsLoggedIn = false
 			t.Execute(w, responseObject)
 		}else{
-			responseObject.IsLoggedIn = true
 			t.Execute(w, responseObject)
 		}
 		

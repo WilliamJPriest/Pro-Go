@@ -23,7 +23,7 @@ I been telling everyone with ears:
 
 ### Alpha Release (MVP)
 
-- [] Bookmarks
+- [✔️] Bookmarks
 - [] Search Func
 - [] Guest Login
 - [] Articles Page
