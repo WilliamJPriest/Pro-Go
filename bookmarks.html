@@ -9,8 +9,8 @@
 </head>
 <body>
     <article  id="articleBody" class="grid grid-cols-1 md:grid-cols-3 gap-10 w[70%]"  >
-        {{ if .Articles}}
-            {{range .Articles}}
+        {{ if .}}
+            {{range .}}
             <div class="addBorder rounded-lg  w-72 h-[500px]  mx-auto text-center mb-10" un-cloak>
                 
                 <a class="w-72 h-[450px} text-[16px] text-white no-underline flex flex-col flex-start" href="{{ .Url }}" target="_blank" un-cloak >

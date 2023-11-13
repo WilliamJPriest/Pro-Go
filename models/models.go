@@ -26,6 +26,15 @@ type ArticleData struct{
 
 }
 
+type ArticleData2 struct{
+	Author string `json:"author"`
+	Title string  `json:"title"`
+	Description string `json:"description"`
+	UrlToImage string `json:"urlToImage"`
+	Content string `json:"content"`
+
+}
+
 type CustomClaims struct {
 	Username string `json:"User"`
 	jwt.StandardClaims
