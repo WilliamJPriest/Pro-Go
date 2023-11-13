@@ -7,36 +7,38 @@
     <title>Pro Go</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/normalize.min.css">
 </head>
-<body>
-    <article  id="articleBody" class="grid grid-cols-1 md:grid-cols-3 gap-10 w[70%]"  >
-        {{ if .}}
-            {{range .}}
-            <div class="addBorder rounded-lg  w-72 h-[500px]  mx-auto text-center mb-10" un-cloak>
-                
-                <a class="w-72 h-[450px} text-[16px] text-white no-underline flex flex-col flex-start" href="{{ .Url }}" target="_blank" un-cloak >
-                    <img class="w-72 h-36 rounded-lg "   src={{.UrlToImage}}  onerror="this.src='https://i.ibb.co/W2LttSG/error.png';this.onerror='';" alt="img failed to failed">
-                    <h2 class="h-20 overflow-y-hidden">{{ .Title}} </h2>
-                    {{if .Author}}<p>{{.Author}} </p> {{else}} <p>Unknown</p>{{end}}
-                    <p class="h-32 overflow-y-hidden px-2 overflow-x-hidden">{{ .Description}}</p> 
-                </a>
-                
-                <div class="flex justify-right pr-4 pb-4" hx-post="/checkBookmarks" hx-target="find i" hx-trigger="load" hx-include="this" hx-swap="innerHTML">
-                    <i class=""></i>
-                    <input  class="hidden" name="Author" value={{.Author}}></input>
-                    <input  class="hidden" name="Title" value={{.Title}}></input>
-                    <input  class="hidden" name="UrlToImage" value={{.UrlToImage}}></input>
-                    <input  class="hidden" name="Description" value={{.Description}}></input>
-                    <input  class="hidden" name="Content" value={{.Content}}></input>
-                </div>
+<body  class="bg-slate-900 h-full p-0 m-0 ">
+    <section class="flex align-center justify-around" >
+        <article  id="articleBody" class="grid grid-cols-1 md:grid-cols-3 gap-10 w[70%]"  >
+            {{ if .}}
+                {{range .}}
+                <div class="addBorder rounded-lg  w-72 h-[500px]  mx-auto text-center mb-10" un-cloak>
+                    
+                    <a class="w-72 h-[450px} text-[16px] text-white no-underline flex flex-col flex-start" href="{{ .Url }}" target="_blank" un-cloak >
+                        <img class="w-72 h-36 rounded-lg "   src={{.UrlToImage}}  onerror="this.src='https://i.ibb.co/W2LttSG/error.png';this.onerror='';" alt="img failed to failed">
+                        <h2 class="h-20 overflow-y-hidden">{{ .Title}} </h2>
+                        {{if .Author}}<p>{{.Author}} </p> {{else}} <p>Unknown</p>{{end}}
+                        <p class="h-32 overflow-y-hidden px-2 overflow-x-hidden">{{ .Description}}</p> 
+                    </a>
+                    
+                    <div class="flex justify-right pr-4 pb-4" hx-post="/checkBookmarks" hx-target="find i" hx-trigger="load" hx-include="this" hx-swap="innerHTML">
+                        <i class=""></i>
+                        <input  class="hidden" name="Author" value={{.Author}}></input>
+                        <input  class="hidden" name="Title" value={{.Title}}></input>
+                        <input  class="hidden" name="UrlToImage" value={{.UrlToImage}}></input>
+                        <input  class="hidden" name="Description" value={{.Description}}></input>
+                        <input  class="hidden" name="Content" value={{.Content}}></input>
+                    </div>
 
+                    
                 
-               
-            </div>
+                </div>
+                {{end}}
+            {{else}}
+                <p> No Data</p>
             {{end}}
-        {{else}}
-            <p> No Data</p>
-        {{end}}
-        
-    </article>
+            
+        </article>
+    </section>
 </body>
 </html>
