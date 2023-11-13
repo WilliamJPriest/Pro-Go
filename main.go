@@ -19,9 +19,6 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-//Find ways to optimise Db query speed
-//Have other people test
-
 
 func main(){
 	err := godotenv.Load()
