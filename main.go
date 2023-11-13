@@ -123,7 +123,7 @@ func main(){
 
 	loadBookmarksHandler := func(w http.ResponseWriter, req *http.Request){
 		claims, _ := req.Context().Value("claims").(*models.CustomClaims)
-		bookmarks, err := database.GetBookMarks(claims.Username)
+		bookmark, err := database.GetBookMarks(claims.Username)
 		if err != nil{
 			fmt.Println("no bookmarks %w", err)
 			return 
@@ -132,7 +132,9 @@ func main(){
 		// if err != nil {
 		// 	print("failed to json")
 		// }
-
+		var bookmarks models.BookmarksData
+		bookmarks.Username=claims.Username
+		bookmarks.Bookmarks = bookmark
 		
 			
 		
@@ -141,7 +143,6 @@ func main(){
 		
 		// json.Unmarshal(bookmarks, &responseSlice)
 		w.WriteHeader(http.StatusOK)
-
 		t := template.Must(template.ParseFiles("bookmarks.html"))
 		t.Execute(w, bookmarks)
 

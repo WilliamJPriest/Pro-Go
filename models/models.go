@@ -26,13 +26,19 @@ type ArticleData struct{
 
 }
 
+type BookmarksData struct{
+	Bookmarks []BookmarkData
+	Username string 
+}
+
+
 type BookmarkData struct{
 	Author string `json:"author"`
 	Title string  `json:"title"`
 	Description string `json:"description"`
 	UrlToImage string `json:"urlToImage"`
 	Content string `json:"content"`
-	Username string `json:"username"`
+
 
 }
 

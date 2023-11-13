@@ -39,12 +39,12 @@
     </style>
 </head>
 <body  class="bg-slate-900 h-full p-0 m-0 ">
-    <h1 class="text-4xl text-white underline flex justify-center align-center text-center">Bookmarks</h1>
+    <h1 class="text-4xl text-white underline flex justify-center align-center text-center">Bookmarks {{.Username}}</h1>
     <section class="flex align-center justify-around flex-row" >
         
         <article  id="articleBody" class="grid grid-cols-1 md:grid-cols-3 gap-10 w[70%]"  >
-            {{ if .}}
-                {{range .}}
+            {{ if .Bookmarks}}
+                {{range .Bookmarks}}
                 <div class="addBorder rounded-lg  w-72 h-[500px]  mx-auto text-center mb-10" un-cloak>
                     
                     <div class="w-72 h-[450px} text-[16px] text-white no-underline flex flex-col flex-start" un-cloak >
