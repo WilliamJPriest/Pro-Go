@@ -59,19 +59,19 @@ func RemovedBookMarks(title string,  username string) error{
 
 }
 
-func GetBookMarks(username string) ([]models.ArticleData, error){
+func GetBookMarks(username string) ([]models.BookmarkData, error){
 	db,err := ConnectToDB()
 	defer db.Close()
-	var bookmarks []models.ArticleData
-	rows, err := db.Query("SELECT author, title, Description, UrlToImage, Content FROM Bookmarks where username= $1", username)
+	var bookmarks []models.BookmarkData
+	rows, err := db.Query("SELECT author, title, Description, UrlToImage, Content, username FROM Bookmarks where username= $1", username)
 	if err != nil {
 		return nil, fmt.Errorf("failed to execute query: %w", err)
 	}
 	defer rows.Close()
 
 	for rows.Next() {
-		var bookmark models.ArticleData
-		err := rows.Scan(&bookmark.Author,&bookmark.Title,&bookmark.Description, &bookmark.UrlToImage,&bookmark.Content)
+		var bookmark models.BookmarkData
+		err := rows.Scan(&bookmark.Author,&bookmark.Title,&bookmark.Description, &bookmark.UrlToImage,&bookmark.Content, &bookmark.Username)
 		if err != nil {
 			return nil, fmt.Errorf("failed to scan row: %w", err)
 		}
