@@ -14,7 +14,6 @@ func CheckBookMarks(title string, username string) (error) {
 	if err != nil{
 		return fmt.Errorf("%w", err)
 	}
-
 	row := db.QueryRow("SELECT title, username FROM Bookmarks WHERE title = $1 AND username = $2", title, username)
 	defer db.Close()
 	

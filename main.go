@@ -121,7 +121,7 @@ func main(){
 		t.Execute(w, nil)
 	}
 
-	secretHandler := func(w http.ResponseWriter, req *http.Request){
+	loadBookmarksHandler := func(w http.ResponseWriter, req *http.Request){
 		claims, _ := req.Context().Value("claims").(*models.CustomClaims)
 		bookmarks, err := database.GetBookMarks(claims.Username)
 		if err != nil{
@@ -184,7 +184,7 @@ func main(){
 	}
 	checkBookmarkHandler := func(w http.ResponseWriter, req *http.Request){
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
-    	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-blue-500  hover:text-white  cursor-pointer"</i>`)
+    	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-blue-500  hover:text-white  cursor-pointer"></i>`)
 	}
 
 	searchHandler := func(w http.ResponseWriter, req *http.Request){		
@@ -223,7 +223,7 @@ func main(){
 	http.HandleFunc("/registerForm", registerPageHandler )	
 	http.HandleFunc("/login",  middlewares.VerifyLogin(loginHandler) )
 	http.HandleFunc("/register", middlewares.VerifyUser(registerHandler) )
-	http.HandleFunc("/bookmarks", middlewares.VerifyJWT(secretHandler))
+	http.HandleFunc("/bookmarks", middlewares.VerifyJWT(loadBookmarksHandler))
 	http.HandleFunc("/handleBookmarks", middlewares.VerifyJWT(bookmarkHandler))
 	http.HandleFunc("/checkBookmarks", middlewares.VerifyBookmarks(checkBookmarkHandler ))
 	http.HandleFunc("/search", searchHandler)

@@ -6,6 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pro Go</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/normalize.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+    <script  src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"></link> 
+    <style>
+            button{
+                -webkit-appearance: button; /* 1 */
+                background-color: transparent;
+                background-image: none; /* 2 */
+                border: 2px solid
+                }
+
+            .addBorder{
+                border: 2px solid white;
+
+            }
+            [un-cloak] {
+                display: none;
+            }
+            body{
+                background: #0f172a;
+            }
+            .my-indicator{
+            display:none;
+            }
+            .htmx-request .my-indicator{
+                display:inline;
+            }
+            .htmx-request.my-indicator{
+                display:inline;
+            }
+    </style>
 </head>
 <body  class="bg-slate-900 h-full p-0 m-0 ">
     <section class="flex align-center justify-around" >
@@ -14,14 +45,14 @@
                 {{range .}}
                 <div class="addBorder rounded-lg  w-72 h-[500px]  mx-auto text-center mb-10" un-cloak>
                     
-                    <a class="w-72 h-[450px} text-[16px] text-white no-underline flex flex-col flex-start" href="{{ .Url }}" target="_blank" un-cloak >
+                    <div class="w-72 h-[450px} text-[16px] text-white no-underline flex flex-col flex-start" un-cloak >
                         <img class="w-72 h-36 rounded-lg "   src={{.UrlToImage}}  onerror="this.src='https://i.ibb.co/W2LttSG/error.png';this.onerror='';" alt="img failed to failed">
                         <h2 class="h-20 overflow-y-hidden">{{ .Title}} </h2>
                         {{if .Author}}<p>{{.Author}} </p> {{else}} <p>Unknown</p>{{end}}
                         <p class="h-32 overflow-y-hidden px-2 overflow-x-hidden">{{ .Description}}</p> 
-                    </a>
+                    </div>
                     
-                    <div class="flex justify-right pr-4 pb-4" hx-post="/checkBookmarks" hx-target="find i" hx-trigger="load" hx-include="this" hx-swap="innerHTML">
+                    <div class="flex justify-right pr-4 pb-4" hx-post="/checkBookmarks" hx-target="find i" hx-trigger="load" hx-include="this" hx-swap="outerHTML">
                         <i class=""></i>
                         <input  class="hidden" name="Author" value={{.Author}}></input>
                         <input  class="hidden" name="Title" value={{.Title}}></input>
@@ -29,6 +60,7 @@
                         <input  class="hidden" name="Description" value={{.Description}}></input>
                         <input  class="hidden" name="Content" value={{.Content}}></input>
                     </div>
+                
 
                     
                 
