@@ -72,7 +72,7 @@ func main(){
 	}
 
 	loginHandler := func(w http.ResponseWriter, req *http.Request){
-		username := req.PostFormValue("username")
+		Username := req.PostFormValue("username")
 
 
 		token := jwt.New(jwt.SigningMethodHS256)
@@ -80,7 +80,7 @@ func main(){
 		claims := token.Claims.(jwt.MapClaims)
 		claims["exp"] = expiration.Unix()
 		claims["authorized"] = true
-		claims["user"] = username
+		claims["user"] = Username
 	
 		tokenString, err := token.SignedString(models.SecretKey)
 		if err != nil {
@@ -98,7 +98,7 @@ func main(){
 		})
 
 		t := template.Must(template.ParseFiles("welcome.html"))
-		t.Execute(w, nil)
+		t.Execute(w, Username)
 
 
 
