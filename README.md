@@ -25,6 +25,7 @@ I been telling everyone with ears:
 
 - [✔️] Bookmarks
 - [✔️] Search Func
+            - Center Loader
 - [] Guest Login
 - [] Articles Page
 - [] Google Analytics 
