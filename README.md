@@ -24,8 +24,7 @@ I been telling everyone with ears:
 ### Alpha Release (MVP)
 
 - [✔️] Bookmarks
-- [✔️] Search Func
-            - Center Loader
+- [✔️] Search Func | ...Center Loader [] 
 - [] Guest Login
 - [] Articles Page
 - [] Google Analytics 
