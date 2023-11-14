@@ -30,7 +30,7 @@ func main(){
 	
   
 	MainPageHandler := func(w http.ResponseWriter, req *http.Request){
-		t := template.Must(template.ParseFiles("index.html"))
+		t := template.Must(template.ParseGlob("templates/index.html"))
 		res, err := http.Get(ApiKey)
 		if err != nil{
 			fmt.Println(err)
@@ -57,12 +57,12 @@ func main(){
 	}	
 
 	loginPageHandler := func(w http.ResponseWriter, req *http.Request){
-		t := template.Must(template.ParseFiles("login.html"))
+		t := template.Must(template.ParseGlob("templates/login.html"))
 		t.Execute(w, nil)
 	}	
 
 	registerPageHandler := func(w http.ResponseWriter, req *http.Request){
-		t := template.Must(template.ParseFiles("register.html"))
+		t := template.Must(template.ParseGlob("templates/register.html"))
 		t.Execute(w, nil)
 		
 
@@ -114,7 +114,7 @@ func main(){
 			log.Fatalf("failed to add user: %s", err)
 		}
 		
-		t := template.Must(template.ParseFiles("login.html"))
+		t := template.Must(template.ParseGlob("templates/login.html"))
 		t.Execute(w, nil)
 	}
 
@@ -140,7 +140,7 @@ func main(){
 		
 		// json.Unmarshal(bookmarks, &responseSlice)
 		w.WriteHeader(http.StatusOK)
-		t := template.Must(template.ParseFiles("bookmarks.html"))
+		t := template.Must(template.ParseGlob("templates/bookmarks.html"))
 		t.Execute(w, bookmarks)
 
 
