@@ -101,6 +101,39 @@ func main(){
 
 	}
 
+	guestLoginHandler := func(w http.ResponseWriter, req *http.Request){
+		Username := "Guest101"
+
+
+		token := jwt.New(jwt.SigningMethodHS256)
+		expiration := time.Now().Add(60 * time.Minute)
+		claims := token.Claims.(jwt.MapClaims)
+		claims["exp"] = expiration.Unix()
+		claims["authorized"] = true
+		claims["user"] = Username
+	
+		tokenString, err := token.SignedString(models.SecretKey)
+		if err != nil {
+			log.Fatalf("failed to login %s", err)
+		}
+		
+		fmt.Println(tokenString)
+	
+		http.SetCookie(w, &http.Cookie{
+			Name:    "token",
+			Value:   tokenString,
+			Expires: expiration,
+			HttpOnly: true,
+			Secure:   true,
+		})
+
+		t := template.Must(template.ParseGlob("templates/welcome.html"))
+		t.Execute(w, Username)
+
+
+
+	}
+
 	registerHandler := func(w http.ResponseWriter, req *http.Request){
 		username := req.PostFormValue("username")
 		password := req.PostFormValue("password")
@@ -218,6 +251,7 @@ func main(){
 	http.HandleFunc("/entry",loginPageHandler)
 	http.HandleFunc("/registerForm", registerPageHandler )	
 	http.HandleFunc("/login",  middlewares.VerifyLogin(loginHandler) )
+	http.HandleFunc("/guestLogin",guestLoginHandler)
 	http.HandleFunc("/register", middlewares.VerifyUser(registerHandler) )
 	http.HandleFunc("/bookmarks", middlewares.VerifyJWT(loadBookmarksHandler))
 	http.HandleFunc("/handleBookmarks", middlewares.VerifyJWT(bookmarkHandler))
