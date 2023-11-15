@@ -244,6 +244,8 @@ func main(){
 		
 	}	
 	articleHandler :=func(w http.ResponseWriter, req *http.Request){
+		author := req.URL
+		fmt.Println(author)
 		t := template.Must(template.ParseGlob("templates/articles.html"))
 		t.Execute(w, nil)
 	}
