@@ -94,7 +94,7 @@ func main(){
 			Secure:   true,
 		})
 
-		t := template.Must(template.ParseFiles("welcome.html"))
+		t := template.Must(template.ParseGlob("templates/welcome.html"))
 		t.Execute(w, Username)
 
 
@@ -187,7 +187,7 @@ func main(){
 
 	searchHandler := func(w http.ResponseWriter, req *http.Request){		
 		searchRes := req.PostFormValue("searchRes")
-		t := template.Must(template.ParseFiles("search.html"))
+		t := template.Must(template.ParseGlob("templates/search.html"))
 		res, err := http.Get("https://newsapi.org/v2/everything?q="+searchRes+"&language=en&")
 		if err != nil{
 			fmt.Println(err)

@@ -33,7 +33,7 @@ func VerifyUser(endpointHandler func(http.ResponseWriter, *http.Request)) http.H
 		defer rows.Close()
 	
 		if rows.Next() {
-			t := template.Must(template.ParseFiles("register-error.html"))
+			t := template.Must(template.ParseGlob("templates/register-error.html"))
 			t.Execute(w, nil)
 		} else {
 			log.Println("Username is not in the database.")
