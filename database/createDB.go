@@ -7,7 +7,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-func Create(){
+func Create() error{
 	db,err := ConnectToDB()
 	if err != nil{
 		log.Fatal("%w", err)
@@ -23,5 +23,10 @@ func Create(){
 		log.Fatal("failed to execute query", err)
 	}
 
+	_, err = db.Exec("CREATE TABLE if not exists Articles (ArticlesID SERIAL PRIMARY KEY, author TEXT, title TEXT, description TEXT, slug TEXT, urlToImage Text, content TEXT,likes INTEGER, dislikes INTEGER, rank TEXT, Badge Text);")
+	if err != nil {
+		log.Fatal("failed to execute query", err)
+	}
+	return nil
 
 }
