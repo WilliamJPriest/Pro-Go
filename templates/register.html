@@ -6,9 +6,9 @@
             </h2>
             <form id="form" class="flex flex-col gap-4" action="POST">
                 <label for="username"></label>
-                <input class="text-slate-900" type="text" name="username" placeholder=" username">
+                <input class="text-slate-900 w-52 mx-auto" type="text" name="username" placeholder=" username">
                 <label for="password"></label>
-                <input class="text-slate-900" type="password" name="password" placeholder=" password">
+                <input class="text-slate-900 w-52 mx-auto" type="password" name="password" placeholder=" password">
                 <button hx-post="/register" hx-trigger="click" hx-indicator="#loader" hx-target="#SwapPanel" hx-swap="innerHTML"  class="border-white border-2 rounded-lg mt-8 hover:bg-white hover:text-slate-900" 
                 > Submit</button>
                 <p  id= "loader" class="my-indicator"> ...Loading</p>
