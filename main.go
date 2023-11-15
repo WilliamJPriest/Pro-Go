@@ -261,7 +261,7 @@ func main(){
 	http.HandleFunc("/handleBookmarks", middlewares.VerifyJWT(bookmarkHandler))
 	http.HandleFunc("/checkBookmarks", middlewares.VerifyBookmarks(checkBookmarkHandler ))
 	http.HandleFunc("/search", searchHandler)
-	http.HandleFunc("/articles", articleHandler)
+	http.HandleFunc("/articles/", articleHandler)
 
 	log.Fatal(http.ListenAndServe(":8000",nil))
 }
