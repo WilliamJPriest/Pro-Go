@@ -63,7 +63,7 @@ func GetBookMarks(username string) ([]models.BookmarkData, error){
 	db,err := ConnectToDB()
 	defer db.Close()
 	var bookmarks []models.BookmarkData
-	rows, err := db.Query("SELECT author, title, Description, UrlToImage, Content FROM Bookmarks where username= $1", username)
+	rows, err := db.Query("SELECT author, title, Description, UrlToImage, Content FROM Bookmarks where username= $1 order by BookmarkID desc", username)
 	if err != nil {
 		return nil, fmt.Errorf("failed to execute query: %w", err)
 	}
