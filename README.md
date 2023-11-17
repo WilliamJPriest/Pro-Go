@@ -24,7 +24,7 @@ I been telling everyone with ears:
 ### Alpha Release (MVP)
 
 - [✔️] Bookmarks
-- [✔️] Search Func | ...Center Loader [] 
+- [✔️] Search Func 
 - [✔️] Guest Login
 - [] Articles Page
 - [] Google Analytics 
@@ -33,6 +33,7 @@ I been telling everyone with ears:
 
 ### Post-Alpha Release
 
+- [] Center Loader 
 - [] Take user email
 - [] Send verify code/reset password
 - [] Two factor
