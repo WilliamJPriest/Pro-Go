@@ -25,7 +25,7 @@ I been telling everyone with ears:
 
 - [✔️] Bookmarks
 - [✔️] Search Func 
-- [✔️] Guest Login
+- [✔️] Guest Login - [✔️] Center Loader 
 - [] Articles Page
 - [] Google Analytics 
 
@@ -33,7 +33,7 @@ I been telling everyone with ears:
 
 ### Post-Alpha Release
 
-- [] Center Loader 
+- [] Loading Bars
 - [] Take user email
 - [] Send verify code/reset password
 - [] Two factor
