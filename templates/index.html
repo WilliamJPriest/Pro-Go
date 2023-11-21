@@ -78,6 +78,7 @@
                             </a>
                             
                             <div class="flex justify-right pr-4 pb-4" hx-post="/checkBookmarks" hx-target="find i" hx-trigger="load" hx-include="this" hx-swap="innerHTML">
+                                <i></i>
                                 <input  class="hidden" name="Author" value={{.Author}}></input>
                                 <input  class="hidden" name="Title" value={{.Title}}></input>
                                 <input  class="hidden" name="UrlToImage" value={{.UrlToImage}}></input>
