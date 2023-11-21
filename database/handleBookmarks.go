@@ -78,7 +78,6 @@ func GetBookMarks(username string) ([]models.BookmarkData, error){
 		bookmarks = append(bookmarks, bookmark)
 	}
 
-	// Check for errors during row iteration
 	if err := rows.Err(); err != nil {
 		return nil, fmt.Errorf("error during row iteration: %w", err)
 	}
