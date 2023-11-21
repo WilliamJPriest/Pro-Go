@@ -15,17 +15,17 @@ func Create() error{
 
 	_, err = db.Exec("CREATE TABLE if not exists Users (UserID SERIAL PRIMARY KEY, username char(100),password char(100));")
 	if err != nil {
-		log.Fatal("failed to execute query", err)
+		log.Fatal("failed to execute Users query", err)
 	}
 
 	_, err = db.Exec("CREATE TABLE if not exists Bookmarks (BookmarkID SERIAL PRIMARY KEY, username char(100),author TEXT, title TEXT, Description TEXT, Url TEXT, UrltoImage Text, Content TEXT);")
 	if err != nil {
-		log.Fatal("failed to execute query", err)
+		log.Fatal("failed to execute Bookmarks query", err)
 	}
 
 	_, err = db.Exec("CREATE TABLE if not exists Articles (ArticlesID SERIAL PRIMARY KEY, author TEXT, title TEXT, description TEXT, slug TEXT, urlToImage Text, content TEXT,likes INTEGER, dislikes INTEGER, rank TEXT, Badge Text);")
 	if err != nil {
-		log.Fatal("failed to execute query", err)
+		log.Fatal("failed to execute Articles query", err)
 	}
 	return nil
 

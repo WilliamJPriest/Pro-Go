@@ -17,7 +17,7 @@ func AddUser(username string, password []byte) (error){
 
 	_, err = db.Exec("INSERT INTO Users (username, password) VALUES ($1, $2)", username, password)
 	if err != nil {
-		return fmt.Errorf("failed to execute query3: %w", err)
+		return fmt.Errorf("failed to execute query: %w", err)
 	}
 	return nil
 }
