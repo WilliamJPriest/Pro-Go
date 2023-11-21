@@ -16,5 +16,5 @@ func GetArticles() (string, error) {
 	if err != nil{
 		return "", fmt.Errorf("couldn't find in articles table: %w", err)
 	}
-	return ", nil
+	return "", nil
 }
