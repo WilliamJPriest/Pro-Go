@@ -23,3 +23,7 @@ require (
 require github.com/lib/pq v1.10.9 // indirect
 
 replace github.com/williamjPriest/HTMXGO/utils => ./utils
+
+replace github.com/WilliamJPriest/Go-WebScrapper/models => ./models
+
+replace github.com/WilliamJPriest/Go-WebScrapper/database => ./database
