@@ -30,7 +30,6 @@ I been telling everyone with ears:
 - [] Articles Page
 - [] Google Analytics 
 
-- [] make go brrrrrr (faster)
 
 ### Post-Alpha Release
 
