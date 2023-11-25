@@ -195,10 +195,8 @@ func main(){
 			return
 		}
 
-		res := database.CheckBookMarks(title, username)
-		if res != nil{
-			err := database.AddBookMarks(author,title,desc,urltoimage,content,username)
-			if err != nil{
+		if res := database.CheckBookMarks(title, username); res != nil{
+			if err := database.AddBookMarks(author,title,desc,urltoimage,content,username); err != nil{
 				w.Header().Set("Content-Type", "text/html; charset=utf-8")
     			fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-white  hover:text-blue-500  cursor-pointer"></i> `)
 				return
@@ -207,9 +205,8 @@ func main(){
     		fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-blue-500  hover:text-white  cursor-pointer"></i> `)
 			return
 		}
-		del := database.RemovedBookMarks(title, username)
-		if del != nil{
-			fmt.Println("%w", del)
+		if del := database.RemovedBookMarks(title, username); del != nil{
+			fmt.Println(del)
 		}
 
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
