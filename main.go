@@ -21,11 +21,10 @@ import (
 
 
 func main(){
-	res, err := database.GetArticles()
+	err := database.GetArticles()
 	if err != nil{
 		fmt.Println(err)
 	}
-	println(res)
 	err2 := godotenv.Load()
 	if err2 != nil {
 	  log.Fatal("Error loading .env file")
