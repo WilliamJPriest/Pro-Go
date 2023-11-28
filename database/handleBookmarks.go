@@ -23,7 +23,7 @@ func CheckBookMarks(title string, username string) (error) {
 	return nil
 }
 
-func AddBookMarks(author string, title string, desc string,urltoimage string,content string, username string) error{
+func AddBookMarks(author string, title string, desc string,urltoimage string,url string,content string, username string) error{
 	db,err := ConnectToDB()
 	defer db.Close()
 	if err != nil{
@@ -33,7 +33,7 @@ func AddBookMarks(author string, title string, desc string,urltoimage string,con
 	// 	fmt.Printf("time: %v \n", time.Since(start))
 	// }(time.Now())
 
-	_, err = db.Exec("INSERT INTO Bookmarks (author, title, Description, UrlToImage, Content, username) VALUES ($1, $2,$3,$4,$5,$6)", author, title, desc, urltoimage, content, username)
+	_, err = db.Exec("INSERT INTO Bookmarks (author, title, description, url, urlToImage, content, username) VALUES ($1, $2,$3,$4,$5,$6,$7)", author, title, desc,url, urltoimage, content, username)
 	if err != nil {
 		return fmt.Errorf("failed to execute query: %w", err)
 	}
@@ -63,7 +63,7 @@ func GetBookMarks(username string) ([]models.BookmarkData, error){
 	db,err := ConnectToDB()
 	defer db.Close()
 	var bookmarks []models.BookmarkData
-	rows, err := db.Query("SELECT author, title, Description, UrlToImage, Content FROM Bookmarks where username= $1 order by BookmarkID desc", username)
+	rows, err := db.Query("SELECT author, title, description, Url, urlToImage, content FROM Bookmarks where username= $1 order by BookmarkID desc", username)
 	if err != nil {
 		return nil, fmt.Errorf("failed to execute query: %w", err)
 	}
@@ -71,7 +71,7 @@ func GetBookMarks(username string) ([]models.BookmarkData, error){
 
 	for rows.Next() {
 		var bookmark models.BookmarkData
-		err := rows.Scan(&bookmark.Author,&bookmark.Title,&bookmark.Description, &bookmark.UrlToImage,&bookmark.Content)
+		err := rows.Scan(&bookmark.Author,&bookmark.Title,&bookmark.Description,&bookmark.Url,&bookmark.UrlToImage,&bookmark.Content)
 		if err != nil {
 			return nil, fmt.Errorf("failed to scan row: %w", err)
 		}

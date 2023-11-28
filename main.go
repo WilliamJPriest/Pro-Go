@@ -186,6 +186,7 @@ func main(){
 		author := req.PostFormValue("Author")
 		title := req.PostFormValue("Title")
 		desc := req.PostFormValue("Description")
+		url := req.PostFormValue("Url")
 		urltoimage := req.PostFormValue("UrlToImage")
 		content := req.PostFormValue("Content")
 		username, err := utils.CheckUsername(req)
@@ -196,7 +197,7 @@ func main(){
 		}
 
 		if res := database.CheckBookMarks(title, username); res != nil{
-			if err := database.AddBookMarks(author,title,desc,urltoimage,content,username); err != nil{
+			if err := database.AddBookMarks(author,title,desc,url,urltoimage,content,username); err != nil{
 				w.Header().Set("Content-Type", "text/html; charset=utf-8")
     			fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-white  hover:text-blue-500  cursor-pointer"></i> `)
 				return
