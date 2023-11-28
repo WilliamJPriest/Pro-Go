@@ -21,10 +21,6 @@ import (
 
 
 func main(){
-	err := database.Create()
-	if err != nil{
-		fmt.Println(err)
-	}
 	err2 := godotenv.Load()
 	if err2 != nil {
 	  log.Fatal("Error loading .env file")

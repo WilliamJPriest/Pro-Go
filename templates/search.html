@@ -4,7 +4,7 @@
         <article  id="articleBody" class="grid grid-cols-1 md:grid-cols-3 gap-10 w[70%]"  >
             <div class="addBorder rounded-lg  w-72 h-[500px]  mx-auto text-center mb-10" un-cloak>
                 
-                <a class="w-72 h-[450px} text-[16px] text-white no-underline flex flex-col flex-start" href="{{ .Url }}" target="_blank" un-cloak >
+                <a class="w-72 h-[450px} text-[16px] text-white no-underline flex flex-col flex-start" href={{.Url}} target="_blank" un-cloak >
                     <img class="w-72 h-36 rounded-lg "   src={{.UrlToImage}}  onerror="this.src='https://i.ibb.co/W2LttSG/error.png';this.onerror='';" alt="img failed to failed">
                     <h2 class="h-20 overflow-y-hidden">{{ .Title}} </h2>
                     {{if .Author}}<p>{{.Author}} </p> {{else}} <p>Unknown</p>{{end}}
