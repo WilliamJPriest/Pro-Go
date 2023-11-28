@@ -26,13 +26,13 @@ I been telling everyone with ears:
 - [✔️] Bookmarks
 - [✔️] Search Func 
 - [✔️] Guest Login | [✔️] Center Loader 
-- [] Custom Articles/ Web Scraped
-- [] Articles Page
-- [] Google Analytics 
 
 
 ### Post-Alpha Release
 
+- [] Custom Articles/ Web Scraped
+- [] Articles Page
+- [] Google Analytics 
 - [] Loading Bars
 - [] Take user email
 - [] Send verify code/reset password
