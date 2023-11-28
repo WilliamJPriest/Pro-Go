@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"time"
 	// "time"
 	"github.com/williamjPriest/HTMXGO/models"
 )
@@ -23,17 +24,17 @@ func CheckBookMarks(title string, username string) (error) {
 	return nil
 }
 
-func AddBookMarks(author string, title string, desc string,urltoimage string,url string,content string, username string) error{
+func AddBookMarks(author string, title string, desc string,urltoimage string,url string, username string) error{
 	db,err := ConnectToDB()
-	defer db.Close()
 	if err != nil{
 		return fmt.Errorf("%w", err)
 	}
-	// defer func(start time.Time){
-	// 	fmt.Printf("time: %v \n", time.Since(start))
-	// }(time.Now())
+	defer db.Close()
+	defer func(start time.Time){
+		fmt.Printf("time: %v \n", time.Since(start))
+	}(time.Now())
 
-	_, err = db.Exec("INSERT INTO Bookmarks (author, title, description, url, urlToImage, content, username) VALUES ($1, $2,$3,$4,$5,$6,$7)", author, title, desc,url, urltoimage, content, username)
+	_, err = db.Exec("INSERT INTO Bookmarks (author, title, description, url, urlToImage, username) VALUES ($1, $2,$3,$4,$5,$6)", author, title, desc,url, urltoimage, username)
 	if err != nil {
 		return fmt.Errorf("failed to execute query: %w", err)
 	}
@@ -43,13 +44,13 @@ func AddBookMarks(author string, title string, desc string,urltoimage string,url
 
 func RemovedBookMarks(title string,  username string) error{
 	db,err := ConnectToDB()
-	defer db.Close()
 	if err != nil{
 		return fmt.Errorf("%w", err)
 	}
-	// defer func(start time.Time){
-	// 	fmt.Printf("time: %v \n", time.Since(start))
-	// }(time.Now())
+	defer db.Close()
+	defer func(start time.Time){
+		fmt.Printf("time: %v \n", time.Since(start))
+	}(time.Now())
 
 	_, err = db.Exec("DELETE FROM Bookmarks WHERE title = $1 AND username = $2", title, username)
 	if err != nil {
