@@ -26,9 +26,9 @@ func GetArticles() (error) {
 			return fmt.Errorf("failed to scan row: %w", err)
 		}
 		authorNames = append(authorNames, authorName)
-		fmt.Println(authorNames)
+		
 	}
-
+	fmt.Println(authorNames)
 
 	return nil
 }
