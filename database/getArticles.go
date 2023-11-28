@@ -28,7 +28,6 @@ func GetArticles() (error) {
 		authorNames = append(authorNames, authorName)
 		
 	}
-	fmt.Println(authorNames)
 
 	return nil
 }

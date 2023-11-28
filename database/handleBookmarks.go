@@ -76,7 +76,6 @@ func GetBookMarks(username string) ([]models.BookmarkData, error){
 			return nil, fmt.Errorf("failed to scan row: %w", err)
 		}
 		bookmarks = append(bookmarks, bookmark)
-		fmt.Println(bookmarks)
 	}
 
 	if err := rows.Err(); err != nil {

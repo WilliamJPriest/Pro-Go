@@ -186,6 +186,8 @@ func main(){
 		urltoimage := req.PostFormValue("UrlToImage")
 		content := req.PostFormValue("Content")
 		username, err := utils.CheckUsername(req)
+		fmt.Println("url"+url)
+		fmt.Println("url"+urltoimage)
 		if err != nil{
 			w.Header().Set("Content-Type", "text/html; charset=utf-8")
 			fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-white  hover:text-blue-500  cursor-pointer"></i> `)
