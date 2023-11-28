@@ -21,7 +21,7 @@ import (
 
 
 func main(){
-	err := database.GetArticles()
+	err := database.Create()
 	if err != nil{
 		fmt.Println(err)
 	}

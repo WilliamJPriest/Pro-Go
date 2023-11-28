@@ -18,12 +18,27 @@ func Create() error{
 		log.Fatal("failed to execute Users query", err)
 	}
 
-	_, err = db.Exec("CREATE TABLE if not exists Bookmarks (BookmarkID SERIAL PRIMARY KEY, username char(100),author TEXT, title TEXT, Description TEXT, Url TEXT, UrltoImage Text, Content TEXT);")
+	// _, err = db.Exec("CREATE TABLE if not exists Bookmarks (BookmarkID SERIAL PRIMARY KEY, username char(100),author TEXT, title TEXT, Description TEXT, Url TEXT, UrltoImage Text, Content TEXT);")
+	// if err != nil {
+	// 	log.Fatal("failed to execute Bookmarks query", err)
+	// }
+
+	// _, err = db.Exec("CREATE TABLE if not exists Articles (ArticlesID SERIAL PRIMARY KEY, author TEXT, title TEXT, description TEXT, slug TEXT, urlToImage Text, content TEXT,likes INTEGER, dislikes INTEGER, rank TEXT, Badge Text);")
+	// if err != nil {
+	// 	log.Fatal("failed to execute Articles query", err)
+	// }
+
+	_, err = db.Exec("DROP TABLE Bookmarks;")
 	if err != nil {
 		log.Fatal("failed to execute Bookmarks query", err)
 	}
 
-	_, err = db.Exec("CREATE TABLE if not exists Articles (ArticlesID SERIAL PRIMARY KEY, author TEXT, title TEXT, description TEXT, slug TEXT, urlToImage Text, content TEXT,likes INTEGER, dislikes INTEGER, rank TEXT, Badge Text);")
+	_, err = db.Exec("DROP TABLE Articles;")
+	if err != nil {
+		log.Fatal("failed to execute Articles query", err)
+	}
+
+	_, err = db.Exec("DROP TABLE UsersProGo;")
 	if err != nil {
 		log.Fatal("failed to execute Articles query", err)
 	}
