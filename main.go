@@ -30,6 +30,11 @@ func main(){
 	
   
 	MainPageHandler := func(w http.ResponseWriter, req *http.Request){
+		if req.URL.Path != "/" {
+			http.NotFound(w, req)
+			return
+		}
+
 		t := template.Must(template.ParseGlob("templates/index.html"))
 		res, err := http.Get(ApiKey)
 		if err != nil{
@@ -215,7 +220,7 @@ func main(){
 	checkBookmarkHandler := func(w http.ResponseWriter, req *http.Request){
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
     	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-indicator="#loader" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-blue-500  hover:text-white  cursor-pointer"></i>`)}
-
+	
 	searchHandler := func(w http.ResponseWriter, req *http.Request){		
 		searchRes := req.PostFormValue("searchRes")
 		t := template.Must(template.ParseGlob("templates/search.html"))
@@ -238,15 +243,9 @@ func main(){
 		}else{
 			t.Execute(w, responseObject)
 		}
-		
-		
-	}	
-	articleHandler :=func(w http.ResponseWriter, req *http.Request){
-		author := req.URL
-		fmt.Println(author)
-		t := template.Must(template.ParseGlob("templates/articles.html"))
-		t.Execute(w, nil)
 	}
+	
+
 
 
 
@@ -261,7 +260,8 @@ func main(){
 	http.HandleFunc("/handleBookmarks", middlewares.VerifyJWT(bookmarkHandler))
 	http.HandleFunc("/checkBookmarks", middlewares.VerifyBookmarks(checkBookmarkHandler ))
 	http.HandleFunc("/search", searchHandler)
-	http.HandleFunc("/articles/", articleHandler)
+	
+
 
 	log.Fatal(http.ListenAndServe(":8000",nil))
 }
