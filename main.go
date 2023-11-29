@@ -78,7 +78,7 @@ func main(){
 
 
 		token := jwt.New(jwt.SigningMethodHS256)
-		expiration := time.Now().Add(60 * time.Minute)
+		expiration := time.Now().Add(6000 * time.Minute)
 		claims := token.Claims.(jwt.MapClaims)
 		claims["exp"] = expiration.Unix()
 		claims["authorized"] = true
