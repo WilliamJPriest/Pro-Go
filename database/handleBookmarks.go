@@ -2,7 +2,6 @@ package database
 
 import (
 	"fmt"
-	"time"
 	"github.com/williamjPriest/HTMXGO/models"
 )
 
@@ -29,9 +28,6 @@ func AddBookMarks(author string, title string, desc string,urltoimage string,url
 		return fmt.Errorf("%w", err)
 	}
 	defer db.Close()
-	defer func(start time.Time){
-		fmt.Printf("time: %v \n", time.Since(start))
-	}(time.Now())
 
 	_, err = db.Exec("INSERT INTO Bookmarks (author, title, description, url, urlToImage, username) VALUES ($1, $2,$3,$4,$5,$6)", author, title, desc,url, urltoimage, username)
 	if err != nil {
@@ -47,9 +43,6 @@ func RemovedBookMarks(title string,  username string) error{
 		return fmt.Errorf("%w", err)
 	}
 	defer db.Close()
-	defer func(start time.Time){
-		fmt.Printf("time: %v \n", time.Since(start))
-	}(time.Now())
 
 	_, err = db.Exec("DELETE FROM Bookmarks WHERE title = $1 AND username = $2", title, username)
 	if err != nil {
