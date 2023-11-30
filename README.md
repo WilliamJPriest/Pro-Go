@@ -25,8 +25,9 @@ I been telling everyone with ears:
 
 - [✔️] Bookmarks
 - [✔️] Search Func 
-- [✔️] Guest Login | 
+- [✔️] Guest Login 
 - [✔️] Center Loader 
+- [✔️] Faster Load Times
 
 
 ### Post-Alpha Release
