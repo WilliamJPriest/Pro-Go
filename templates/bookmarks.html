@@ -27,14 +27,18 @@
             body{
                 background: #0f172a;
             }
-            .my-indicator{
+            .htmx-indicator{
             display:none;
             }
-            .htmx-request .my-indicator{
+            .htmx-request .htmx-indicator{
                 display:inline;
             }
-            .htmx-request.my-indicator{
+            .htmx-request.htmx-indicator{
                 display:inline;
+            }
+
+            .htmx-request > i{
+                display: none;
             }
     </style>
 </head>
@@ -59,7 +63,6 @@
                         <input  class="hidden" name="UrlToImage" value={{.UrlToImage}}></input>
                         <input  class="hidden" name="Url" value={{.Url}}></input>
                         <input  class="hidden" name="Description" value={{.Description}}></input>
-                        <input  class="hidden" name="Content" value={{.Content}}></input>
                     </div>
                 
 
