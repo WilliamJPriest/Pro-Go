@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/golang-jwt/jwt"
 	"github.com/williamjPriest/HTMXGO/models"
@@ -11,6 +12,12 @@ import (
 
 func VerifyJWT(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+		err := godotenv.Load()
+		if err != nil {
+			return nil, fmt.Errorf("Error loading .env file: %w", err)
+		}
+		secretCode := os.Getenv("SECRET_CODE")
+		var SecretKey = []byte(secretCode)
 		cookie, err := req.Cookie("token")
 		if err != nil {
 			w.Header().Set("Content-Type", "text/html; charset=utf-8")
@@ -21,7 +28,7 @@ func VerifyJWT(endpointHandler func(http.ResponseWriter, *http.Request)) http.Ha
 		JWTstr := cookie.Value
 
 		token, err := jwt.ParseWithClaims(JWTstr, &models.CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
-			return models.SecretKey, nil
+			return SecretKey, nil
 		})
 
 		if err != nil {

@@ -1,6 +1,8 @@
 package models
 
 import (
+	"os"
+
 	"github.com/golang-jwt/jwt"
 )
 
@@ -49,4 +51,6 @@ type CustomClaims struct {
 }
 
 
-var SecretKey = []byte("SecretYouShouldHide")
+
+var secretCode = os.Getenv("SECRET_CODE")
+var secretKey = []byte(secretCode)

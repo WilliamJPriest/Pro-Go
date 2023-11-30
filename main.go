@@ -25,8 +25,11 @@ func main(){
 	if err2 != nil {
 	  log.Fatal("Error loading .env file")
 	}
-  
-	ApiKey := os.Getenv("API_KEY")
+
+	secretCode := os.Getenv("SECRET_CODE")
+	var SecretKey = []byte(secretCode)
+
+	apiKey := os.Getenv("API_KEY")
 	
   
 	MainPageHandler := func(w http.ResponseWriter, req *http.Request){
@@ -36,7 +39,7 @@ func main(){
 		}
 
 		t := template.Must(template.ParseGlob("templates/index.html"))
-		res, err := http.Get(ApiKey)
+		res, err := http.Get(apiKey)
 		if err != nil{
 			fmt.Println(err)
 		}
@@ -84,7 +87,7 @@ func main(){
 		claims["authorized"] = true
 		claims["user"] = Username
 	
-		tokenString, err := token.SignedString(models.SecretKey)
+		tokenString, err := token.SignedString(SecretKey)
 		if err != nil {
 			log.Fatalf("failed to login %s", err)
 		}
@@ -117,7 +120,7 @@ func main(){
 		claims["authorized"] = true
 		claims["user"] = Username
 	
-		tokenString, err := token.SignedString(models.SecretKey)
+		tokenString, err := token.SignedString(SecretKey)
 		if err != nil {
 			log.Fatalf("failed to login %s", err)
 		}
