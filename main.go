@@ -39,7 +39,7 @@ func main(){
 		}
 
 		t := template.Must(template.ParseGlob("templates/index.html"))
-		res, err := http.Get(apiKey)
+		res, err := http.Get("https://newsapi.org/v2/top-headlines?country=us&category=technology&"+apiKey)
 		if err != nil{
 			fmt.Println(err)
 		}
@@ -227,7 +227,7 @@ func main(){
 	searchHandler := func(w http.ResponseWriter, req *http.Request){		
 		searchRes := req.PostFormValue("searchRes")
 		t := template.Must(template.ParseGlob("templates/search.html"))
-		res, err := http.Get("https://newsapi.org/v2/everything?q="+searchRes+"&language=en&")
+		res, err := http.Get("https://newsapi.org/v2/everything?q="+searchRes+"&language=en&"+apiKey)
 		if err != nil{
 			fmt.Println(err)
 		}
