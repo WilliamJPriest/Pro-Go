@@ -77,13 +77,14 @@
                                 <p class="h-32 overflow-y-hidden px-2 overflow-x-hidden">{{ .Description}}</p> 
                             </a>
                             
-                            <div class="flex justify-right pr-4 pb-4" hx-post="/checkBookmarks" hx-target="find i" hx-trigger="load" hx-include="this" hx-swap="innerHTML">
-                                <i></i>
+                            <div class="flex justify-right pr-4 pb-4" hx-post="/checkBookmarks" hx-target="find i" hx-trigger="load" hx-include="this" hx-swap="outerHTML">
+                                <i class="far fa-bookmark text-white  hover:text-blue-500  cursor-pointer">...loading</i>
                                 <input  class="hidden" name="Author" value={{.Author}}></input>
                                 <input  class="hidden" name="Title" value={{.Title}}></input>
                                 <input  class="hidden" name="UrlToImage" value={{.UrlToImage}}></input>
                                 <input  class="hidden" name="Url" value={{.Url}}></input>
                                 <input  class="hidden" name="Description" value={{.Description}}></input>
+                                <!-- <i class="my-indicator">...loading</p> -->
                             </div>
 
                             

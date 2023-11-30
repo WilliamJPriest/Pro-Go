@@ -222,7 +222,7 @@ func main(){
 	}
 	checkBookmarkHandler := func(w http.ResponseWriter, req *http.Request){
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
-    	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-indicator="#loader" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-blue-500  hover:text-white  cursor-pointer"></i>`)}
+    	fmt.Fprint(w, `<i hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML" class="far fa-bookmark text-blue-500  hover:text-white  cursor-pointer"></i>`)}
 	
 	searchHandler := func(w http.ResponseWriter, req *http.Request){		
 		searchRes := req.PostFormValue("searchRes")
