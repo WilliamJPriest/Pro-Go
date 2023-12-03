@@ -22,12 +22,13 @@ func CheckBookMarks(title string, username string) (error) {
 	return nil
 }
 
-func AddBookMarks(author string, title string, desc string,urltoimage string,url string, username string) error{
+func AddBookMarks(author string, title string, desc string,url string,urltoimage string, username string) error{
 	db,err := ConnectToDB()
 	if err != nil{
 		return fmt.Errorf("%w", err)
 	}
 	defer db.Close()
+	fmt.Println(url)
 
 	_, err = db.Exec("INSERT INTO Bookmarks (author, title, description, url, urlToImage, username) VALUES ($1, $2,$3,$4,$5,$6)", author, title, desc,url, urltoimage, username)
 	if err != nil {
