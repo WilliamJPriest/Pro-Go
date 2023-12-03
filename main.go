@@ -21,6 +21,7 @@ import (
 
 
 func main(){
+	database.Create()
 	err2 := godotenv.Load()
 	if err2 != nil {
 	  log.Fatal("Error loading .env file")
@@ -193,8 +194,6 @@ func main(){
 		url := req.PostFormValue("Url")
 		urltoimage := req.PostFormValue("UrlToImage")
 		username, err := utils.CheckUsername(req)
-		fmt.Println("url"+url)
-		fmt.Println("url"+urltoimage)
 		if err != nil{
 			w.Header().Set("Content-Type", "text/html; charset=utf-8")
 			fmt.Fprint(w, `<div hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML"> <i class="far fa-bookmark text-white  hover:text-blue-500  cursor-pointer" ></i><i class="htmx-indicator far fa-bookmark text-blue-500  hover:text-white cursor-pointer"></i>`)

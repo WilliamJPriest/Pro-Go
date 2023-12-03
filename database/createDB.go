@@ -28,6 +28,7 @@ func Create() error{
 		log.Fatal("failed to execute Articles query", err)
 	}
 
+
 	return nil
 
 }
