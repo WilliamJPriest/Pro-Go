@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/normalize.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"></link> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Vollkorn">
 
     <style>
             button{
@@ -41,13 +42,17 @@
             .htmx-request > i{
                 display: none;
             }
-    </style>
+            .Vollkorn{
+                font-family: 'Vollkorn';
+            }
+            
+            </style>
 </head>
 <body id="SwapPanel" class="bg-slate-900 h-full p-0 m-0 "> 
     <section class=""> 
         <nav class=" flex text-center justify-between h-[10vh] align-bottom"> 
     
-        <h1 class="text-blue-500 text-4xl p-0 m-2" >Pro-Go</h1>
+        <h1 class="text-blue-500 text-4xl p-0 m-2 Vollkorn" >Pro -Go</h1>
                
         <div class="flex p-5 gap-2">
             {{ if .IsLoggedIn}}
