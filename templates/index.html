@@ -68,9 +68,9 @@
             <h2 class="text-5xl m-2">For All Your Programming & Tech News</h2>
         </article>
     </section>
-    <h2 class="text-white pb-10 pl-2" >Here's your Articles</h2>
-    <section class="flex align-center justify-around ">
-            <article  id="articleBody" class="grid grid-cols-1 md:grid-cols-3 gap-10 w[70%]"  >
+    <h2 class="text-white pb-10 pl-2 " >Here's your Articles</h2>
+    <section class="flex flex-col-reverse md:flex-row align-center justify-around ">
+            <article  id="articleBody" class="grid grid-cols-1 md:grid-cols-3 gap-10 w:[100%] md:w[70%] md:ml-8"  >
                     {{ if .Articles}}
                         {{range .Articles}}
                         <div class="addBorder rounded-lg  w-72 h-[500px]  mx-auto text-center mb-10" un-cloak>
@@ -97,10 +97,10 @@
                     {{end}}
                     
             </article>
-            <article >
-                <form class="flex flex-col align-center gap-5 mt-20" hx-on::after-request="this.reset()">
-                    <input id="searchBar" name="searchRes" placeholder="...search">
-                    <button hx-post="/search"  hx-target="#articleBody" hx-include="#searchBar" hx-swap="innerHTML" class="text-white w-32 mx-auto">Find Something</button>
+            <article class="mx-auto">
+                <form class="flex flex-col align-center gap-5 my-10 w-full justify-center" hx-on::after-request="this.reset()">
+                    <input class="w-48" id="searchBar" name="searchRes" placeholder="...search">
+                    <button hx-post="/search"  hx-target="#articleBody" hx-include="#searchBar" hx-swap="innerHTML" class="text-white  mx-auto w-32">Find Something</button>
                 </form>
             </article>
     </section>
