@@ -167,20 +167,13 @@ func main(){
 			fmt.Println("no bookmarks %w", err)
 			return 
 		}
-		// jsonData, err := json.Marshal(bookmarks)
-		// if err != nil {
-		// 	print("failed to json")
-		// }
+
 		var bookmarks models.BookmarksData
 		bookmarks.Username=claims.Username
 		bookmarks.Bookmarks = bookmark
 		
 			
 		
-		
-		// var responseSlice []models.ArticleData
-		
-		// json.Unmarshal(bookmarks, &responseSlice)
 		w.WriteHeader(http.StatusOK)
 		t := template.Must(template.ParseGlob("templates/bookmarks.html"))
 		t.Execute(w, bookmarks)
