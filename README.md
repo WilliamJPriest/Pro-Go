@@ -36,7 +36,6 @@ MVP: https://pro-go-npja.onrender.com
 - [] Custom Articles/ Web Scraped
 - [] Articles Page
 - [] Google Analytics 
-- [] Loading Bars
 - [] Take user email
 - [] Send verify code/reset password
 - [] Two factor
@@ -53,7 +52,3 @@ MVP: https://pro-go-npja.onrender.com
 - [] Paid Pro Features
 - [] Supporter icons for those who contribute to this Project
 
-## **Watch This Project Live**
----
-
-<a href="https://www.youtube.com/@ThatWeirdKiidOnYT/streams?sub_confirmation=1">![Youtube](https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white)</a>
