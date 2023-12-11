@@ -27,3 +27,5 @@ replace github.com/williamjPriest/HTMXGO/utils => ./utils
 replace github.com/WilliamJPriest/Go-WebScrapper/models => ./models
 
 replace github.com/WilliamJPriest/Go-WebScrapper/database => ./database
+
+replace github.com/williamjPriest/HTMXGO/routes => ./routes
