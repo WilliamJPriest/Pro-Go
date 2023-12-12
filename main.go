@@ -87,7 +87,6 @@ func main(){
 			log.Fatalf("failed to login %s", err)
 		}
 		
-		fmt.Println(tokenString)
 	
 		http.SetCookie(w, &http.Cookie{
 			Name:    "token",
@@ -120,7 +119,6 @@ func main(){
 			log.Fatalf("failed to login %s", err)
 		}
 		
-		fmt.Println(tokenString)
 	
 		http.SetCookie(w, &http.Cookie{
 			Name:    "token",
