@@ -56,9 +56,10 @@
         <div class="flex p-5 gap-2">
             {{ if .IsLoggedIn}}
                 <a class="text-white no-underline hover:text-blue-500" href="/bookmarks"> Bookmarks</a>
+                <a class="text-white no-underline hover:text-blue-500" hx-get="/logout" hx-swap="none" >Logout</a>
             {{else}}
                 <a class="text-white no-underline hover:text-blue-500" href="/entry"> Login</a>
-                <a class="text-white no-underline hover:text-blue-500" href="/logout"> Logout</a>
+                
             {{end}}
         </div>
                 

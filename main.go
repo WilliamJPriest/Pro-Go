@@ -69,12 +69,7 @@ func main(){
 		t.Execute(w, nil)
 	}	
 
-	registerPageHandler := func(w http.ResponseWriter, req *http.Request){
-		t := template.Must(template.ParseGlob("templates/register.html"))
-		t.Execute(w, nil)
-		
-
-	}
+	
 
 	loginHandler := func(w http.ResponseWriter, req *http.Request){
 		Username := req.PostFormValue("username")
@@ -139,6 +134,23 @@ func main(){
 		t.Execute(w, Username)
 
 
+
+	}
+
+	logoutHandler := func(w http.ResponseWriter, req *http.Request){
+		http.SetCookie(w, &http.Cookie{
+			Name: "token",
+			Expires: time.Now(),
+
+		})
+		
+
+	}
+
+	registerPageHandler := func(w http.ResponseWriter, req *http.Request){
+		t := template.Must(template.ParseGlob("templates/register.html"))
+		t.Execute(w, nil)
+		
 
 	}
 
@@ -246,10 +258,11 @@ func main(){
 
 	http.HandleFunc("/",MainPageHandler)
 	http.HandleFunc("/entry",loginPageHandler)
-	http.HandleFunc("/registerForm", registerPageHandler )	
 	http.HandleFunc("/login",  middlewares.VerifyLogin(loginHandler) )
 	http.HandleFunc("/guestLogin",guestLoginHandler)
+	http.HandleFunc("/logout",logoutHandler)	
 	http.HandleFunc("/register", middlewares.VerifyUser(registerHandler) )
+	http.HandleFunc("/registerForm", registerPageHandler )	
 	http.HandleFunc("/bookmarks", middlewares.VerifyJWT(loadBookmarksHandler))
 	http.HandleFunc("/handleBookmarks", middlewares.VerifyJWT(bookmarkHandler))
 	http.HandleFunc("/checkBookmarks", middlewares.VerifyBookmarks(checkBookmarkHandler ))
