@@ -1,6 +1,6 @@
 <body  id="SwapPanel" class="bg-slate-900 ">
     <section   class="w-full text-white flex flex-col justify-center text-center items-center h-[100vh]">  
-        <article  class=" border-white border-2 rounded-lg w-72 h-80 flex flex-col justify-center items-center pt-8">
+        <article  class=" border-white border-2 rounded-lg w-72 h-96 flex flex-col justify-center items-center pt-8">
             <h2 class="flex flex-start">
                 Register
             </h2>
@@ -14,7 +14,7 @@
                 <button hx-post="/register" hx-trigger="click" hx-indicator="#loader" hx-target="#SwapPanel" hx-swap="innerHTML" class="border-white border-2 rounded-lg mt-8 hover:bg-white hover:text-slate-900" 
                 > Submit</button>
                 <p  id= "loader" class="my-indicator"> ...Loading</p>
-                <p id="error-message">That username is already taken</p>
+                <p id="error-message">That username/email is already taken</p>
             </form>
             <a hx-get="/entry" hx-trigger="click" hx-target="#SwapPanel" hx-swap="innerHTML" class="m-6 cursor-pointer">Login into account</a>
         </article>
