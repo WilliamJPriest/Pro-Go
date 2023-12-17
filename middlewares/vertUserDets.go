@@ -14,7 +14,7 @@ func VerifyUser(endpointHandler func(http.ResponseWriter, *http.Request)) http.H
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		username := req.PostFormValue("username")
 		email := req.PostFormValue("email")
-		validEmail := utils.CheckEmail(email)
+		validEmail := utils.ValidateEmail(email)
 		if !validEmail{
 			t := template.Must(template.ParseGlob("templates/register-error.html"))
 			t.Execute(w, nil)
@@ -33,7 +33,7 @@ func VerifyUser(endpointHandler func(http.ResponseWriter, *http.Request)) http.H
 			log.Fatal("Failed to execute query: %w" ,err)
 		}
 		defer db.Close()
-		rows, err := db.Query("SELECT * FROM Users WHERE username = $1", username)
+		rows, err := db.Query("SELECT * FROM Users WHERE username = $1 or email = $2 ", username, email)
 		if err != nil {
 			log.Fatal("Error executing SQL query: %w", err)
 		}
