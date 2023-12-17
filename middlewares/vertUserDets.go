@@ -2,6 +2,7 @@ package middlewares
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -13,7 +14,8 @@ import (
 func VerifyUser(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		username := req.PostFormValue("username")
-
+		email := req.PostFormValue("email")
+		fmt.Println(email)
 		err := godotenv.Load()
 		if err != nil {
 			log.Fatal("Error loading .env file: %w", err)
@@ -36,7 +38,6 @@ func VerifyUser(endpointHandler func(http.ResponseWriter, *http.Request)) http.H
 			t := template.Must(template.ParseGlob("templates/register-error.html"))
 			t.Execute(w, nil)
 		} else {
-			log.Println("Username is not in the database.")
 			endpointHandler(w, req)
 		}
 
