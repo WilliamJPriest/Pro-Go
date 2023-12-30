@@ -48,6 +48,7 @@ func main(){
 			fmt.Println(err)
 		}
 
+
 		var responseObject models.ArticlesData
 
 		json.Unmarshal(responseData, &responseObject)
