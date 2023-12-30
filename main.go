@@ -142,7 +142,7 @@ func main(){
 			Expires: time.Now(),
 
 		})
-		w.Header().Set("Hx-Refresh", "true")
+		w.Header().Set("Hx-Redirect", "/")
 		
 
 	}
