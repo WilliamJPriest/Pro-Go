@@ -206,7 +206,14 @@ func main(){
 			return
 		}
 
-		if res := database.CheckBookMarks(title, username); res != nil{
+		resChan := make(chan error)
+
+		go func(){
+			res:= database.CheckBookMarks(title, username)
+			resChan <-res
+		}()
+		res := <-resChan
+		if res != nil{
 			if err := database.AddBookMarks(author,title,desc,url,urltoimage,username); err != nil{
 				w.Header().Set("Content-Type", "text/html; charset=utf-8")
     			fmt.Fprint(w, `<div hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML"> <i class="far fa-bookmark text-white  hover:text-blue-500  cursor-pointer" ></i><i class="htmx-indicator far fa-bookmark text-blue-500  hover:text-white cursor-pointer"></i>`)
