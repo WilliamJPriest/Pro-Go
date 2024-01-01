@@ -276,6 +276,7 @@ func main(){
 	http.HandleFunc("/handleBookmarks", middlewares.VerifyJWT(bookmarkHandler))
 	http.HandleFunc("/checkBookmarks", middlewares.VerifyBookmarks(checkBookmarkHandler ))
 	http.HandleFunc("/search", searchHandler)
+
 	
 
 
