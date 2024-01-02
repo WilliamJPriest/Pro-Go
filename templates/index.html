@@ -90,7 +90,7 @@
                 
 
         </nav>
-        <article class="flex flex-col text-center justify-center text-white h-[80vh] bg-no-repeat bg-cover bg-[url(https://i.ibb.co/4ftkbdB/bgIMG.pnggit)]">
+        <article loading="lazy" class="flex flex-col text-center justify-center text-white h-[80vh] bg-no-repeat bg-cover bg-[url(https://i.ibb.co/4ftkbdB/bgIMG.pnggit)]">
             <h2 class="text-5xl m-2">For All Your Programming & Tech News</h2>
         </article>
     </section>
@@ -102,7 +102,7 @@
                         <div class="addBorder rounded-lg  w-72 h-[500px]  mx-auto text-center mb-10" un-cloak>
                             
                             <a class="w-72 h-[450px} text-[16px] text-white no-underline flex flex-col flex-start" href={{.Url}} target="_blank" un-cloak >
-                                <img  class=" rounded-lg w-72 h-36"  loading="lazy" src={{.UrlToImage}} onload="checkImageSize(this)" onerror="this.src='https://i.ibb.co/W2LttSG/error.webp';this.onerror='';" alt="img failed to failed"/>
+                                <img  class=" rounded-lg w-72 h-36"  loading="lazy" src={{.UrlToImage}}  onerror="this.src='https://i.ibb.co/W2LttSG/error.webp';this.onerror='';" alt="img failed to failed"/>
                                 <h2 class="h-20 overflow-y-hidden">{{ .Title}} </h2>
                                 {{if .Author}}<p>{{.Author}} </p> {{else}} <p>Unknown</p>{{end}}
                                 <p class="h-32 overflow-y-hidden px-2 overflow-x-hidden">{{ .Description}}</p> 
