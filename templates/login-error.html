@@ -11,7 +11,7 @@
                 <input class="text-slate-900 w-52 mx-auto" type="password" name="password" placeholder=" password">
                 <button hx-post="/login" hx-trigger="click" hx-indicator="#loader" hx-target="#SwapPanel" hx-swap="innerHTML" class="border-white border-2 rounded-lg mt-8 hover:bg-white hover:text-slate-900" 
                 > Submit</button>
-                <p  id= "loader" class="my-indicator"> ...Loading</p>
+                <p id= "loader" class="my-indicator"> ...Loading</p>
                 <p id="error-message"> Username or Password is Incorrect</p>
             </form>
             <a hx-get="/registerForm" hx-trigger="click" hx-target="#SwapPanel" hx-swap="innerHTML" class="m-6 cursor-pointer">Register an account</a>
