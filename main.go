@@ -11,7 +11,6 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt"
-	"github.com/joho/godotenv"
 	"github.com/williamjPriest/HTMXGO/database"
 	"github.com/williamjPriest/HTMXGO/middlewares"
 	"github.com/williamjPriest/HTMXGO/models"
@@ -21,10 +20,6 @@ import (
 
 
 func main(){
-	err2 := godotenv.Load()
-	if err2 != nil {
-	  log.Fatal("Error loading .env file")
-	}
 
 	secretCode := os.Getenv("SECRET_CODE")
 	var SecretKey = []byte(secretCode)
