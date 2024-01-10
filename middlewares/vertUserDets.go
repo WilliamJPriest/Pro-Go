@@ -7,7 +7,6 @@ import (
 	"os"
 	"text/template"
 	"github.com/williamjPriest/HTMXGO/utils"
-	"github.com/joho/godotenv"
 )
 
 func VerifyUser(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
@@ -20,11 +19,6 @@ func VerifyUser(endpointHandler func(http.ResponseWriter, *http.Request)) http.H
 			t.Execute(w, nil)
 			return
 
-		}
-		err := godotenv.Load()
-		if err != nil {
-			log.Fatal("Error loading .env file: %w", err)
-		 
 		}
 		DBlink := os.Getenv("DB_LINK")
 		dsn := DBlink

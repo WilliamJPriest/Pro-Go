@@ -7,7 +7,6 @@ import (
 	"os"
 	"text/template"
 
-	"github.com/joho/godotenv"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -16,11 +15,6 @@ func VerifyLogin(endpointHandler func(http.ResponseWriter, *http.Request)) http.
 		username := req.PostFormValue("username")
 		password := req.PostFormValue("password")
 
-		err := godotenv.Load()
-		if err != nil {
-			log.Fatal("Error loading .env file: %w", err)
-		 
-		}
 		DBlink := os.Getenv("DB_LINK")
 		dsn := DBlink
 		db, err := sql.Open("postgres", dsn)
