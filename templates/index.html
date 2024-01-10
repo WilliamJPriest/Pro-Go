@@ -73,7 +73,7 @@
             </style>
 </head>
 <body id="SwapPanel" class="bg-slate-900 h-full p-0 m-0 "> 
-    <section class=""> 
+    <section class="" un-cloak> 
         <nav class=" flex text-center justify-between h-[10vh] align-bottom"> 
         <a href="/"><h1 class="text-blue-500 text-4xl p-0 m-2 Vollkorn" >Pro -Go</h1></a>
         
@@ -94,8 +94,8 @@
             <h2 class="text-5xl m-2">For All Your Programming & Tech News</h2>
         </article>
     </section>
-    <h2 class="text-white pb-10 pl-2 " >Here's your Articles</h2>
-    <section class="flex flex-col-reverse md:flex-row align-center justify-around ">
+    <h2 class="text-white pb-10 pl-2 "un-cloak >Here's your Articles</h2>
+    <section class="flex flex-col-reverse md:flex-row align-center justify-around " un-cloak>
             <article  id="articleBody" class="grid grid-cols-1 md:grid-cols-3 gap-10 w:[100%] md:w[70%] md:ml-8"  >
                     {{ if .Articles}}
                         {{range .Articles}}
@@ -130,7 +130,7 @@
                 </form>
             </article>
     </section>
-    <footer class="flex flex-col text-center justify-center mx-auto h-20vh py-5 ">
+    <footer class="flex flex-col text-center justify-center mx-auto h-20vh py-5 " un-cloak>
         <p class="text-white text-2xl"> Created by WilliamJP</p>
         <div>
             <a  href="https://github.com/WilliamJPriest"><i class="fa-brands  fa-github text-2xl text-white mx-2.5"></i></a>
