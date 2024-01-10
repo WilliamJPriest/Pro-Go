@@ -277,8 +277,12 @@ func main(){
 	http.HandleFunc("/checkBookmarks", middlewares.VerifyBookmarks(checkBookmarkHandler ))
 	http.HandleFunc("/search", searchHandler)
 
-	
+	port := os.Getenv("PORT")
+
+	if port == ""{
+		port = "3000"
+	}
 
 
-	log.Fatal(http.ListenAndServe(":8000",nil))
+	log.Fatal(http.ListenAndServe("0.0.0.0:"+ port,nil))
 }
