@@ -10,6 +10,10 @@
     <script defer src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
     <style>
+        body{
+            background-color: #0f172a;
+        }
+
         .my-indicator{
             display:none;
         }
@@ -24,9 +28,9 @@
         }
     </style>
 </head>
-<body id="SwapPanel" class="bg-slate-900">
-    <section class="w-full text-white flex flex-col justify-center text-center items-center h-[100vh]" un-cloak>  
-        <article class="border-white border-2 rounded-lg w-72 h-96 flex flex-col justify-center items-center pt-8">
+<body id="SwapPanel" class=" h-full p-0 m-0">
+    <section class="w-full text-white flex flex-col justify-center text-center items-center h-[100vh]" >  
+        <article class="border-white border-2 rounded-lg w-72 h-96 flex flex-col justify-center items-center pt-8" un-cloak>
             <h2 class="flex flex-start">
                 Login
             </h2>
