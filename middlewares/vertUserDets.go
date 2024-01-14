@@ -13,7 +13,6 @@ func VerifyUser(endpointHandler func(http.ResponseWriter, *http.Request)) http.H
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 
 		username := req.PostFormValue("username")
-		email := req.PostFormValue("email")
 
 		DBlink := os.Getenv("DB_LINK")
 		dsn := DBlink
@@ -22,7 +21,7 @@ func VerifyUser(endpointHandler func(http.ResponseWriter, *http.Request)) http.H
 			log.Fatal("Failed to execute query: %w" ,err)
 		}
 		defer db.Close()
-		rows, err := db.Query("SELECT * FROM Users WHERE username = $1 or email = $2 ", username, email)
+		rows, err := db.Query("SELECT * FROM Users WHERE username = $1", username)
 		if err != nil {
 			log.Fatal("Error executing SQL query: %w", err)
 		}
