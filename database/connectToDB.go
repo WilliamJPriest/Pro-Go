@@ -10,7 +10,6 @@ import (
 
 func ConnectToDB() (*sql.DB, error){
 
-
 	DBlink := os.Getenv("DB_LINK")
 	dsn := DBlink
 	db, err := sql.Open("postgres", dsn)

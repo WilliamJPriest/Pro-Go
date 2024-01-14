@@ -17,7 +17,7 @@ func Create() error{
 		log.Fatal("failed to execute Users query", err)
 	}
 
-	_, err = db.Exec("CREATE TABLE if not exists Bookmarks (BookmarkID SERIAL PRIMARY KEY, username char(100),author tEXT, title TEXT, description TEXT, Url TEXT, urlToImage Text, content TEXT);")
+	_, err = db.Exec("CREATE TABLE if not exists Bookmarks (BookmarkID SERIAL PRIMARY KEY, username char(100),author TEXT, title TEXT, description TEXT, Url TEXT, urlToImage TEXT, content TEXT);")
 	if err != nil {
 		log.Fatal("failed to execute Bookmarks query", err)
 	}
@@ -26,7 +26,6 @@ func Create() error{
 	if err != nil {
 		log.Fatal("failed to execute Articles query", err)
 	}
-
 
 
 

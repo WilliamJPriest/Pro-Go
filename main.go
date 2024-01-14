@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/williamjPriest/HTMXGO/database"
 	"github.com/williamjPriest/HTMXGO/middlewares"
 
 	"github.com/williamjPriest/HTMXGO/routes"
@@ -12,7 +13,6 @@ import (
 
 
 func main(){
-
 	http.HandleFunc("/",routes.MainPageHandler)
 	http.HandleFunc("/entry",routes.LoginPageHandler)
 	http.HandleFunc("/login",  middlewares.VerifyLogin(routes.LoginHandler) )
