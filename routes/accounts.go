@@ -22,10 +22,6 @@ func LoginPageHandler(w http.ResponseWriter, req *http.Request){
 
 
 func LoginHandler(w http.ResponseWriter, req *http.Request){
-	err := godotenv.Load()
-	if err != nil {
-	  log.Fatal("Error loading .env file")
-	}
 	secretCode := os.Getenv("SECRET_CODE")
 	var SecretKey = []byte(secretCode)
 	Username := req.PostFormValue("username")

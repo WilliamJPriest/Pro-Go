@@ -3,21 +3,17 @@ package middlewares
 import (
 	"context"
 	"fmt"
-	"log"
+
 	"net/http"
 	"os"
 
 	"github.com/golang-jwt/jwt"
-	"github.com/joho/godotenv"
 	"github.com/williamjPriest/HTMXGO/models"
 )
 
 func VerifyJWT(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
-		err := godotenv.Load()
-		if err != nil {
-		  log.Fatal("Error loading .env file")
-		}
+
 		secretCode := os.Getenv("SECRET_CODE")
 		var SecretKey = []byte(secretCode)
 		cookie, err := req.Cookie("token")
