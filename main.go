@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/williamjPriest/HTMXGO/database"
+
 	"github.com/williamjPriest/HTMXGO/middlewares"
 
 	"github.com/williamjPriest/HTMXGO/routes"
