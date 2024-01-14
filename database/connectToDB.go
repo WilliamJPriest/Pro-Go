@@ -3,12 +3,18 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"log"
 	"os"
 
-
+	"github.com/joho/godotenv"
 )
 
 func ConnectToDB() (*sql.DB, error){
+	err := godotenv.Load()
+	if err != nil {
+	  log.Fatal("Error loading .env file")
+	}
+
 
 	DBlink := os.Getenv("DB_LINK")
 	dsn := DBlink

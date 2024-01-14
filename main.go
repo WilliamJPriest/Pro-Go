@@ -14,51 +14,24 @@ import (
 	"github.com/williamjPriest/HTMXGO/database"
 	"github.com/williamjPriest/HTMXGO/middlewares"
 	"github.com/williamjPriest/HTMXGO/models"
+	"github.com/williamjPriest/HTMXGO/routes"
 	"github.com/williamjPriest/HTMXGO/utils"
 	"golang.org/x/crypto/bcrypt"
+	"github.com/joho/godotenv"
 )
 
 
 func main(){
-
+	err := godotenv.Load()
+	if err != nil {
+	  log.Fatal("Error loading .env file")
+	}
 	secretCode := os.Getenv("SECRET_CODE")
 	var SecretKey = []byte(secretCode)
 
-	apiKey := os.Getenv("API_KEY")
-	
+	ApiKey := os.Getenv("API_KEY")
+
   
-	MainPageHandler := func(w http.ResponseWriter, req *http.Request){
-		if req.URL.Path != "/" {
-			http.NotFound(w, req)
-			return
-		}
-
-		t := template.Must(template.ParseGlob("templates/index.html"))
-		res, err := http.Get("https://newsapi.org/v2/top-headlines?country=us&category=technology&"+apiKey)
-		if err != nil{
-			fmt.Println(err)
-		}
-		responseData, err := io.ReadAll(res.Body)
-		if err != nil {
-			fmt.Println(err)
-		}
-
-
-		var responseObject models.ArticlesData
-
-		json.Unmarshal(responseData, &responseObject)
-
-		_, err = req.Cookie("token")
-		if err != nil {
-			responseObject.IsLoggedIn = false
-			t.Execute(w, responseObject)
-		}else{
-			responseObject.IsLoggedIn = true
-			t.Execute(w, responseObject)
-		}
-		
-		
-	}	
 
 	loginPageHandler := func(w http.ResponseWriter, req *http.Request){
 		t := template.Must(template.ParseGlob("templates/login.html"))
@@ -234,7 +207,7 @@ func main(){
 	searchHandler := func(w http.ResponseWriter, req *http.Request){		
 		searchRes := req.PostFormValue("searchRes")
 		t := template.Must(template.ParseGlob("templates/search.html"))
-		res, err := http.Get("https://newsapi.org/v2/everything?q="+searchRes+"&language=en&"+apiKey)
+		res, err := http.Get("https://newsapi.org/v2/everything?q="+searchRes+"&language=en&"+ApiKey)
 		if err != nil{
 			fmt.Println(err)
 		}
@@ -260,7 +233,7 @@ func main(){
 
 
 
-	http.HandleFunc("/",MainPageHandler)
+	http.HandleFunc("/",routes.MainPageHandler)
 	http.HandleFunc("/entry",loginPageHandler)
 	http.HandleFunc("/login",  middlewares.VerifyLogin(loginHandler) )
 	http.HandleFunc("/guestLogin",guestLoginHandler)
