@@ -11,18 +11,18 @@ replace github.com/williamjPriest/HTMXGO/models => ./models
 replace github.com/williamjPriest/HTMXGO/controllers => ./controllers
 
 require (
-	github.com/golang-jwt/jwt v3.2.2+incompatible
-	github.com/williamjPriest/HTMXGO/database v0.0.0-00010101000000-000000000000
 	github.com/williamjPriest/HTMXGO/middlewares v0.0.0-00010101000000-000000000000
-	github.com/williamjPriest/HTMXGO/models v0.0.0-00010101000000-000000000000
 	github.com/williamjPriest/HTMXGO/routes v0.0.0-00010101000000-000000000000
-	github.com/williamjPriest/HTMXGO/utils v0.0.0-00010101000000-000000000000
-	golang.org/x/crypto v0.14.0
 )
 
 require (
+	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/lib/pq v1.10.9 // indirect
+	github.com/williamjPriest/HTMXGO/database v0.0.0-00010101000000-000000000000 // indirect
+	github.com/williamjPriest/HTMXGO/models v0.0.0-00010101000000-000000000000 // indirect
+	github.com/williamjPriest/HTMXGO/utils v0.0.0-00010101000000-000000000000 // indirect
+	golang.org/x/crypto v0.14.0 // indirect
 )
 
 replace github.com/williamjPriest/HTMXGO/utils => ./utils
