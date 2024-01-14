@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt"
-	"github.com/joho/godotenv"
 	"github.com/williamjPriest/HTMXGO/database"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -56,10 +55,6 @@ func LoginHandler(w http.ResponseWriter, req *http.Request){
 }
 
 func GuestLoginHandler(w http.ResponseWriter, req *http.Request){
-	err := godotenv.Load()
-	if err != nil {
-	  log.Fatal("Error loading .env file")
-	}
 	secretCode := os.Getenv("SECRET_CODE")
 	var SecretKey = []byte(secretCode)
 
