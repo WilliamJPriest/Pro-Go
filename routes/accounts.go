@@ -109,7 +109,6 @@ func RegisterPageHandler(w http.ResponseWriter, req *http.Request){
 
 func RegisterHandler(w http.ResponseWriter, req *http.Request){
 	username := req.PostFormValue("username")
-	email := req.PostFormValue("email")
 	password := req.PostFormValue("password")
 	
 	bcrypt,err := bcrypt.GenerateFromPassword([]byte(password), 5  )
@@ -117,7 +116,7 @@ func RegisterHandler(w http.ResponseWriter, req *http.Request){
 		log.Fatalf("failed to hash: %s", err)
 	}
 
-	err = database.AddUser(username,email,bcrypt)
+	err = database.AddUser(username,bcrypt)
 	if err != nil{
 		log.Fatalf("failed to add user: %s", err)
 	}
