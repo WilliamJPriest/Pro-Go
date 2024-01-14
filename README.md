@@ -1,5 +1,5 @@
 <p align="center">
-  <img  src="Assets\pro-go.webp"/>
+  <img  src="Assets\pro-go.png"/>
 </p>
 
 # **Pro-GO**

@@ -95,7 +95,7 @@ func LogoutHandler(w http.ResponseWriter, req *http.Request){
 		Expires: time.Now(),
 
 	})
-	w.Header().Set("Hx-Redirect", "/")
+	w.Header().Set("HX-Refresh", "true")
 	
 
 }
