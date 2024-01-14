@@ -7,7 +7,6 @@ import (
 	"os"
 	"text/template"
 
-	"github.com/williamjPriest/HTMXGO/utils"
 )
 
 func VerifyUser(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
@@ -15,13 +14,7 @@ func VerifyUser(endpointHandler func(http.ResponseWriter, *http.Request)) http.H
 
 		username := req.PostFormValue("username")
 		email := req.PostFormValue("email")
-		validEmail := utils.ValidateEmail(email)
-		if !validEmail{
-			t := template.Must(template.ParseGlob("templates/register-error.html"))
-			t.Execute(w, nil)
-			return
 
-		}
 		DBlink := os.Getenv("DB_LINK")
 		dsn := DBlink
 		db, err := sql.Open("postgres", dsn)
