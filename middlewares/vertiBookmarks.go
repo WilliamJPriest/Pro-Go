@@ -2,15 +2,20 @@ package middlewares
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
-
-	"github.com/williamjPriest/HTMXGO/utils"
+	"github.com/joho/godotenv"
 	"github.com/williamjPriest/HTMXGO/database"
+	"github.com/williamjPriest/HTMXGO/utils"
 )
 
 func VerifyBookmarks(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+		err := godotenv.Load()
+		if err != nil {
+		  log.Fatal("Error loading .env file")
+		}
 		title := req.PostFormValue("Title")
 		username, err := utils.CheckUsername(req)
 

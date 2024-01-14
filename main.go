@@ -8,15 +8,13 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"time"
 
-	"github.com/golang-jwt/jwt"
 	"github.com/williamjPriest/HTMXGO/database"
 	"github.com/williamjPriest/HTMXGO/middlewares"
 	"github.com/williamjPriest/HTMXGO/models"
 	"github.com/williamjPriest/HTMXGO/routes"
 	"github.com/williamjPriest/HTMXGO/utils"
-	"golang.org/x/crypto/bcrypt"
+
 	"github.com/joho/godotenv"
 )
 
@@ -26,120 +24,118 @@ func main(){
 	if err != nil {
 	  log.Fatal("Error loading .env file")
 	}
-	secretCode := os.Getenv("SECRET_CODE")
-	var SecretKey = []byte(secretCode)
 
 	ApiKey := os.Getenv("API_KEY")
 
   
 
-	loginPageHandler := func(w http.ResponseWriter, req *http.Request){
-		t := template.Must(template.ParseGlob("templates/login.html"))
-		t.Execute(w, nil)
-	}	
+	// loginPageHandler := func(w http.ResponseWriter, req *http.Request){
+	// 	t := template.Must(template.ParseGlob("templates/login.html"))
+	// 	t.Execute(w, nil)
+	// }	
 
 	
 
-	loginHandler := func(w http.ResponseWriter, req *http.Request){
-		Username := req.PostFormValue("username")
+	// loginHandler := func(w http.ResponseWriter, req *http.Request){
+	// 	Username := req.PostFormValue("username")
 
 
-		token := jwt.New(jwt.SigningMethodHS256)
-		expiration := time.Now().Add(6000 * time.Minute)
-		claims := token.Claims.(jwt.MapClaims)
-		claims["exp"] = expiration.Unix()
-		claims["authorized"] = true
-		claims["user"] = Username
+	// 	token := jwt.New(jwt.SigningMethodHS256)
+	// 	expiration := time.Now().Add(6000 * time.Minute)
+	// 	claims := token.Claims.(jwt.MapClaims)
+	// 	claims["exp"] = expiration.Unix()
+	// 	claims["authorized"] = true
+	// 	claims["user"] = Username
 	
-		tokenString, err := token.SignedString(SecretKey)
-		if err != nil {
-			log.Fatalf("failed to login %s", err)
-		}
-		
-	
-		http.SetCookie(w, &http.Cookie{
-			Name:    "token",
-			Value:   tokenString,
-			Expires: expiration,
-			HttpOnly: true,
-			Secure:   true,
-		})
-
-		t := template.Must(template.ParseGlob("templates/welcome.html"))
-		t.Execute(w, Username)
-
-
-
-	}
-
-	guestLoginHandler := func(w http.ResponseWriter, req *http.Request){
-		Username := "Guest101"
-
-
-		token := jwt.New(jwt.SigningMethodHS256)
-		expiration := time.Now().Add(60 * time.Minute)
-		claims := token.Claims.(jwt.MapClaims)
-		claims["exp"] = expiration.Unix()
-		claims["authorized"] = true
-		claims["user"] = Username
-	
-		tokenString, err := token.SignedString(SecretKey)
-		if err != nil {
-			log.Fatalf("failed to login %s", err)
-		}
+	// 	tokenString, err := token.SignedString(SecretKey)
+	// 	if err != nil {
+	// 		log.Fatalf("failed to login %s", err)
+	// 	}
 		
 	
-		http.SetCookie(w, &http.Cookie{
-			Name:    "token",
-			Value:   tokenString,
-			Expires: expiration,
-			HttpOnly: true,
-			Secure:   true,
-		})
+	// 	http.SetCookie(w, &http.Cookie{
+	// 		Name:    "token",
+	// 		Value:   tokenString,
+	// 		Expires: expiration,
+	// 		HttpOnly: true,
+	// 		Secure:   true,
+	// 	})
 
-		t := template.Must(template.ParseGlob("templates/welcome.html"))
-		t.Execute(w, Username)
+	// 	t := template.Must(template.ParseGlob("templates/welcome.html"))
+	// 	t.Execute(w, Username)
 
 
 
-	}
+	// }
 
-	logoutHandler := func(w http.ResponseWriter, req *http.Request){
-		http.SetCookie(w, &http.Cookie{
-			Name: "token",
-			Expires: time.Now(),
+	// guestLoginHandler := func(w http.ResponseWriter, req *http.Request){
+	// 	Username := "Guest101"
 
-		})
-		w.Header().Set("Hx-Redirect", "/")
+
+	// 	token := jwt.New(jwt.SigningMethodHS256)
+	// 	expiration := time.Now().Add(60 * time.Minute)
+	// 	claims := token.Claims.(jwt.MapClaims)
+	// 	claims["exp"] = expiration.Unix()
+	// 	claims["authorized"] = true
+	// 	claims["user"] = Username
+	
+	// 	tokenString, err := token.SignedString(SecretKey)
+	// 	if err != nil {
+	// 		log.Fatalf("failed to login %s", err)
+	// 	}
+		
+	
+	// 	http.SetCookie(w, &http.Cookie{
+	// 		Name:    "token",
+	// 		Value:   tokenString,
+	// 		Expires: expiration,
+	// 		HttpOnly: true,
+	// 		Secure:   true,
+	// 	})
+
+	// 	t := template.Must(template.ParseGlob("templates/welcome.html"))
+	// 	t.Execute(w, Username)
+
+
+
+	// }
+
+	// logoutHandler := func(w http.ResponseWriter, req *http.Request){
+	// 	http.SetCookie(w, &http.Cookie{
+	// 		Name: "token",
+	// 		Expires: time.Now(),
+
+	// 	})
+	// 	w.Header().Set("Hx-Redirect", "/")
 		
 
-	}
+	// }
 
-	registerPageHandler := func(w http.ResponseWriter, req *http.Request){
-		t := template.Must(template.ParseGlob("templates/register.html"))
-		t.Execute(w, nil)
+	// registerPageHandler := func(w http.ResponseWriter, req *http.Request){
+	// 	t := template.Must(template.ParseGlob("templates/register.html"))
+	// 	t.Execute(w, nil)
 		
 
-	}
+	// }
 
-	registerHandler := func(w http.ResponseWriter, req *http.Request){
-		username := req.PostFormValue("username")
-		email := req.PostFormValue("email")
-		password := req.PostFormValue("password")
+	// registerHandler := func(w http.ResponseWriter, req *http.Request){
+	// 	username := req.PostFormValue("username")
+	// 	email := req.PostFormValue("email")
+	// 	password := req.PostFormValue("password")
 		
-		bcrypt,err := bcrypt.GenerateFromPassword([]byte(password), 5  )
-		if err != nil{
-			log.Fatalf("failed to hash: %s", err)
-		}
+	// 	bcrypt,err := bcrypt.GenerateFromPassword([]byte(password), 5  )
+	// 	if err != nil{
+	// 		log.Fatalf("failed to hash: %s", err)
+	// 	}
 
-		err = database.AddUser(username,email,bcrypt)
-		if err != nil{
-			log.Fatalf("failed to add user: %s", err)
-		}
+	// 	err = database.AddUser(username,email,bcrypt)
+	// 	if err != nil{
+	// 		log.Fatalf("failed to add user: %s", err)
+	// 	}
 		
-		t := template.Must(template.ParseGlob("templates/login.html"))
-		t.Execute(w, nil)
-	}
+	// 	t := template.Must(template.ParseGlob("templates/login.html"))
+	// 	t.Execute(w, nil)
+	// }
 
 	loadBookmarksHandler := func(w http.ResponseWriter, req *http.Request){
 		claims, _ := req.Context().Value("claims").(*models.CustomClaims)
@@ -234,12 +230,12 @@ func main(){
 
 
 	http.HandleFunc("/",routes.MainPageHandler)
-	http.HandleFunc("/entry",loginPageHandler)
-	http.HandleFunc("/login",  middlewares.VerifyLogin(loginHandler) )
-	http.HandleFunc("/guestLogin",guestLoginHandler)
-	http.HandleFunc("/logout",logoutHandler)	
-	http.HandleFunc("/register", middlewares.VerifyUser(registerHandler) )
-	http.HandleFunc("/registerForm", registerPageHandler )	
+	http.HandleFunc("/entry",routes.LoginPageHandler)
+	http.HandleFunc("/login",  middlewares.VerifyLogin(routes.LoginHandler) )
+	http.HandleFunc("/guestLogin",routes.GuestLoginHandler)
+	http.HandleFunc("/logout",routes.LogoutHandler)	
+	http.HandleFunc("/register", middlewares.VerifyUser(routes.RegisterHandler) )
+	http.HandleFunc("/registerForm", routes.RegisterPageHandler )	
 	http.HandleFunc("/bookmarks", middlewares.VerifyJWT(loadBookmarksHandler))
 	http.HandleFunc("/handleBookmarks", middlewares.VerifyJWT(bookmarkHandler))
 	http.HandleFunc("/checkBookmarks", middlewares.VerifyBookmarks(checkBookmarkHandler ))

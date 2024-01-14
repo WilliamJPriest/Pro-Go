@@ -7,11 +7,17 @@ import (
 	"os"
 	"text/template"
 
+	"github.com/joho/godotenv"
 	"golang.org/x/crypto/bcrypt"
 )
 
 func VerifyLogin(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+		err := godotenv.Load()
+		if err != nil {
+		  log.Fatal("Error loading .env file")
+		}
+
 		username := req.PostFormValue("username")
 		password := req.PostFormValue("password")
 
