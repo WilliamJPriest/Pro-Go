@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/williamjPriest/HTMXGO/database"
 	"github.com/williamjPriest/HTMXGO/middlewares"
 
 	"github.com/williamjPriest/HTMXGO/routes"
@@ -13,13 +12,13 @@ import (
 
 
 func main(){
-	database.Create()
+
 	http.HandleFunc("/",routes.MainPageHandler)
 	http.HandleFunc("/entry",routes.LoginPageHandler)
 	http.HandleFunc("/login",  middlewares.VerifyLogin(routes.LoginHandler) )
 	http.HandleFunc("/guestLogin",routes.GuestLoginHandler)
 	http.HandleFunc("/logout",routes.LogoutHandler)	
-	http.HandleFunc("/register", middlewares.VerifyUser(routes.RegisterHandler) )
+	http.HandleFunc("/register", middlewares.VerifyUser(routes.RegisterHandler))
 	http.HandleFunc("/registerForm", routes.RegisterPageHandler )	
 	http.HandleFunc("/bookmarks", middlewares.VerifyJWT(routes.LoadBookmarksHandler))
 	http.HandleFunc("/handleBookmarks", middlewares.VerifyJWT(routes.BookmarkHandler))
