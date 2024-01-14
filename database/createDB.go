@@ -3,7 +3,6 @@ package database
 import (
 	"log"
 
-
 	_ "github.com/lib/pq"
 )
 
@@ -13,7 +12,7 @@ func Create() error{
 		log.Fatal("%w", err)
 	}
 
-	_, err = db.Exec("CREATE TABLE if not exists Users (UserID SERIAL PRIMARY KEY, username char(100),password char(100),email char(100));")
+	_, err = db.Exec("CREATE TABLE if not exists Users (UserID SERIAL PRIMARY KEY, username char(100),password char(100));")
 	if err != nil {
 		log.Fatal("failed to execute Users query", err)
 	}
@@ -27,6 +26,9 @@ func Create() error{
 	if err != nil {
 		log.Fatal("failed to execute Articles query", err)
 	}
+
+
+
 
 
 	return nil
