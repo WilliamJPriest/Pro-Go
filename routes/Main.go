@@ -23,7 +23,6 @@ func MainPageHandler(w http.ResponseWriter, req *http.Request){
 		http.NotFound(w, req)
 		return
 	}
-	fmt.Println("API_KEY:", ApiKey)
 
 	t := template.Must(template.ParseGlob("templates/index.html"))
 	res, err := http.Get("https://newsapi.org/v2/top-headlines?country=us&category=technology&"+ApiKey)
