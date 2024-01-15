@@ -1,6 +1,5 @@
-<p align="center">
-  <img  src="Assets/pro-go.png"/>
-</p>
+<img  src="Assets/pro-go.png"/>
+
 
 # **Pro-GO**
 
