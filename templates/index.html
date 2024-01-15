@@ -79,7 +79,7 @@
                             <a class="w-72 h-[450px} text-[16px] text-white no-underline flex flex-col flex-start" href={{.Url}} target="_blank" un-cloak >
                                 <img  class=" rounded-lg w-72 h-36"  loading="lazy" src={{.UrlToImage}} onerror="this.src='https://i.ibb.co/W2LttSG/error.webp';this.onerror='';" alt="img failed to failed"/>
                                 <h2 class="h-20 overflow-y-hidden">{{ .Title}} </h2>
-                                {{if .Author}}<p class="h-4">{{.Author}} </p> {{else}} <p class="h-4">Unknown</p>{{end}}
+                                {{if .Author}}<p class="h-4">{{.Author}} </p> {{else}} <p >Unknown</p>{{end}}
                                 <p class="h-32 overflow-y-hidden px-2 overflow-x-hidden">{{ .Description}}</p> 
                             </a>
                             
