@@ -53,7 +53,7 @@
                     <a class="w-72 h-[450px} text-[16px] text-white no-underline flex flex-col flex-start" href={{.Url}} target="_blank" un-cloak >
                         <img class="w-72 h-36 rounded-lg "   src={{.UrlToImage}}  onerror="this.src='https://i.ibb.co/W2LttSG/error.webp';this.onerror='';" alt="img failed to failed"/>
                         <h2 class="h-20 overflow-y-hidden">{{ .Title}} </h2>
-                        {{if .Author}}<p>{{.Author}} </p> {{else}} <p>Unknown</p>{{end}}
+                        {{if .Author}}<p class="h-10">{{.Author}} </p> {{else}} <p>Unknown</p>{{end}}
                         <p class="h-32 overflow-y-hidden px-2 overflow-x-hidden">{{ .Description}}</p> 
                     </a>
                     <div class="flex justify-right pr-4 pb-4" hx-post="/checkBookmarks" hx-target="find i" hx-trigger="load" hx-include="this" hx-swap="outerHTML">
