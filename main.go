@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-
+	"github.com/joho/godotenv"
 	"github.com/williamjPriest/HTMXGO/middlewares"
 
 	"github.com/williamjPriest/HTMXGO/routes"
@@ -24,7 +24,10 @@ func main(){
 	http.HandleFunc("/handleBookmarks", middlewares.VerifyJWT(routes.BookmarkHandler))
 	http.HandleFunc("/checkBookmarks", middlewares.VerifyBookmarks(routes.CheckBookmarkHandler ))
 	http.HandleFunc("/search", routes.SearchHandler)
-
+	err := godotenv.Load()
+	if err != nil {
+	log.Fatal("Error loading .env file")
+	}
 	port := os.Getenv("PORT")
 
 	if port == ""{

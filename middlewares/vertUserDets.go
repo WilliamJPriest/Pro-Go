@@ -7,11 +7,15 @@ import (
 	"os"
 	"text/template"
 
+	"github.com/joho/godotenv"
 )
 
 func VerifyUser(endpointHandler func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
-
+		err := godotenv.Load()
+		if err != nil {
+		  log.Fatal("Error loading .env file")
+		}
 		username := req.PostFormValue("username")
 
 		DBlink := os.Getenv("DB_LINK")

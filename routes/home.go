@@ -4,14 +4,20 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"text/template"
 
+	"github.com/joho/godotenv"
 	"github.com/williamjPriest/HTMXGO/models"
 )
 
 func MainPageHandler(w http.ResponseWriter, req *http.Request){
+	err := godotenv.Load()
+	if err != nil {
+	log.Fatal("Error loading .env file")
+	}
 	ApiKey := os.Getenv("API_KEY")
 	if req.URL.Path != "/" {
 		http.NotFound(w, req)

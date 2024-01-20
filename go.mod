@@ -8,9 +8,8 @@ replace github.com/williamjPriest/HTMXGO/middlewares => ./middlewares
 
 replace github.com/williamjPriest/HTMXGO/models => ./models
 
-replace github.com/williamjPriest/HTMXGO/controllers => ./controllers
-
 require (
+	github.com/joho/godotenv v1.5.1
 	github.com/williamjPriest/HTMXGO/middlewares v0.0.0-00010101000000-000000000000
 	github.com/williamjPriest/HTMXGO/routes v0.0.0-00010101000000-000000000000
 )
@@ -31,3 +30,5 @@ replace github.com/WilliamJPriest/Go-WebScrapper/models => ./models
 replace github.com/WilliamJPriest/Go-WebScrapper/database => ./database
 
 replace github.com/williamjPriest/HTMXGO/routes => ./routes
+
+replace github.com/williamjPriest/HTMXGO/controllers => ./controllers
