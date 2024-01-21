@@ -19,6 +19,6 @@ func LoadBookmarkController(w http.ResponseWriter, req *http.Request)(loadedBook
 	var bookmarks models.BookmarksData
 	bookmarks.Username=claims.Username
 	bookmarks.Bookmarks = bookmark
-	return loadedBookmarks
+	return bookmarks
 
 }
