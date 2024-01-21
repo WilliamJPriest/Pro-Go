@@ -18,12 +18,14 @@ func LoginPageHandler(w http.ResponseWriter, req *http.Request){
 
 func LoginHandler(w http.ResponseWriter, req *http.Request){
 	controllers.LoginController(w, req)
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	t := template.Must(template.ParseGlob("templates/welcome.html"))
 	t.Execute(w,  req.PostFormValue("username"))
 }
 
 func GuestLoginHandler(w http.ResponseWriter, req *http.Request){
 	controllers.GuestLoginController(w, req)
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	t := template.Must(template.ParseGlob("templates/welcome.html"))
 	t.Execute(w, "Guest101")
 }
@@ -39,6 +41,7 @@ func LogoutHandler(w http.ResponseWriter, req *http.Request){
 
 func RegisterPageHandler(w http.ResponseWriter, req *http.Request){
 	t := template.Must(template.ParseGlob("templates/register.html"))
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	t.Execute(w, nil)
 
 }
