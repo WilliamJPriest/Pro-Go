@@ -14,8 +14,6 @@ func LoginPageHandler(w http.ResponseWriter, req *http.Request){
 	t.Execute(w, nil)
 }	
 
-
-
 func LoginHandler(w http.ResponseWriter, req *http.Request){
 	controllers.LoginController(w, req)
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")

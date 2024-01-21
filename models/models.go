@@ -1,8 +1,6 @@
 package models
 
 import (
-	"os"
-
 	"github.com/golang-jwt/jwt"
 )
 
@@ -49,8 +47,3 @@ type CustomClaims struct {
 	Username string `json:"User"`
 	jwt.StandardClaims
 }
-
-
-
-var secretCode = os.Getenv("SECRET_CODE")
-var secretKey = []byte(secretCode)
