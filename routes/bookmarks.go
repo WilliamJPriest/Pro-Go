@@ -5,28 +5,16 @@ import (
 	"net/http"
 	"text/template"
 
+	"github.com/williamjPriest/HTMXGO/controllers"
 	"github.com/williamjPriest/HTMXGO/database"
-	"github.com/williamjPriest/HTMXGO/models"
 	"github.com/williamjPriest/HTMXGO/utils"
 )
 
 func LoadBookmarksHandler(w http.ResponseWriter, req *http.Request){
-	claims, _ := req.Context().Value("claims").(*models.CustomClaims)
-	bookmark, err := database.GetBookMarks(claims.Username)
-	if err != nil{
-		fmt.Println("no bookmarks %w", err)
-		return 
-	}
-
-	var bookmarks models.BookmarksData
-	bookmarks.Username=claims.Username
-	bookmarks.Bookmarks = bookmark
-	
-		
-	
+	loadedBookmarks := controllers.LoadBookmarkController(w,req)
 	w.WriteHeader(http.StatusOK)
 	t := template.Must(template.ParseGlob("templates/bookmarks.html"))
-	t.Execute(w, bookmarks)
+	t.Execute(w, loadedBookmarks)
 
 
 }

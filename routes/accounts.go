@@ -39,9 +39,9 @@ func LogoutHandler(w http.ResponseWriter, req *http.Request){
 	w.Header().Set("HX-Redirect", "/entry")
 }
 
-func RegisterPageHandler(w http.ResponseWriter, req *http.Request){
-	t := template.Must(template.ParseGlob("templates/register.html"))
+func RegisterPageHandler(w http.ResponseWriter, req *http.Request){	
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	t := template.Must(template.ParseGlob("templates/register.html"))
 	t.Execute(w, nil)
 
 }
