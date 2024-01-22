@@ -1,4 +1,4 @@
-package routes
+package controllers
 
 import (
 	"encoding/json"
@@ -7,14 +7,12 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"text/template"
 
 	"github.com/joho/godotenv"
 	"github.com/williamjPriest/HTMXGO/models"
 )
 
-func SearchHandler(w http.ResponseWriter, req *http.Request){
-	t := template.Must(template.ParseGlob("templates/search.html"))	
+func SearchControllers(w http.ResponseWriter, req *http.Request)(resObject models.ArticlesData){
 	err := godotenv.Load()
 	if err != nil {
 	log.Fatal("Error loading .env file")
@@ -34,11 +32,5 @@ func SearchHandler(w http.ResponseWriter, req *http.Request){
 	var responseObject models.ArticlesData
 
 	json.Unmarshal(responseData, &responseObject)
-
-	_, err = req.Cookie("token")
-	if err != nil {
-		t.Execute(w, responseObject)
-	}else{
-		t.Execute(w, responseObject)
-	}
+	return responseObject
 }
