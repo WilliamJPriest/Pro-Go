@@ -39,14 +39,11 @@ func BookmarkHandler(w http.ResponseWriter, req *http.Request){
 	}()
 	res := <-resChan
 	if res != nil{
-		if err := database.AddBookMarks(author,title,desc,url,urltoimage,username); err != nil{
+		if add := database.AddBookMarks(author,title,desc,url,urltoimage,username); add != nil{
 			w.Header().Set("Content-Type", "text/html; charset=utf-8")
 			fmt.Fprint(w, `<div hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML"> <i class="far fa-bookmark text-white  hover:text-blue-500  cursor-pointer" ></i><i class="htmx-indicator far fa-bookmark text-blue-500  hover:text-white cursor-pointer"></i>`)
 			return
 		}
-		w.Header().Set("Content-Type", "text/html; charset=utf-8")
-		fmt.Fprint(w, `<div hx-post="/handleBookmarks" hx-target="this" hx-trigger="click" hx-swap="outerHTML"> <i class="far fa-bookmark text-blue-500  hover:text-white  cursor-pointer" ></i><i class="htmx-indicator far fa-bookmark text-white  hover:text-blue-500 cursor-pointer"></i>`)
-		return
 	}
 	if del := database.RemovedBookMarks(title, username); del != nil{
 		fmt.Println(del)
