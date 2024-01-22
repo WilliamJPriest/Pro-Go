@@ -12,7 +12,7 @@ import (
 	"github.com/williamjPriest/HTMXGO/models"
 )
 
-func SearchControllers(w http.ResponseWriter, req *http.Request)(resObject models.ArticlesData){
+func SearchController(w http.ResponseWriter, req *http.Request)(resObject models.ArticlesData){
 	err := godotenv.Load()
 	if err != nil {
 	log.Fatal("Error loading .env file")
