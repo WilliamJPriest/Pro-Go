@@ -1,6 +1,7 @@
-
-<img  src="https://i.ibb.co/LJg0m57/pro-go.webp"/>
-
+<div style="
+  margin-left: 15%;">
+    <img  src="https://i.ibb.co/LJg0m57/pro-go.webp"/>
+</div>
 
 # **Pro-GO**
 
