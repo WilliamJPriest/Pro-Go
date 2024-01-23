@@ -8,7 +8,6 @@ import (
 
 )
 
-
 func LoginPageHandler(w http.ResponseWriter, req *http.Request){
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	t := template.Must(template.ParseGlob("templates/login.html"))
