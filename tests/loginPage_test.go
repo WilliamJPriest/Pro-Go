@@ -9,7 +9,7 @@ import (
 	"github.com/williamjPriest/HTMXGO/routes"
 )
 
-func TestLoginHandler(t *testing.T) {
+func TestLoginPageHandler(t *testing.T) {
 	req, err := http.NewRequest("GET", "/entry", nil) // Assuming login handler is mapped to "/login" path
 	if err != nil {
 		t.Fatal(err)
