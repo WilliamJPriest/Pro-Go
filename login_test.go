@@ -3,13 +3,14 @@ package main
 import (
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	"github.com/williamjPriest/HTMXGO/routes"
 )
 
-func TestRegisterHandler(t *testing.T) {
-	req, err := http.NewRequest("GET", "/register", nil)
+func TestLoginHandler(t *testing.T) {
+	req, err := http.NewRequest("GET", "/login", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -25,5 +26,10 @@ func TestRegisterHandler(t *testing.T) {
 	expectedContentType := "text/html; charset=utf-8"
 	if contentType := recorder.Header().Get("Content-Type"); contentType != expectedContentType {
 		t.Errorf("handler returned wrong Content-Type: got %v want %v", contentType, expectedContentType)
+	}
+
+	expectedTemplateContent := "Expected Content in login.html"
+	if body := recorder.Body.String(); !strings.Contains(body, expectedTemplateContent) {
+		t.Errorf("handler returned unexpected body: got %v want %v", body, expectedTemplateContent)
 	}
 }
